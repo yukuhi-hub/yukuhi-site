@@ -1,499 +1,925 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ゆくひ合同会社 | 新規事業を「着実」に事業化へ</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --base-black: #050A14;
-            --accent-bronze: #8E744A;
-            --text-main: #1A1A1A;
-            --text-sub: #444444;
-            --paper-white: #FCFCFA;
-            --border-line: #D1D1CB;
-            --soft-gray: #F4F4F2;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ゆくひ合同会社 | 製造業の新規事業を、AIエージェントで事業化へ</title>
+<meta name="description" content="社内ベンチャーExitの実体験と独自AIエージェント技術で、製造業・大企業の新規事業構築を支援します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #fafaf8;
+    --ink: #1a1a1a;
+    --accent: #c8410a;
+    --accent-light: #e8501a;
+    --muted: #6b7280;
+    --border: #e2e0db;
+    --bg-warm: #f5f3ef;
+    --bg-section: #f0ede8;
+    --dark-bg: #0f1923;
+  }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
 
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-            line-height: 2.2;
-            color: var(--text-main);
-            background-color: var(--paper-white);
-            -webkit-font-smoothing: antialiased;
-            font-size: 18px;
-        }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.8;
+    font-size: 16px;
+  }
 
-        .font-serif { font-family: 'Noto Serif JP', serif; letter-spacing: 0.05em; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,250,248,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--black);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--accent) !important;
+    color: #fff !important;
+    padding: 10px 24px;
+    border-radius: 3px;
+    font-size: 13px !important;
+    letter-spacing: 0.04em;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--accent-light) !important; }
 
-        /* Navigation */
-        header { padding: 35px 0; position: absolute; width: 100%; z-index: 100; }
-        nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.3em; text-decoration: none; color: var(--base-black); }
+  /* ─── HERO ─── */
+  .hero {
+    padding-top: 64px;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 55% 45%;
+    align-items: center;
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 75% 50%, rgba(200,65,10,0.1) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-left {
+    padding: 80px 48px 80px 80px;
+    position: relative; z-index: 1;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+    padding: 8px 16px;
+    border: 1px solid rgba(200,65,10,0.35);
+    border-radius: 2px;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .hero h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 28px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(250,250,248,0.65);
+    line-height: 1.9;
+    max-width: 460px;
+    margin-bottom: 52px;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 16px 40px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
+  .btn-outline {
+    display: inline-block;
+    border: 1px solid rgba(250,250,248,0.25);
+    color: rgba(250,250,248,0.75);
+    padding: 16px 40px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: rgba(250,250,248,0.6); color: var(--white); }
 
-        /* Image Styling */
-        .img-fluid {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* 画像を枠いっぱいに綺麗に収める */
-            display: block;
-        }
-        .img-container {
-            background: #e5e5e2;
-            aspect-ratio: 16/9;
-            overflow: hidden;
-            border-radius: 2px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-line);
-        }
+  .hero-right {
+    padding: 80px 72px 80px 32px;
+    position: relative; z-index: 1;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 32px 28px;
+    transition: background 0.3s;
+  }
+  .stat-card:hover { background: rgba(255,255,255,0.07); }
+  .stat-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 42px;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .stat-num span { color: var(--accent); font-size: 24px; }
+  .stat-label {
+    font-size: 12px;
+    color: rgba(250,250,248,0.4);
+    line-height: 1.6;
+  }
 
-        /* Hero */
-        .hero {
-            padding: 240px 0 120px;
-            background: radial-gradient(circle at 90% 10%, #F0F0E8 0%, var(--paper-white) 50%);
-            position: relative;
-        }
-        .hero-tag { font-size: 1.0rem; font-weight: 700; color: var(--accent-bronze); letter-spacing: 0.15em; margin-bottom: 28px; display: block; }
-        .hero h1 { font-size: 3.8rem; line-height: 1.3; color: var(--base-black); margin-bottom: 35px; }
-        .hero p.lead { font-size: 1.25rem; color: var(--text-sub); max-width: 780px; margin-bottom: 55px; }
+  /* ─── SECTIONS ─── */
+  section { padding: 112px 0; }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 48px; }
 
-        /* Trust Line */
-        .trust-line { 
-            border-top: 1px solid var(--border-line); 
-            border-bottom: 1px solid var(--border-line); 
-            padding: 60px 0;
-            background: #fff; 
-        }
-        .trust-grid { display: flex; justify-content: space-between; gap: 50px; }
-        .trust-item { flex: 1; }
-        .trust-item h4 { 
-            font-size: 1.05rem; 
-            color: var(--accent-bronze); 
-            margin-bottom: 12px; 
-            font-weight: 700; 
-            border-left: 2px solid var(--accent-bronze);
-            padding-left: 12px;
-        }
-        .trust-item p { font-size: 1.2rem; font-weight: 500; color: var(--base-black); line-height: 1.6; }
+  .section-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .section-eyebrow::after {
+    content: '';
+    flex: 0 0 48px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.35;
+  }
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(28px, 3.2vw, 42px);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 20px;
+  }
+  .section-lead {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.9;
+    max-width: 580px;
+  }
 
-        /* Section Commons */
-        .section-padding { padding: 160px 0; }
-        .section-title { margin-bottom: 90px; }
-        .section-title span { font-size: 0.95rem; color: var(--accent-bronze); font-weight: 700; letter-spacing: 0.15em; display: block; margin-bottom: 20px; }
-        .section-title h2 { font-size: 2.6rem; color: var(--base-black); line-height: 1.4; }
+  /* ─── TECH SECTION ─── */
+  .tech-section {
+    background: var(--dark-bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .tech-section .section-title { color: var(--white); }
+  .tech-section .section-lead { color: rgba(250,250,248,0.5); }
 
-        /* Insight */
-        .insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px 100px; }
-        .insight-card h3 { font-size: 1.45rem; margin-bottom: 20px; color: var(--base-black); }
-        .insight-card p { font-size: 1.1rem; color: var(--text-sub); }
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 64px;
+  }
+  .tech-card {
+    background: rgba(255,255,255,0.03);
+    padding: 48px 40px;
+    transition: background 0.3s;
+  }
+  .tech-card:hover { background: rgba(255,255,255,0.06); }
+  .tech-phase {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .tech-phase::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--accent);
+  }
+  .tech-card h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .tech-card p {
+    font-size: 14px;
+    color: rgba(250,250,248,0.5);
+    line-height: 1.9;
+  }
+  .tech-tag {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 5px 12px;
+    background: rgba(200,65,10,0.18);
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    border-radius: 2px;
+  }
 
-        /* Features / Value Prop */
-        .features-section { background-color: var(--soft-gray); }
-        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-        .feature-card { background: #fff; padding: 50px 40px; border-bottom: 4px solid var(--accent-bronze); }
-        .feature-card h3 { font-size: 1.3rem; margin-bottom: 20px; color: var(--base-black); }
-        .feature-card p { font-size: 1.05rem; color: var(--text-sub); line-height: 1.8; }
+  /* ─── POSITION ─── */
+  .position-section { background: var(--bg-warm); }
+  .position-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 64px;
+  }
+  .pos-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 36px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--accent);
+  }
+  .pos-card h4 {
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .pos-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+  .pos-quote {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .pos-quote em {
+    font-style: normal;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  .pos-body {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 2;
+  }
 
-        /* Services */
-        .service-row { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; margin-bottom: 140px; align-items: start; }
-        .service-row:nth-child(even) { direction: rtl; }
-        .service-row:nth-child(even) * { direction: ltr; }
-        .service-content h3 { font-size: 1.9rem; margin-bottom: 25px; color: var(--base-black); }
-        .service-content p.service-desc { margin-bottom: 30px; font-size: 1.15rem; color: var(--text-sub); }
-        .service-details { list-style: none; margin-bottom: 30px; }
-        .service-details li { position: relative; padding-left: 1.5em; margin-bottom: 10px; font-size: 1.05rem; color: var(--base-black); font-weight: 500; line-height: 1.6; }
-        .service-details li::before { content: ""; position: absolute; left: 0; top: 10px; width: 12px; height: 1px; background: var(--accent-bronze); }
-        .induction-box { background: #fff; padding: 35px; border: 1px solid var(--border-line); }
-        .induction-box h4 { font-size: 1.05rem; margin-bottom: 12px; color: var(--accent-bronze); font-weight: 700; }
-        .induction-box p { font-size: 1.05rem; margin-bottom: 0; line-height: 1.8; }
+  /* ─── SERVICES ─── */
+  .services-section {}
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 64px;
+  }
+  .svc-card {
+    background: var(--bg-section);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 40px 32px;
+    transition: border-color 0.25s, box-shadow 0.25s;
+  }
+  .svc-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 6px 28px rgba(200,65,10,0.09);
+  }
+  .svc-card.highlight {
+    border-color: var(--accent);
+    background: linear-gradient(140deg, var(--bg-section), rgba(200,65,10,0.05));
+  }
+  .svc-step {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .svc-card h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.45;
+  }
+  .svc-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.9;
+  }
 
-        /* Achievements */
-        .achievement-section { background-color: var(--soft-gray); }
-        .achievement-list { display: flex; flex-direction: column; gap: 50px; }
-        .achievement-row { display: grid; grid-template-columns: 240px 1fr; gap: 50px; padding-bottom: 40px; border-bottom: 1px solid var(--border-line); }
-        .achievement-category { font-size: 1.05rem; font-weight: 700; color: var(--accent-bronze); padding-top: 5px; }
-        .achievement-content h3 { font-size: 1.25rem; color: var(--base-black); margin-bottom: 12px; line-height: 1.6; }
-        .achievement-content p { font-size: 1.1rem; color: var(--text-sub); }
-        .highlight-list { list-style: none; margin-top: 15px; }
-        .highlight-list li { position: relative; padding-left: 1.4em; font-size: 1.1rem; color: var(--base-black); margin-bottom: 8px; font-weight: 500; }
-        .highlight-list li::before { content: "・"; position: absolute; left: 0; color: var(--accent-bronze); }
+  /* ─── WHY ─── */
+  .why-section { background: var(--bg-warm); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 64px;
+  }
+  .why-item {
+    background: var(--white);
+    padding: 44px 40px;
+    display: flex; gap: 24px;
+  }
+  .why-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 44px;
+    font-weight: 500;
+    color: rgba(200,65,10,0.12);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 56px;
+  }
+  .why-content h3 {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .why-content p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.9;
+  }
 
-        /* Representative */
-        .rep-section { background: var(--base-black); color: #fff; padding: 160px 0; }
-        .rep-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 100px; align-items: center; }
-        .rep-image-container { aspect-ratio: 3/4; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
-        .rep-content h2 { font-size: 2.6rem; margin-bottom: 35px; line-height: 1.4; }
-        .rep-content p { font-size: 1.15rem; color: #CCC; margin-bottom: 25px; line-height: 2.0; }
-        .rep-name { font-size: 1.25rem; font-weight: 700; color: #fff; margin-top: 50px; border-left: 3px solid var(--accent-bronze); padding-left: 20px; }
+  /* ─── ACHIEVEMENTS ─── */
+  .achieve-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 64px;
+  }
+  .achieve-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 36px 32px;
+    transition: box-shadow 0.25s;
+  }
+  .achieve-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.07); }
+  .achieve-icon {
+    width: 44px; height: 44px;
+    background: rgba(200,65,10,0.09);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+  .achieve-card h3 {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  .achieve-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+  .achieve-tag {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 4px 12px;
+    background: rgba(200,65,10,0.08);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 2px;
+  }
 
-        /* CTA */
-        .cta-section { text-align: center; background: #fff; padding: 160px 0; }
-        .cta-box h2 { font-size: 2.7rem; margin-bottom: 35px; color: var(--base-black); }
-        .cta-box p { font-size: 1.2rem; color: var(--text-sub); max-width: 800px; margin: 0 auto 50px; }
-        .btn-group { display: flex; justify-content: center; gap: 25px; margin-top: 50px; }
-        .btn { padding: 24px 52px; text-decoration: none; font-size: 1.05rem; font-weight: 700; letter-spacing: 0.15em; transition: 0.4s; border-radius: 2px; }
-        .btn-dark { background: var(--base-black); color: #fff; }
-        .btn-line { border: 1px solid var(--base-black); color: var(--base-black); }
+  /* ─── PROFILE ─── */
+  .profile-section { background: var(--black); }
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .profile-img-wrap { position: relative; }
+  .profile-img-wrap img {
+    width: 100%;
+    border-radius: 4px;
+    display: block;
+    filter: grayscale(15%);
+  }
+  .profile-img-wrap .badge {
+    position: absolute;
+    bottom: -20px; right: -20px;
+    background: var(--accent);
+    color: #fff;
+    padding: 14px 18px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 2px;
+  }
+  .profile-content .section-title { color: var(--white); }
+  .profile-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .profile-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: rgba(250,250,248,0.4);
+    margin-bottom: 36px;
+  }
+  .profile-body {
+    font-size: 15px;
+    color: rgba(250,250,248,0.65);
+    line-height: 2;
+    margin-bottom: 44px;
+  }
+  .timeline {
+    border-left: 1px solid rgba(255,255,255,0.1);
+    padding-left: 28px;
+  }
+  .tl-item {
+    padding-bottom: 28px;
+    position: relative;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -32px; top: 7px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .tl-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .tl-text {
+    font-size: 14px;
+    color: rgba(250,250,248,0.55);
+    line-height: 1.7;
+  }
 
-        footer { padding: 60px 0; border-top: 1px solid var(--border-line); font-size: 0.95rem; color: #666; }
+  /* ─── CTA ─── */
+  .cta-section {
+    background: var(--accent);
+    padding: 96px 0;
+    text-align: center;
+  }
+  .cta-section h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(26px, 3.2vw, 40px);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 18px;
+  }
+  .cta-section p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.78);
+    margin-bottom: 44px;
+  }
+  .btn-white {
+    display: inline-block;
+    background: #fff;
+    color: var(--accent);
+    padding: 18px 56px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.18); }
 
-       @media (max-width: 900px) {
-    body { font-size: 17px; }
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 44px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: rgba(250,250,248,0.25);
+  }
 
-    .container { padding: 0 20px; }
+  /* ─── FADE ANIMATION ─── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    .hero h1 { font-size: 2.6rem; }
-
-    .trust-grid,
-    .features-grid,
-    .service-row,
-    .rep-grid,
-    .insight-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .achievement-row {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        padding-bottom: 28px;
-    }
-
-    .achievement-category {
-        padding-top: 0;
-        font-size: 0.95rem;
-    }
-
-    .achievement-content h3 {
-        font-size: 1.2rem;
-        line-height: 1.7;
-        word-break: keep-all;
-        overflow-wrap: break-word;
-    }
-
-    .achievement-content p,
-    .highlight-list li {
-        font-size: 1rem;
-        line-height: 1.9;
-    }
-
-    .rep-image-container {
-        order: 2;
-        width: 100%;
-        max-width: 400px;
-        margin: 0 auto;
-    }
-
-    .rep-content { order: 1; }
-
-    .btn-group {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 14px;
-    }
-
-    .btn {
-        width: 100%;
-        max-width: 350px;
-        text-align: center;
-    }
-}
-
-        .reveal { opacity: 0; transform: translateY(20px); transition: 1s cubic-bezier(0.22, 1, 0.36, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-    </style>
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 960px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 80px 24px 48px; }
+    .hero-right { padding: 0 24px 64px; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .stat-num { font-size: 32px; }
+    .container { padding: 0 24px; }
+    section { padding: 80px 0; }
+    .tech-grid { grid-template-columns: 1fr; }
+    .position-grid { grid-template-columns: 1fr; gap: 40px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .achieve-grid { grid-template-columns: 1fr; }
+    .profile-grid { grid-template-columns: 1fr; gap: 48px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 36px 24px; }
+  }
+</style>
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#" class="logo font-serif">ゆくひ合同会社</a>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="btn-dark btn" style="padding: 14px 30px; font-size: 0.95rem;">お問い合わせ</a>
-            </nav>
-        </div>
-    </header>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">ゆくひ合同会社</a>
+  <ul class="nav-links">
+    <li><a href="#tech">技術構想</a></li>
+    <li><a href="#services">支援メニュー</a></li>
+    <li><a href="#achievements">実績</a></li>
+    <li><a href="#profile">代表</a></li>
+    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="nav-cta">お問い合わせ</a></li>
+  </ul>
+</nav>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <span class="hero-tag reveal">製造業・大企業の新規事業構築支援</span>
-                <h1 class="font-serif reveal">新規事業を「着実」に<br>事業化へ</h1>
-                <p class="lead reveal">
-                    社内ベンチャーの立ち上げから事業売却（Exit）までを完遂した実務知に基づき、製造業・大企業の新規事業構築を支援します。構想を絵に描いた餅で終わらせず、現実に前へ進めるための伴走を提供します。
-                </p>
-                <div class="btn-group reveal" style="justify-content: flex-start;">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="btn btn-dark">お問い合わせ</a>
-                    <a href="#services" class="btn btn-line">支援内容を見る</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="trust-line">
-        <div class="container">
-            <div class="trust-grid reveal">
-                <div class="trust-item">
-                    <h4>社内ベンチャー立案</h4>
-                    <p>日本特殊陶業初の社内ベンチャーを立案</p>
-                </div>
-                <div class="trust-item">
-                    <h4>事業推進・Exit</h4>
-                    <p>代表取締役社長として事業を推進し、Exitまでけん引</p>
-                </div>
-                <div class="trust-item">
-                    <h4>ゆくひメソッド</h4>
-                    <p>立ち上げからExitまでの実践知を、独自メソッドとして体系化</p>
-                </div>
-            </div>
-        </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">製造業 × AIエージェント × 新規事業</div>
+    <h1>
+      製造業の現場知見を、<br>
+      <em>AIエージェント</em>で<br>
+      事業に変える。
+    </h1>
+    <p class="hero-sub">
+      社内ベンチャーの立案からExit（事業売却）までを完遂した当事者の実践知と、製造業向けAIエージェントの独自技術で、大企業・製造業の新規事業を確実に前へ進めます。
+    </p>
+    <div class="hero-actions">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="btn-primary">まず相談する</a>
+      <a href="#services" class="btn-outline">支援内容を見る</a>
     </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">1<span>社目</span></div>
+        <div class="stat-label">日本特殊陶業<br>初の社内ベンチャー</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">Exit<span>まで</span></div>
+        <div class="stat-label">立案から事業売却<br>まで一貫経験</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">4<span>件</span></div>
+        <div class="stat-label">AIエージェント<br>特許出願済み</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3<span>現</span></div>
+        <div class="stat-label">現場・現物・現実<br>3現主義の実践</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="section-padding">
-        <div class="container">
-            <div class="section-title reveal">
-                <span>新規事業が直面する課題</span>
-                <h2 class="font-serif">なぜ新規事業は、途中で止まるのか</h2>
-            </div>
-            <div class="insight-grid">
-                <div class="insight-card reveal">
-                    <h3 class="font-serif">解像度の不足</h3>
-                    <p>顧客課題と提供価値が曖昧なまま進めることで、検証段階で足踏みが生じ、市場との乖離が埋まらなくなります。</p>
-                </div>
-                <div class="insight-card reveal">
-                    <h3 class="font-serif">出口なき航海</h3>
-                    <p>立ち上げ自体が目的化し、数年後の自立や売却のシナリオが欠けているため、投資判断の基準が揺らぎます。</p>
-                </div>
-                <div class="insight-card reveal">
-                    <h3 class="font-serif">大企業固有の壁</h3>
-                    <p>既存事業の評価軸を新規事業に当てはめることで、挑戦が正当に評価されず、組織的な停滞を招きます。</p>
-                </div>
-                <div class="insight-card reveal">
-                    <h3 class="font-serif">実務推進の空白</h3>
-                    <p>立派な戦略資料はあるが、現場で課題を突破する「実務家」がいない。事業化には、実行の空白を埋める知見が必要です。</p>
-                </div>
-            </div>
+<!-- TECH -->
+<section class="tech-section" id="tech">
+  <div class="container">
+    <div class="section-eyebrow">技術的裏付け</div>
+    <h2 class="section-title">製造業バリューチェーン全体を<br>AIエージェントで変える構想</h2>
+    <p class="section-lead">設計・製造・廃液処理まで、製造工程の全フェーズをカバーするAIエージェントアーキテクチャを独自開発。各領域で特許出願により権利を確保しています。</p>
+    <div class="tech-grid">
+      <div class="tech-card fade-up">
+        <div class="tech-phase">設計フェーズ</div>
+        <h3>設計支援<br>AIエージェント</h3>
+        <p>CAD/CAE情報と現場の非計測情報（破面観察・製造条件・過去トラブル）を統合。破壊モードを推定し、設計変更案を実行パッケージとして出力。</p>
+        <span class="tech-tag">出願済み</span>
+      </div>
+      <div class="tech-card fade-up">
+        <div class="tech-phase">製造フェーズ</div>
+        <h3>産業用機器制御<br>AIエージェント</h3>
+        <p>センサで測れない現場知見（環境・機器・ナレッジ）をLLMに統合し、産業機器を自律制御。評価→計画→実行のループを自動化。</p>
+        <span class="tech-tag">出願済み</span>
+      </div>
+      <div class="tech-card fade-up">
+        <div class="tech-phase">廃液・廃棄フェーズ</div>
+        <h3>廃液処理支援<br>AIエージェント</h3>
+        <p>使用前の化学物質情報と工程条件から廃液の再資源化適合性を事前推定。処理トラブルを未然に防ぎ、再資源化率を最大化する設計変更案を生成。</p>
+        <span class="tech-tag">出願済み</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSITION -->
+<section class="position-section">
+  <div class="container">
+    <div class="section-eyebrow">YUKUHIだけが持つもの</div>
+    <div class="position-grid">
+      <div>
+        <div class="pos-card fade-up">
+          <h4>社内ベンチャーExit経験者</h4>
+          <p>日本特殊陶業初の社内ベンチャーを立案・推進し、事業売却まで完遂。大企業の壁を内側から突破した当事者。</p>
         </div>
-    </section>
-
-    <section class="section-padding features-section">
-        <div class="container">
-            <div class="section-title reveal">
-                <span>ゆくひの提供価値</span>
-                <h2 class="font-serif">「戦略」を「実行可能な事業」へ変える</h2>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card reveal">
-                    <h3 class="font-serif">Exitからの逆算</h3>
-                    <p>立ち上げだけでなく、事業の自立や売却（Exit）を見据え、フェーズごとの達成基準を明確に設計します。</p>
-                </div>
-                <div class="feature-card reveal">
-                    <h3 class="font-serif">解像度の徹底追求</h3>
-                    <p>顧客課題、提供価値、勝てる構造。曖昧さを排除し、社内調整にも耐えうる強固なロジックを構築します。</p>
-                </div>
-                <div class="feature-card reveal">
-                    <h3 class="font-serif">実務としての伴走</h3>
-                    <p>机上の空論ではなく、現場の推進、投資判断基準の策定、AI活用など、事業を前に進める実務を共に担います。</p>
-                </div>
-            </div>
+        <div class="pos-card fade-up">
+          <h4>特許4件のAIエージェント技術</h4>
+          <p>製造業の「測れない知見」をLLMで扱う独自アーキテクチャを特許化。技術ではなく、現場課題の解決設計から生まれた発明。</p>
         </div>
-    </section>
-
-    <!-- 5. 提供サービス -->
-    <section class="section-padding" id="services">
-        <div class="container">
-            <div class="section-title reveal">
-                <span>支援メニュー</span>
-                <h2 class="font-serif">事業化へ導く5つのアプローチ</h2>
-            </div>
-
-            <!-- 01 講演 -->
-            <div class="service-row reveal">
-                <div class="service-content">
-                    <span class="hero-tag">01</span>
-                    <h3 class="font-serif">講演・ミニワークショップ</h3>
-                    <p class="service-desc">社内ベンチャーのリアル、Exitから考える新規事業など、実体験に基づく言葉で、参加者の意識を「自分ごと」へと切り替えます。</p>
-                    <div class="induction-box">
-                        <h4>研修への展開</h4>
-                        <p>講演で生まれた期待感を、具体的なスキルへと昇華させるための実践研修プログラムへとスムーズに繋げることが可能です。</p>
-                    </div>
-                </div>
-                <div class="img-container">
-                    <img src="lecture.jpg" alt="講演風景" class="img-fluid">
-                </div>
-            </div>
-
-            <!-- 02 研修 -->
-            <div class="service-row reveal">
-                <div class="service-content">
-                    <span class="hero-tag">02</span>
-                    <h3 class="font-serif">研修・ワークショップ</h3>
-                    <p class="service-desc">担当者、事務局、経営層。それぞれの視点に欠けている「事業化の要諦」を整理し、現場で使える判断力と構想力を養います。</p>
-                </div>
-                <div class="img-container">
-                    <img src="workshop.jpg" alt="研修風景" class="img-fluid">
-                </div>
-            </div>
-
-            <!-- 03 伴走支援 -->
-            <div class="service-row reveal">
-                <div class="service-content">
-                    <span class="hero-tag">03</span>
-                    <h3 class="font-serif">新規事業伴走支援</h3>
-                    <p class="service-desc">戦略策定からビジネスモデルの精緻化、社内評価基準の設計まで。立ち上げ経験を持つパートナーとして、実務の推進を支援します。</p>
-                </div>
-                <div class="img-container" style="background-color: var(--soft-gray); display: flex; align-items: center; justify-content: center;">
-                   <span style="color: #999; font-size: 0.9rem;">[ PMO / 事業推進支援 ]</span>
-                </div>
-            </div>
-
-            <!-- 04 AI -->
-            <div class="service-row reveal">
-                <div class="service-content">
-                    <span class="hero-tag">04</span>
-                    <h3 class="font-serif">AIエージェント活用・共同開発</h3>
-                    <p class="service-desc">AIエージェントを活用し、製造業の属人化解消、新規事業の共同開発、実務に即したエージェント開発を支援します。</p>
-                    <ul class="service-details">
-                        <li>製造業の属人化の解消をAIエージェントで実現</li>
-                        <li>AIを用いた新規事業の共同開発</li>
-                        <li>実務に即したAIエージェントの設計・開発</li>
-                    </ul>
-                </div>
-                <div class="img-container" style="background: white; border: none; box-shadow: none;">
-                    <img src="ai-diagram.jpg" alt="AI図解" class="img-fluid" style="object-fit: contain;">
-                </div>
-            </div>
-
-            <!-- 05 人事 -->
-            <div class="service-row reveal">
-                <div class="service-content">
-                    <span class="hero-tag">05</span>
-                    <h3 class="font-serif">人事制度・評価制度設計</h3>
-                    <p class="service-desc">既存事業の枠組みに縛られない、挑戦者が正当に報われる評価制度・組織構造の構築を支援し、挑戦の継続性を担保します。</p>
-                </div>
-                <div class="img-container" style="background-color: var(--soft-gray); display: flex; align-items: center; justify-content: center;">
-                    <span style="color: #999; font-size: 0.9rem;">[ 組織制度設計支援 ]</span>
-                </div>
-            </div>
+        <div class="pos-card fade-up">
+          <h4>3現主義×AI実装の統合</h4>
+          <p>現場・現物・現実を深掘りする方法論と、AIエージェントの実装技術を同時に持つ。理論だけでも技術だけでもない。</p>
         </div>
-    </section>
+      </div>
+      <div class="fade-up">
+        <p class="pos-quote">
+          「Exit経験者」と<br>
+          「AIエージェント実装者」が、<br>
+          <em>同一人物である必要がある。</em>
+        </p>
+        <p class="pos-body">
+          新規事業支援者は多い。AIエンジニアも多い。でも、製造業の現場で実際に事業を立ち上げ、Exitまで動かし切り、さらにその経験から製造業向けAIエージェントを自ら開発している人間は極めて少ない。<br><br>
+          YUKUHIの価値は、「現場で何が起きているか」を知った上でAIエージェントを設計できること。コンサルが机上で描く戦略でも、エンジニアが技術先行で作るプロダクトでもなく、「現場で動く事業」を作ることができる。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- 6. 実績 -->
-    <section class="section-padding achievement-section" id="achievements">
-        <div class="container">
-            <div class="section-title reveal">
-                <span>支援実績</span>
-                <h2 class="font-serif">実務に基づいた確かな実績</h2>
-            </div>
-            <div class="achievement-list">
-                <div class="achievement-row reveal">
-                    <div class="achievement-category">事業立ち上げ・Exit</div>
-                    <div class="achievement-content">
-                        <h3>日本特殊陶業初の社内ベンチャー「シェアリングファクトリー」の立案・事業売却</h3>
-                        <p>製造業向け設備シェアリングプラットフォームをゼロから構築。推進体制の構築・実行支援（PMO）を経て、同社初となる新規事業子会社のExit（事業売却）までを完遂しました。</p>
-                    </div>
-                </div>
-                <div class="achievement-row reveal">
-                    <div class="achievement-category">戦略メンタリング</div>
-                    <div class="achievement-content">
-                        <h3>日本特殊陶業グループの新規事業テーマにおけるメンタリング</h3>
-                        <p>「Niterraアクア・デシカント事業」をはじめとする新規事業プロジェクトにおいて、事業解像度の向上、勝ち筋の設計、投資判断基準の策定を支援しています。</p>
-                    </div>
-                </div>
-                <div class="achievement-row reveal">
-                    <div class="achievement-category">営業・事業推進</div>
-                    <div class="achievement-content">
-                        <h3>エネルギー関連事業における営業・事業推進支援</h3>
-                        <p>「Niterra電力」のセールスコンサルティングを担当。製造業・大企業向けの大規模な提案活動、および事業成長に向けた営業戦略の構築に携わっています。</p>
-                    </div>
-                </div>
-                <div class="achievement-row reveal">
-                    <div class="achievement-category">講演実績</div>
-                    <div class="achievement-content">
-                        <h3>製造業・研究機関等での多数の登壇</h3>
-                        <p>実体験に基づく新規事業構築の要諦について、以下の主要機関をはじめ多数の講演実績があります。</p>
-                        <ul class="highlight-list">
-                            <li>産総研コンソーシアム名古屋工業技術協会 創立60周年記念公開講演会</li>
-                            <li>日本ガイシ株式会社、豊田合成株式会社 等の製造業企業</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="section-eyebrow">支援メニュー</div>
+    <h2 class="section-title">フェーズで選べる、<br>5つのアプローチ</h2>
+    <p class="section-lead">講演・ワークショップから始まり、AIエージェント共同開発まで。貴社の状況に合わせたフェーズで入れます。</p>
+    <div class="services-grid">
+      <div class="svc-card fade-up">
+        <div class="svc-step">STEP 01</div>
+        <h3>講演・<br>ミニワークショップ</h3>
+        <p>社内ベンチャーのリアル、Exitから考える新規事業。実体験から語ることで「自分ごと」に変える。</p>
+      </div>
+      <div class="svc-card fade-up">
+        <div class="svc-step">STEP 02</div>
+        <h3>研修・<br>ワークショップ</h3>
+        <p>担当者・事務局・経営層それぞれに欠けている「事業化の要諦」を整理。現場で使える判断力を養う。</p>
+      </div>
+      <div class="svc-card fade-up">
+        <div class="svc-step">STEP 03</div>
+        <h3>新規事業<br>伴走支援</h3>
+        <p>戦略策定・ビジネスモデル精緻化・社内評価基準の設計まで。実務推進パートナーとして動く。</p>
+      </div>
+      <div class="svc-card highlight fade-up">
+        <div class="svc-step">STEP 04</div>
+        <h3>組織に入り込み、<br>事業を創る</h3>
+        <p>外部の視点を持ちながら組織の内側に入り込み、新規事業を実際に立ち上げる。経営層と連携し、方針策定から実行・Exitまでを主導する。</p>
+      </div>
+      <div class="svc-card highlight fade-up">
+        <div class="svc-step">STEP 05</div>
+        <h3>AIエージェント<br>共同開発</h3>
+        <p>製造業向けAIエージェントの設計・開発。製造現場の属人化解消と新規事業創出を同時に実現する独自アーキテクチャ。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why-section">
+  <div class="container">
+    <div class="section-eyebrow">なぜ止まるのか</div>
+    <h2 class="section-title">新規事業が途中で止まる、<br>4つの本質的な原因</h2>
+    <div class="why-grid">
+      <div class="why-item fade-up">
+        <div class="why-num">01</div>
+        <div class="why-content">
+          <h3>解像度の不足</h3>
+          <p>顧客課題と提供価値が曖昧なまま進むことで、検証段階で足踏みが生じ、市場との乖離が埋まらなくなる。</p>
         </div>
-    </section>
-
-    <!-- 7. 代表紹介 -->
-    <section class="rep-section">
-        <div class="container">
-            <div class="rep-grid">
-                <div class="rep-image-container reveal">
-                    <img src="profile.jpg" alt="ゆくひ合同会社 代表 長谷川 祐貴" class="img-fluid">
-                </div>
-                <div class="rep-content reveal">
-                    <span class="hero-tag" style="color: var(--accent-bronze);">代表紹介</span>
-                    <h2 class="font-serif">当事者として培った実務知を貴社へ。</h2>
-                    <p>
-                        日本特殊陶業（Niterra）において、初の社内ベンチャー立案から、分社化、そして事業売却（Exit）までを一貫して経験しました。
-                    </p>
-                    <p>
-                        大企業の組織の中で「新しいこと」を始める際に生じる特有の摩擦や葛藤、そしてそれをいかにして論理と熱量で突破し、出口（Exit）まで辿り着かせるか。
-                    </p>
-                    <p>
-                        実体験から得た「生きた知見」を、貴社の事業を現実に前へ進めるための力に変え、誠実に伴走いたします。
-                    </p>
-                    <div class="rep-name">
-                        ゆくひ合同会社 代表 長谷川 祐貴
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="why-item fade-up">
+        <div class="why-num">02</div>
+        <div class="why-content">
+          <h3>出口なき航海</h3>
+          <p>立ち上げ自体が目的化し、数年後の自立や売却のシナリオが欠けているため、投資判断の基準が揺らぐ。</p>
         </div>
-    </section>
-
-    <!-- 8. CTA -->
-    <section class="cta-section" id="contact">
-        <div class="container">
-            <div class="cta-box reveal">
-                <span class="hero-tag">お問い合わせ</span>
-                <h2 class="font-serif">新規事業を、着実に前へ。</h2>
-                <p>
-                    講演依頼、研修相談、新規事業伴走、AI活用のご相談など、まずはお気軽にお問い合わせください。
-                </p>
-                <div class="btn-group">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="btn btn-dark">お問い合わせ</a>
-                    <a href="#achievements" class="btn btn-line">実績・支援歴を見る</a>
-                </div>
-            </div>
+      </div>
+      <div class="why-item fade-up">
+        <div class="why-num">03</div>
+        <div class="why-content">
+          <h3>大企業固有の壁</h3>
+          <p>既存事業の評価軸を新規事業に当てはめることで、挑戦が正当に評価されず、組織的な停滞を招く。</p>
         </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div class="logo font-serif" style="opacity: 0.6;">ゆくひ合同会社</div>
-                <p>&copy; 2026 Yukuhi LLC. All Rights Reserved.</p>
-            </div>
+      </div>
+      <div class="why-item fade-up">
+        <div class="why-num">04</div>
+        <div class="why-content">
+          <h3>実務推進の空白</h3>
+          <p>立派な戦略資料はあるが、現場で課題を突破する「実務家」がいない。事業化には実行の空白を埋める知見が必要。</p>
         </div>
-    </footer>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 80) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        reveal();
-    </script>
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="container">
+    <div class="section-eyebrow">実績</div>
+    <h2 class="section-title">実務に基づいた、確かな実績</h2>
+    <div class="achieve-grid">
+      <div class="achieve-card fade-up">
+        <div class="achieve-icon">🏭</div>
+        <h3>日本特殊陶業 初の社内ベンチャー「シェアリングファクトリー」立案・Exit</h3>
+        <p>製造業向け設備シェアリングプラットフォームをゼロから構築。分社化を経て事業売却まで完遂。</p>
+        <span class="achieve-tag">事業立ち上げ・Exit</span>
+      </div>
+      <div class="achieve-card fade-up">
+        <div class="achieve-icon">🎯</div>
+        <h3>日本特殊陶業グループ 新規事業テーマにおけるメンタリング</h3>
+        <p>「Niterraアクア・デシカント事業」ほか複数の新規事業プロジェクトにおいて、事業解像度の向上、勝ち筋の設計、投資判断基準の策定を支援。</p>
+        <span class="achieve-tag">戦略メンタリング</span>
+      </div>
+      <div class="achieve-card fade-up">
+        <div class="achieve-icon">⚡</div>
+        <h3>Niterra電力 セールスコンサルティング・事業推進支援</h3>
+        <p>エネルギー関連新規事業における大規模提案活動の推進と、事業成長に向けた営業戦略の構築を担当。</p>
+        <span class="achieve-tag">営業・事業推進</span>
+      </div>
+      <div class="achieve-card fade-up">
+        <div class="achieve-icon">🎤</div>
+        <h3>製造業・研究機関での講演実績</h3>
+        <p>産総研コンソーシアム名古屋工業技術協会 創立60周年記念公開講演会、日本ガイシ、豊田合成ほか多数。</p>
+        <span class="achieve-tag">講演実績</span>
+      </div>
+      <div class="achieve-card fade-up">
+        <div class="achieve-icon">🔬</div>
+        <h3>製造業AIエージェント 特許4件出願</h3>
+        <p>産業用機器制御・設計支援・廃液処理支援など製造バリューチェーン全体をカバーする独自アーキテクチャを出願。</p>
+        <span class="achieve-tag">特許・技術開発</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section class="profile-section" id="profile">
+  <div class="container">
+    <div class="profile-grid">
+      <div class="profile-img-wrap fade-up">
+        <img src="profile.jpg" alt="長谷川 祐貴" onerror="this.style.background='#1e2a38';this.style.minHeight='380px';this.style.borderRadius='4px'">
+        <div class="badge">ゆくひ合同会社<br>代表 長谷川 祐貴</div>
+      </div>
+      <div>
+        <div class="section-eyebrow" style="color:rgba(200,65,10,0.75);">代表紹介</div>
+        <p class="profile-name">長谷川 祐貴</p>
+        <p class="profile-role">ゆくひ合同会社 代表 / 発明者</p>
+        <p class="profile-body">
+          日本特殊陶業（Niterra）において、初の社内ベンチャー立案から分社化、事業売却（Exit）までを一貫して経験。大企業の組織の中で「新しいこと」を始める際の特有の摩擦と、それを論理と熱量で突破する方法を実体験として持つ。<br><br>
+          現在は、その経験を製造業向けAIエージェント技術として開発・特許化しながら、大企業・製造業の新規事業構築を支援。「やったつもり」を「本当にやった」に変える実務家として伴走している。
+        </p>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-year">日本特殊陶業</div>
+            <div class="tl-text">製造業向け設備シェアリング事業を社内ベンチャーとして立案・推進</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">Exit完遂</div>
+            <div class="tl-text">代表取締役社長として事業を牽引、同社初のベンチャーExit（事業売却）を実現</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">ゆくひ合同会社 設立</div>
+            <div class="tl-text">製造業×AIエージェントの技術開発と新規事業支援を開始</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2026年〜</div>
+            <div class="tl-text">AIエージェント関連特許4件出願。製造業との共同開発・実証を推進中</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>新規事業を、着実に前へ。</h2>
+    <p>講演依頼・研修相談・新規事業伴走・AIエージェント共同開発のご相談など、まずはお気軽に。</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="btn-white">お問い合わせはこちら</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">ゆくひ合同会社</span>
+  <span class="footer-copy">© 2026 Yukuhi LLC. All Rights Reserved.</span>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const siblings = Array.from(entry.target.parentNode.children);
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), idx * 80);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
 </body>
 </html>
