@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新規事業支援 | ゆくひ合同会社</title>
+<meta name="description" content="なぜ、大企業の新規事業は成功まで進まないのか。顧客課題、競争構造、意思決定、Exit。その解像度が不足している。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy-dark: #06111e;
+    --white: #fafaf8;
+    --ink: #1a1a1a;
+    --accent: #b8551a;
+    --muted: #6b7280;
+    --bg-section: #f9f8f6;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.8;
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(6,17,30,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    padding: 0 80px;
+    height: 88px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    height: 52px;
+    opacity: 0.92;
+    transition: opacity 0.4s;
+  }
+  .nav-logo:hover { opacity: 1; }
+  .nav-links { display: flex; gap: 64px; list-style: none; }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(250,250,248,0.45);
+    text-decoration: none;
+    transition: color 0.4s;
+    letter-spacing: 0.06em;
+  }
+  .nav-links a:hover { color: rgba(250,250,248,0.85); }
+  .nav-cta {
+    color: rgba(250,250,248,0.65) !important;
+    font-size: 12px !important;
+    letter-spacing: 0.08em !important;
+    border-bottom: 1px solid rgba(184,85,26,0.3) !important;
+    padding-bottom: 2px !important;
+  }
+  .nav-cta:hover { 
+    color: var(--white) !important;
+    border-bottom-color: rgba(184,85,26,0.7) !important;
+  }
+
+  /* ─── HERO (新背景) ─── */
+  .hero {
+    padding-top: 88px;
+    min-height: 88vh;
+    background: var(--navy-dark);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* 背景画像 - 右寄せ、構造的圧力 */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('hero-bg-nb.png');
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+    opacity: 1;
+  }
+  
+  /* Dark overlay - cinematic mood */
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      90deg, 
+      rgba(6,17,30,0.92) 0%, 
+      rgba(6,17,30,0.75) 50%,
+      rgba(6,17,30,0.6) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  /* オレンジ光 - 静かな熱量 */
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at 70% 50%, 
+      rgba(184,85,26,0.08) 0%, 
+      transparent 60%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .hero-container {
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 160px 100px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-text-area h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(48px, 6vw, 76px);
+    color: var(--white);
+    line-height: 1.45;
+    margin-bottom: 72px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    max-width: 1000px;
+  }
+
+  .hero-sub {
+    font-size: 22px;
+    color: rgba(250,250,248,0.78);
+    line-height: 2.2;
+    margin-bottom: 88px;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    max-width: 700px;
+  }
+
+  .hero-actions { 
+    display: flex; 
+    gap: 48px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .hero-link {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    color: rgba(250,250,248,0.92);
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(184,85,26,0.35);
+    transition: all 0.7s;
+  }
+  
+  .hero-link::after {
+    content: '→';
+    margin-left: 20px;
+    font-size: 16px;
+    color: rgba(184,85,26,0.7);
+    transition: all 0.7s;
+  }
+  
+  .hero-link:hover {
+    color: var(--white);
+    border-bottom-color: rgba(184,85,26,0.85);
+  }
+  
+  .hero-link:hover::after {
+    margin-left: 34px;
+    color: rgba(184,85,26,1);
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 170px 0; }
+  .container { max-width: 1480px; margin: 0 auto; padding: 0 100px; }
+
+  .section-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: rgba(184,85,26,0.85);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 56px;
+    font-weight: 400;
+  }
+  
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(38px, 4.5vw, 60px);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.6;
+    margin-bottom: 120px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── PROBLEM (左右レイアウト) ─── */
+  .problem-section {
+    background: var(--white);
+  }
+  
+  .problem-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 140px;
+    align-items: start;
+  }
+  
+  .problem-intro h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(34px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    letter-spacing: 0.05em;
+  }
+  
+  .problem-intro p {
+    font-size: 18px;
+    line-height: 2.3;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  
+  .problem-list {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+  
+  .problem-item h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    letter-spacing: 0.03em;
+  }
+  
+  .problem-item p {
+    font-size: 16px;
+    line-height: 2;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ─── EXPERIENCE (講演写真 + 実践知) ─── */
+  .experience-section {
+    background: var(--bg-section);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .experience-layout {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 120px;
+    align-items: center;
+  }
+  
+  .experience-content h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 700;
+    line-height: 1.7;
+    margin-bottom: 56px;
+    letter-spacing: 0.05em;
+  }
+  
+  .experience-lead {
+    font-size: 19px;
+    line-height: 2.1;
+    color: var(--ink);
+    margin-bottom: 72px;
+    font-weight: 300;
+  }
+  
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .experience-item h4 {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(184,85,26,0.85);
+    margin-bottom: 12px;
+  }
+  
+  .experience-item p {
+    font-size: 16px;
+    line-height: 2.1;
+    color: var(--ink);
+    font-weight: 300;
+  }
+  
+  .experience-image-area {
+    position: relative;
+  }
+  
+  .experience-frame {
+    width: 100%;
+    aspect-ratio: 16/11;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(26,26,26,0.04);
+  }
+  
+  .experience-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 実践者トーン - 暖色抑制、ネイビーとグレー強化 */
+    filter: 
+      brightness(0.75) 
+      contrast(0.9) 
+      saturate(0.65) 
+      sepia(0.18) 
+      hue-rotate(-18deg);
+  }
+  
+  .experience-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg, 
+      rgba(6,17,30,0.12) 0%, 
+      rgba(6,17,30,0.35) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .experience-caption {
+    margin-top: 24px;
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.6;
+  }
+
+  /* ─── SUPPORT ─── */
+  .support-section {
+    background: var(--white);
+  }
+  
+  .support-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 100px;
+  }
+  
+  .support-column h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.65;
+    margin-bottom: 48px;
+    letter-spacing: 0.05em;
+  }
+  
+  .support-desc {
+    font-size: 17px;
+    line-height: 2.4;
+    color: var(--ink);
+    margin-bottom: 64px;
+    font-weight: 300;
+  }
+  
+  .support-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .support-list li {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  
+  .support-list li::before {
+    content: '—';
+    margin-right: 16px;
+    color: rgba(184,85,26,0.35);
+  }
+
+  /* ─── FINAL CTA ─── */
+  .final-cta {
+    background: var(--navy-dark);
+    text-align: center;
+    padding: 160px 0;
+    position: relative;
+  }
+  
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(184,85,26,0.12) 0%, transparent 65%);
+  }
+  
+  .final-cta h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(38px, 4.5vw, 60px);
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 100px;
+    line-height: 1.65;
+    letter-spacing: 0.05em;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .final-cta-actions {
+    display: flex;
+    gap: 64px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .final-link {
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(250,250,248,0.85);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(184,85,26,0.25);
+    transition: all 0.7s;
+  }
+  
+  .final-link::after {
+    content: '→';
+    margin-left: 20px;
+    font-size: 16px;
+    color: rgba(184,85,26,0.5);
+    transition: all 0.7s;
+  }
+  
+  .final-link:hover {
+    color: var(--white);
+    border-bottom-color: rgba(184,85,26,0.75);
+  }
+  
+  .final-link:hover::after {
+    margin-left: 32px;
+    color: rgba(184,85,26,1);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: transparent;
+    padding: 96px;
+    text-align: center;
+    border-top: 1px solid rgba(26,26,26,0.05);
+  }
+  
+  .footer-logo {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 24px;
+    letter-spacing: 0.08em;
+    opacity: 0.5;
+  }
+  
+  .footer-copy {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    opacity: 0.35;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1400px) {
+    nav { padding: 0 60px; }
+    .container { padding: 0 60px; }
+    .hero-container { padding: 140px 60px; }
+    .problem-layout { gap: 100px; }
+    .experience-layout { gap: 80px; }
+    .support-grid { gap: 80px; }
+  }
+
+  @media (max-width: 960px) {
+    nav { padding: 0 32px; height: 76px; }
+    .nav-logo { height: 44px; }
+    .container { padding: 0 32px; }
+    .nav-links { display: none; }
+    
+    .hero-container { padding: 120px 32px; }
+    section { padding: 120px 0; }
+    
+    .problem-layout { grid-template-columns: 1fr; gap: 80px; }
+    .experience-layout { grid-template-columns: 1fr; gap: 64px; }
+    .support-grid { grid-template-columns: 1fr; gap: 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html">
+    <img src="logo.jpg" alt="ゆくひ" class="nav-logo">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">TOP</a></li>
+    <li><a href="ai-agent.html">製造業判断AI</a></li>
+    <li><a href="new-business.html">新規事業支援</a></li>
+    <li><a href="index.html#company">YUKUHI</a></li>
+  </ul>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="nav-cta">お問い合わせ</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  
+  <div class="hero-container">
+    <div class="hero-text-area">
+      <h1>なぜ、大企業の新規事業は<br>成功まで進まないのか。</h1>
+      <p class="hero-sub">
+        実行はしている。<br>
+        しかし、顧客課題、競争構造、意思決定、Exit。<br>
+        その解像度が不足している。
+      </p>
+      <div class="hero-actions">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="hero-link">相談する</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem-section">
+  <div class="container">
+    <div class="section-eyebrow">STRUCTURE</div>
+    
+    <div class="problem-layout">
+      <div class="problem-intro">
+        <h2>
+          新規事業が止まる理由は、<br>
+          アイデア不足ではない。
+        </h2>
+        <p>
+          新規事業が止まる理由を、<br>
+          構造で説明する。
+        </p>
+      </div>
+      
+      <div class="problem-list">
+        <div class="problem-item">
+          <h4>顧客解像度</h4>
+          <p>顧客課題の表面だけを見ている。現場に入り、本質的な構造まで理解しているか。</p>
+        </div>
+        
+        <div class="problem-item">
+          <h4>競争理解</h4>
+          <p>なぜ競合が勝ち、なぜ自社が勝てるのか。その構造を説明できるか。</p>
+        </div>
+        
+        <div class="problem-item">
+          <h4>意思決定</h4>
+          <p>会議は進むが、誰がどう判断するか、その構造が曖昧になっていないか。</p>
+        </div>
+        
+        <div class="problem-item">
+          <h4>実行構造</h4>
+          <p>担当者は動いているが、事務局化していないか。推進と実行の構造が混在していないか。</p>
+        </div>
+        
+        <div class="problem-item">
+          <h4>Exit視点</h4>
+          <p>「続けること」が目的になっていないか。出口から逆算した構造で事業を設計しているか。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience-section">
+  <div class="container">
+    <div class="section-eyebrow">EXPERIENCE</div>
+    
+    <div class="experience-layout">
+      <div class="experience-content">
+        <h3>
+          実際にやってきたから、<br>
+          現実が分かる。
+        </h3>
+        
+        <p class="experience-lead">
+          社内ベンチャー立ち上げ、分社化、経営、営業、組織運営、Exit。<br>
+          <br>
+          その現実を、実際に経験してきた。
+        </p>
+        
+        <div class="experience-list">
+          <div class="experience-item">
+            <h4>VENTURE LAUNCH</h4>
+            <p>日本特殊陶業 初の社内ベンチャー立案・推進・分社化</p>
+          </div>
+          
+          <div class="experience-item">
+            <h4>MANAGEMENT</h4>
+            <p>株式会社シェアリングファクトリー 代表取締役<br>経営・顧客開拓・組織運営</p>
+          </div>
+          
+          <div class="experience-item">
+            <h4>EXIT</h4>
+            <p>事業売却完遂<br>出口から逆算した事業構築</p>
+          </div>
+          
+          <div class="experience-item">
+            <h4>FIELD PRACTICE</h4>
+            <p>3現主義（現場・現物・現実）から顧客課題構造を理解</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="experience-image-area">
+        <div class="experience-frame">
+          <img src="lecture.jpg" alt="実践者として語る" class="experience-image">
+        </div>
+        <div class="experience-caption">
+          Sharing knowledge from real experience
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section class="support-section">
+  <div class="container">
+    <div class="section-eyebrow">SUPPORT</div>
+    <h2 class="section-title">提供する支援</h2>
+    
+    <div class="support-grid">
+      <div class="support-column">
+        <h3>講演・ワークショップ</h3>
+        <p class="support-desc">
+          実体験を共有しながら、<br>
+          自社課題を構造的に整理する。
+        </p>
+        <ul class="support-list">
+          <li>新規事業が止まる構造</li>
+          <li>顧客解像度向上</li>
+          <li>勝ち筋設計</li>
+          <li>Exit視点</li>
+          <li>3現主義実践</li>
+        </ul>
+      </div>
+      
+      <div class="support-column">
+        <h3>実行支援・メンタリング</h3>
+        <p class="support-desc">
+          現場に入り、<br>
+          実行まで伴走する。
+        </p>
+        <ul class="support-list">
+          <li>新規事業レビュー</li>
+          <li>顧客課題深掘り</li>
+          <li>競争構造分析</li>
+          <li>事務局伴走</li>
+          <li>経営壁打ち</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <h2>次の事業を、<br>現実にする。</h2>
+    <div class="final-cta-actions">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="final-link">相談する</a>
+      <a href="index.html" class="final-link">TOPへ戻る</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">ゆくひ合同会社</span>
+  <span class="footer-copy">© 2026 Yukuhi LLC. All Rights Reserved.</span>
+</footer>
+
+</body>
+</html>

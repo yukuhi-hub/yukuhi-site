@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>製造業判断AI | ゆくひ合同会社</title>
+<meta name="description" content="属人化した判断を、AIと構造化で再現可能にする。製造業の情報構造と判断を理解し、再現可能な形に整理する。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy-dark: #06111e;
+    --white: #fafaf8;
+    --ink: #1a1a1a;
+    --accent: #b8551a;
+    --muted: #6b7280;
+    --bg-section: #f9f8f6;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.8;
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  /* ─── NAV (統一) ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(6,17,30,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    padding: 0 80px;
+    height: 88px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    height: 62px;
+    opacity: 0.92;
+    transition: opacity 0.4s;
+  }
+  .nav-logo:hover { opacity: 1; }
+  .nav-links { display: flex; gap: 64px; list-style: none; }
+  .nav-links a {
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(250,250,248,0.5);
+    text-decoration: none;
+    transition: all 0.4s;
+    letter-spacing: 0.06em;
+    position: relative;
+    padding-bottom: 2px;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(184,85,26,0);
+    transition: all 0.4s;
+  }
+  .nav-links a:hover {
+    color: rgba(250,250,248,0.95);
+    text-shadow: 0 0 8px rgba(184,85,26,0.15);
+  }
+  .nav-links a:hover::after {
+    background: rgba(184,85,26,0.7);
+  }
+  .nav-cta {
+    color: rgba(250,250,248,0.65) !important;
+    font-size: 13px !important;
+    letter-spacing: 0.08em !important;
+    border-bottom: 1px solid rgba(184,85,26,0.3) !important;
+    padding-bottom: 2px !important;
+  }
+  .nav-cta:hover { 
+    color: var(--white) !important;
+    border-bottom-color: rgba(184,85,26,0.7) !important;
+  }
+
+  /* ─── HERO (建築的構造) ─── */
+  .hero {
+    padding-top: 88px;
+    min-height: 88vh;
+    background: var(--navy-dark);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* 建築的背景 - Industrial Architecture */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      linear-gradient(135deg, rgba(6,17,30,0.92) 0%, rgba(6,17,30,0.75) 50%, rgba(6,17,30,0.85) 100%),
+      radial-gradient(ellipse at 60% 50%, rgba(184,85,26,0.08) 0%, transparent 60%);
+    z-index: 1;
+  }
+  
+  /* データフローの示唆 */
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(90deg, transparent 0%, rgba(184,85,26,0.03) 50%, transparent 100%),
+      linear-gradient(0deg, transparent 0%, rgba(255,255,255,0.02) 50%, transparent 100%);
+    background-size: 200% 200%;
+    animation: dataFlow 20s ease-in-out infinite;
+    z-index: 1;
+    opacity: 0.4;
+  }
+  
+  @keyframes dataFlow {
+    0%, 100% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+  }
+  
+  .hero-container {
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 160px 100px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-text-area h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(48px, 6vw, 76px);
+    color: var(--white);
+    line-height: 1.5;
+    margin-bottom: 64px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    max-width: 1000px;
+  }
+
+  .hero-sub {
+    font-size: 22px;
+    color: rgba(250,250,248,0.78);
+    line-height: 2.3;
+    margin-bottom: 88px;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    max-width: 740px;
+  }
+
+  .hero-actions { 
+    display: flex; 
+    gap: 48px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .hero-link {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    color: rgba(250,250,248,0.92);
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(184,85,26,0.35);
+    transition: all 0.7s;
+  }
+  
+  .hero-link::after {
+    content: '→';
+    margin-left: 20px;
+    font-size: 16px;
+    color: rgba(184,85,26,0.7);
+    transition: all 0.7s;
+  }
+  
+  .hero-link:hover {
+    color: var(--white);
+    border-bottom-color: rgba(184,85,26,0.85);
+  }
+  
+  .hero-link:hover::after {
+    margin-left: 34px;
+    color: rgba(184,85,26,1);
+  }
+
+  /* ─── SECTIONS (統一) ─── */
+  section { padding: 170px 0; }
+  .container { max-width: 1480px; margin: 0 auto; padding: 0 100px; }
+
+  .section-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: rgba(184,85,26,0.85);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 56px;
+    font-weight: 400;
+  }
+  
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(38px, 4.5vw, 60px);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.6;
+    margin-bottom: 120px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── STRUCTURE (構造説明) ─── */
+  .structure-section {
+    background: var(--white);
+  }
+  
+  .structure-intro {
+    max-width: 900px;
+    margin-bottom: 120px;
+  }
+  
+  .structure-intro p {
+    font-size: 19px;
+    line-height: 2.5;
+    color: var(--ink);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+  
+  .structure-list {
+    display: flex;
+    flex-direction: column;
+    gap: 96px;
+  }
+  
+  .structure-item h4 {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(184,85,26,0.85);
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  
+  .structure-item h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.7;
+    margin-bottom: 28px;
+    letter-spacing: 0.04em;
+  }
+  
+  .structure-item p {
+    font-size: 17px;
+    line-height: 2.3;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 800px;
+  }
+
+  /* ─── PHASE (軽量化) ─── */
+  .phase-section {
+    background: var(--bg-section);
+  }
+  
+  .phase-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 80px;
+  }
+  
+  .phase-card {
+    background: var(--white);
+    border: 1px solid rgba(26,26,26,0.04);
+    padding: 56px;
+    transition: all 0.5s ease;
+  }
+  
+  .phase-card:hover {
+    border-color: rgba(184,85,26,0.15);
+    transform: translateY(-4px);
+  }
+  
+  .phase-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(184,85,26,0.6);
+    margin-bottom: 20px;
+  }
+  
+  .phase-card h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    letter-spacing: 0.04em;
+  }
+  
+  .phase-card p {
+    font-size: 16px;
+    line-height: 2.2;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ─── EXAMPLES (余白拡大) ─── */
+  .examples-section {
+    background: var(--white);
+  }
+  
+  .examples-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 100px;
+  }
+  
+  .example-item h4 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 0.03em;
+  }
+  
+  .example-item p {
+    font-size: 16px;
+    line-height: 2.2;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ─── FINAL CTA (統一) ─── */
+  .final-cta {
+    background: var(--navy-dark);
+    text-align: center;
+    padding: 160px 0;
+    position: relative;
+  }
+  
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(184,85,26,0.12) 0%, transparent 65%);
+  }
+  
+  .final-cta h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(38px, 4.5vw, 60px);
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 100px;
+    line-height: 1.65;
+    letter-spacing: 0.05em;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .final-cta-actions {
+    display: flex;
+    gap: 64px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .final-link {
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(250,250,248,0.85);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(184,85,26,0.25);
+    transition: all 0.7s;
+  }
+  
+  .final-link::after {
+    content: '→';
+    margin-left: 20px;
+    font-size: 16px;
+    color: rgba(184,85,26,0.5);
+    transition: all 0.7s;
+  }
+  
+  .final-link:hover {
+    color: var(--white);
+    border-bottom-color: rgba(184,85,26,0.75);
+  }
+  
+  .final-link:hover::after {
+    margin-left: 32px;
+    color: rgba(184,85,26,1);
+  }
+
+  /* ─── FOOTER (統一) ─── */
+  footer {
+    background: transparent;
+    padding: 96px;
+    text-align: center;
+    border-top: 1px solid rgba(26,26,26,0.05);
+  }
+  
+  .footer-logo {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 24px;
+    letter-spacing: 0.08em;
+    opacity: 0.5;
+  }
+  
+  .footer-copy {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    opacity: 0.35;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1400px) {
+    nav { padding: 0 60px; }
+    .container { padding: 0 60px; }
+    .hero-container { padding: 140px 60px; }
+    .phase-grid { gap: 60px; }
+    .examples-grid { gap: 80px; }
+  }
+
+  @media (max-width: 960px) {
+    nav { padding: 0 32px; height: 76px; }
+    .nav-logo { height: 52px; }
+    .container { padding: 0 32px; }
+    .nav-links { display: none; }
+    
+    .hero-container { padding: 120px 32px; }
+    section { padding: 120px 0; }
+    
+    .phase-grid { grid-template-columns: 1fr; gap: 48px; }
+    .examples-grid { grid-template-columns: 1fr; gap: 64px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html">
+    <img src="logo.jpg" alt="ゆくひ" class="nav-logo">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">TOP</a></li>
+    <li><a href="ai-agent.html">製造業判断AI</a></li>
+    <li><a href="new-business.html">新規事業支援</a></li>
+    <li><a href="index.html#company">YUKUHIについて</a></li>
+  </ul>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="nav-cta">お問い合わせ</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-text-area">
+      <h1>属人化した判断を、<br>AIと構造化で再現可能にする。</h1>
+      <p class="hero-sub">
+        製造業の情報構造と判断を理解し、<br>
+        再現可能な形に整理する。
+      </p>
+      <div class="hero-actions">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="hero-link">相談する</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRUCTURE -->
+<section class="structure-section">
+  <div class="container">
+    <div class="section-eyebrow">STRUCTURE</div>
+    <h2 class="section-title">構造を理解する</h2>
+    
+    <div class="structure-intro">
+      <p>
+        製造業の判断は、単なるデータ処理ではない。<br>
+        現場の知識、過去の経験、暗黙の基準。<br>
+        それらの構造を理解し、整理し、再現可能にする。
+      </p>
+    </div>
+    
+    <div class="structure-list">
+      <div class="structure-item">
+        <h4>INFORMATION DESIGN</h4>
+        <h3>情報構造の設計</h3>
+        <p>
+          製造業の情報は、システムごとに分断されている。<br>
+          ID連携、マスタ設計、情報フローを整理し、判断可能な構造を作る。
+        </p>
+      </div>
+      
+      <div class="structure-item">
+        <h4>KNOWLEDGE STRUCTURING</h4>
+        <h3>現場知識の構造化</h3>
+        <p>
+          ベテランの判断基準、暗黙知、経験則。<br>
+          それらを3現主義（現場・現物・現実）で理解し、再現可能な形に構造化する。
+        </p>
+      </div>
+      
+      <div class="structure-item">
+        <h4>REASONING ARCHITECTURE</h4>
+        <h3>推論の設計</h3>
+        <p>
+          単なるデータ検索ではなく、構造化された情報から推論するAIを設計する。<br>
+          判断のプロセスを再現し、説明可能な形で実装する。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE -->
+<section class="phase-section">
+  <div class="container">
+    <div class="section-eyebrow">APPROACH</div>
+    <h2 class="section-title">実現までの構造</h2>
+    
+    <div class="phase-grid">
+      <div class="phase-card">
+        <div class="phase-number">Phase 01</div>
+        <h3>現場理解</h3>
+        <p>
+          3現主義で現場に入り、判断の構造、情報の流れ、暗黙知を理解する。
+        </p>
+      </div>
+      
+      <div class="phase-card">
+        <div class="phase-number">Phase 02</div>
+        <h3>情報設計</h3>
+        <p>
+          システム間のID連携、マスタ設計、情報構造を整理し、判断可能な形を作る。
+        </p>
+      </div>
+      
+      <div class="phase-card">
+        <div class="phase-number">Phase 03</div>
+        <h3>推論設計</h3>
+        <p>
+          判断基準を構造化し、推論可能なAIアーキテクチャを設計する。
+        </p>
+      </div>
+      
+      <div class="phase-card">
+        <div class="phase-number">Phase 04</div>
+        <h3>実装・検証</h3>
+        <p>
+          現場で検証しながら実装し、判断精度を高め、運用可能な形へ。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXAMPLES -->
+<section class="examples-section">
+  <div class="container">
+    <div class="section-eyebrow">EXAMPLES</div>
+    <h2 class="section-title">実現例</h2>
+    
+    <div class="examples-grid">
+      <div class="example-item">
+        <h4>納期回答AI</h4>
+        <p>
+          受注情報、在庫、生産計画、過去実績から納期を推論。<br>
+          ベテラン判断を再現可能に。
+        </p>
+      </div>
+      
+      <div class="example-item">
+        <h4>生産計画AI</h4>
+        <p>
+          需要予測、設備状況、在庫制約から最適な生産計画を生成。<br>
+          計画担当者の判断を構造化。
+        </p>
+      </div>
+      
+      <div class="example-item">
+        <h4>業務効率化AI</h4>
+        <p>
+          分断された情報を統合し、繰り返し判断を自動化。<br>
+          情報構造の整理から実現。
+        </p>
+      </div>
+      
+      <div class="example-item">
+        <h4>産業機器AI</h4>
+        <p>
+          設備データ、稼働履歴、保守記録から異常を検知。<br>
+          保守判断の再現性を高める。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <h2>判断を、<br>再現可能にする。</h2>
+    <div class="final-cta-actions">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="final-link">相談する</a>
+      <a href="index.html" class="final-link">TOPへ戻る</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">ゆくひ合同会社</span>
+  <span class="footer-copy">© 2026 Yukuhi LLC. All Rights Reserved.</span>
+</footer>
+
+</body>
+</html>
