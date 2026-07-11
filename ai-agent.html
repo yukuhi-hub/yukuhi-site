@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>製造業判断AI | ゆくひ合同会社</title>
-<meta name="description" content="属人化した判断を、AIと構造化で再現可能にする。製造業の情報構造と判断を理解し、再現可能な形に整理する。">
+<meta name="description" content="属人化した判断を、AIと構造化で再現可能にする。先頭商品は納期回答AI。現場の判断基準を構造化し、回答納期と判断理由を説明可能な形で提示する。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -197,6 +197,140 @@
   /* ─── SECTIONS (統一) ─── */
   section { padding: 170px 0; }
   .container { max-width: 1480px; margin: 0 auto; padding: 0 100px; }
+
+  /* ─── LEAD PRODUCT (納期回答AI) ─── */
+  .lead-product-section {
+    background: var(--bg-section);
+  }
+
+  .lead-product-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 140px;
+    align-items: start;
+  }
+
+  .lead-product-intro h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(36px, 4.2vw, 56px);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.65;
+    margin-bottom: 56px;
+    letter-spacing: 0.05em;
+  }
+
+  .lead-product-pains {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 64px;
+  }
+
+  .lead-product-pains li {
+    font-size: 17px;
+    line-height: 2;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  .lead-product-pains li::before {
+    content: '—';
+    margin-right: 16px;
+    color: rgba(184,85,26,0.35);
+  }
+
+  .lead-product-statement {
+    font-size: 18px;
+    line-height: 2.4;
+    color: var(--ink);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  .lead-product-detail {
+    padding-top: 12px;
+  }
+
+  .lead-product-values {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 72px;
+  }
+
+  .lead-product-values li {
+    font-size: 17px;
+    line-height: 2;
+    color: var(--ink);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    padding-left: 28px;
+    position: relative;
+  }
+
+  .lead-product-values li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15px;
+    width: 12px;
+    height: 1px;
+    background: rgba(184,85,26,0.7);
+  }
+
+  .lead-product-philosophy {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20px;
+    line-height: 2.2;
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding-left: 32px;
+    border-left: 1px solid rgba(184,85,26,0.5);
+    margin-bottom: 80px;
+  }
+
+  .lead-product-cta {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(184,85,26,0.4);
+    transition: all 0.7s;
+  }
+
+  .lead-product-cta::after {
+    content: '→';
+    margin-left: 20px;
+    font-size: 16px;
+    color: rgba(184,85,26,0.6);
+    transition: all 0.7s;
+  }
+
+  .lead-product-cta:hover {
+    border-bottom-color: rgba(184,85,26,0.85);
+  }
+
+  .lead-product-cta:hover::after {
+    margin-left: 32px;
+    color: rgba(184,85,26,1);
+  }
+
+  .lead-product-cta-note {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--muted);
+    font-weight: 300;
+    margin-top: 24px;
+    letter-spacing: 0.02em;
+  }
 
   .section-eyebrow {
     font-family: 'Space Mono', monospace;
@@ -408,6 +542,17 @@
     color: rgba(184,85,26,1);
   }
 
+  .final-cta-note {
+    font-size: 14px;
+    line-height: 2;
+    color: rgba(250,250,248,0.5);
+    font-weight: 300;
+    margin-top: 56px;
+    letter-spacing: 0.02em;
+    position: relative;
+    z-index: 1;
+  }
+
   /* ─── FOOTER (統一) ─── */
   footer {
     background: transparent;
@@ -441,6 +586,7 @@
     .hero-container { padding: 140px 60px; }
     .phase-grid { gap: 60px; }
     .examples-grid { gap: 80px; }
+    .lead-product-layout { gap: 100px; }
   }
 
   @media (max-width: 960px) {
@@ -454,6 +600,8 @@
     
     .phase-grid { grid-template-columns: 1fr; gap: 48px; }
     .examples-grid { grid-template-columns: 1fr; gap: 64px; }
+    .lead-product-layout { grid-template-columns: 1fr; gap: 80px; }
+    .lead-product-philosophy { font-size: 18px; }
   }
 </style>
 </head>
@@ -483,7 +631,50 @@
         再現可能な形に整理する。
       </p>
       <div class="hero-actions">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="hero-link">相談する</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="hero-link">自社の納期回答業務について相談する</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD PRODUCT -->
+<section class="lead-product-section">
+  <div class="container">
+    <div class="section-eyebrow">LEAD PRODUCT — 納期回答AI</div>
+
+    <div class="lead-product-layout">
+      <div class="lead-product-intro">
+        <h2>まずは、<br>納期回答の属人化から。</h2>
+        <ul class="lead-product-pains">
+          <li>顧客から納期を聞かれても、その場で回答できない。</li>
+          <li>ベテランが受注状況、在庫、工程、設備負荷を確認しなければ判断できない。</li>
+          <li>担当者によって、回答や判断根拠が変わる。</li>
+        </ul>
+        <p class="lead-product-statement">
+          納期回答AIは、現場に蓄積された判断基準を整理し、<br>
+          回答納期だけでなく、「なぜその納期になるのか」まで<br>
+          説明可能な形で提示します。
+        </p>
+      </div>
+
+      <div class="lead-product-detail">
+        <ul class="lead-product-values">
+          <li>納期回答に必要な情報を整理する</li>
+          <li>ベテランの判断基準をルール化する</li>
+          <li>回答とともに、判断理由を表示する</li>
+          <li>営業・生産管理の回答スピードを向上させる</li>
+          <li>判断基準を、担当者個人ではなく会社の資産として蓄積する</li>
+        </ul>
+
+        <p class="lead-product-philosophy">
+          生成AIを導入するだけでは、<br>
+          現場の判断は再現できない。<br>
+          必要なのは、データの前に、<br>
+          判断基準を構造化すること。
+        </p>
+
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="lead-product-cta">自社の納期回答業務について相談する</a>
+        <p class="lead-product-cta-note">現在の回答フローや使用データを伺い、AI化の可能性を整理します。</p>
       </div>
     </div>
   </div>
@@ -579,18 +770,10 @@
 <!-- EXAMPLES -->
 <section class="examples-section">
   <div class="container">
-    <div class="section-eyebrow">EXAMPLES</div>
-    <h2 class="section-title">実現例</h2>
+    <div class="section-eyebrow">EXPANSION</div>
+    <h2 class="section-title">展開できる判断領域</h2>
     
     <div class="examples-grid">
-      <div class="example-item">
-        <h4>納期回答AI</h4>
-        <p>
-          受注情報、在庫、生産計画、過去実績から納期を推論。<br>
-          ベテラン判断を再現可能に。
-        </p>
-      </div>
-      
       <div class="example-item">
         <h4>生産計画AI</h4>
         <p>
@@ -623,9 +806,10 @@
   <div class="container">
     <h2>判断を、<br>再現可能にする。</h2>
     <div class="final-cta-actions">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="final-link">相談する</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="final-link">自社の納期回答業務について相談する</a>
       <a href="index.html" class="final-link">TOPへ戻る</a>
     </div>
+    <p class="final-cta-note">現在の回答フローや使用データを伺い、AI化の可能性を整理します。</p>
   </div>
 </section>
 
