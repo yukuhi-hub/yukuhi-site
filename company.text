@@ -1,451 +1,491 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ゆくひ合同会社の会社案内。製造業向け判断AI、新規事業支援、代表プロフィール、会社概要をご紹介します。">
+  <meta name="description" content="ゆくひ合同会社の会社案内。製造業向け判断AIと新規事業支援の2事業、代表プロフィール、会社概要をご紹介します。">
   <title>会社案内 | ゆくひ合同会社</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-
 :root {
-  --navy: #071b2e;
-  --navy-2: #0c2942;
-  --blue: #d9662a;
-  --cyan: #f2a65a;
-  --ink: #132338;
-  --muted: #637083;
-  --line: #dce4ec;
-  --paper: #f4f7fa;
+  --abyss: #04121f;
+  --navy: #0a2540;
+  --amber: #d9662a;
+  --amber-light: #f2a65a;
+  --mist: #eff2f6;
+  --ink: #0d1f33;
+  --muted: #4f6577;
+  --line: #d7dfe8;
   --white: #ffffff;
-  --font-geist-mono: 'SFMono-Regular', Menlo, Consolas, monospace;
-  --font-geist-sans: -apple-system, 'Segoe UI', 'Noto Sans JP', sans-serif;
+  --serif: "Noto Serif JP", "Yu Mincho", serif;
+  --sans: "Noto Sans JP", -apple-system, "Segoe UI", sans-serif;
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  margin: 0;
-  color: var(--ink);
-  background: var(--white);
-  font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
-  letter-spacing: .02em;
+  margin: 0; font-family: var(--sans); font-weight: 400; font-size: 16px;
+  color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; text-decoration: none; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 500; margin: 0; }
+p { margin: 0; }
+dl, dd { margin: 0; }
+img { max-width: 100%; }
+:focus-visible { outline: 2px solid var(--amber-light); outline-offset: 3px; }
 
-.site-header {
-  height: 78px;
-  padding: 0 clamp(24px, 5vw, 80px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(255,255,255,.13);
-  position: fixed;
-  inset: 0 0 auto;
-  z-index: 20;
-  color: white;
-  background: rgba(6,24,39,.93);
-  backdrop-filter: blur(14px);
+.y-wrap { padding: 0 clamp(22px, 7vw, 112px); }
+.y-section { padding: clamp(84px, 11vw, 148px) 0; }
+
+/* ── header ── */
+.y-header {
+  position: sticky; top: 0; z-index: 50;
+  height: 78px; display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; padding: 0 clamp(16px, 3.4vw, 40px);
+  background: rgba(4,18,31,.86); backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(242,166,90,.2); color: var(--white);
 }
-.logo { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 700; letter-spacing: .08em; }
-.logo-symbol { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.55); font-family: serif; font-size: 18px; }
-.logo-image { height: 32px; width: auto; display: block; border-radius: 4px; }
-.site-header nav { display: flex; gap: clamp(18px, 2.5vw, 38px); font-size: 12px; color: rgba(255,255,255,.68); }
-.site-header nav a:hover { color: #fff; }
-.header-business-cta { min-width: 284px; padding: 10px 15px; color: var(--navy); background: #f0a961; display: flex; align-items: center; justify-content: space-between; gap: 18px; font-size: 12px; font-weight: 750; white-space: nowrap; box-shadow: 0 7px 24px rgba(0,0,0,.18); transition: .2s ease; }
-.header-business-cta:hover { background: white; transform: translateY(-1px); }
-.header-business-cta span, .header-business-cta small { display: block; }
-.header-business-cta small { margin-bottom: 2px; color: #31566b; font-size: 8px; font-weight: 550; letter-spacing: .08em; }
+.y-logo { display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 500; letter-spacing: .04em; }
+.y-logo img { height: 34px; width: auto; display: block; border-radius: 4px; }
+.y-nav { display: flex; gap: 26px; font-size: 16px; }
+.y-nav a { position: relative; padding: 6px 0; color: rgba(255,255,255,.78); transition: color .25s; }
+.y-nav a::after { content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: var(--amber-light); transition: width .3s ease; }
+.y-nav a:hover { color: var(--white); }
+.y-nav a:hover::after { width: 100%; }
+.y-header-cta {
+  display: flex; align-items: center; gap: 16px; padding: 10px 16px;
+  border: 1px solid rgba(242,166,90,.38); font-size: 16px; line-height: 1.5;
+  transition: border-color .25s, background .25s;
+}
+.y-header-cta:hover { border-color: var(--amber-light); background: rgba(217,102,42,.16); }
+.y-header-cta small { display: block; font-size: 16px; color: var(--amber-light); letter-spacing: .03em; }
 
-.hero {
-  min-height: 800px;
-  padding: 148px clamp(24px, 6.5vw, 104px) 80px;
+/* ── hero ── */
+.y-hero {
+  position: relative; overflow: hidden; color: var(--white);
   background:
-    radial-gradient(circle at 78% 35%, rgba(217,102,42,.28), transparent 27%),
-    linear-gradient(125deg, #061827 0%, #0a253b 65%, #0d3048 100%);
-  color: white;
-  display: grid;
-  grid-template-columns: .9fr 1.1fr;
-  align-items: center;
-  gap: clamp(48px, 7vw, 110px);
-  overflow: hidden;
+    radial-gradient(58% 74% at 10% 6%, rgba(217,102,42,.34), transparent 62%),
+    radial-gradient(46% 62% at 90% 86%, rgba(242,166,90,.16), transparent 66%),
+    linear-gradient(158deg, var(--abyss) 0%, #0a2540 52%, #0e2c45 100%);
 }
-.eyebrow { font-family: var(--font-geist-mono), monospace; font-size: 11px; font-weight: 650; letter-spacing: .18em; color: #b8703c; display: flex; align-items: center; gap: 10px; margin: 0 0 26px; }
-.eyebrow span { width: 30px; height: 1px; background: currentColor; }
-.hero .eyebrow, .eyebrow.light { color: #f2a65a; }
-.hero h1 { margin: 0; font-family: "Noto Serif JP", "Yu Mincho", serif; font-weight: 500; letter-spacing: .01em; font-size: clamp(38px, 3.15vw, 50px); line-height: 1.48; }
-.hero h1 em { color: #f2a65a; font-style: normal; }
-.hero-lead { font-size: clamp(15px, 1.35vw, 19px); line-height: 2; color: rgba(255,255,255,.71); margin: 34px 0 36px; }
-.hero-actions { display: flex; align-items: center; gap: 30px; }
-.button { display: inline-flex; align-items: center; justify-content: space-between; gap: 38px; padding: 17px 22px; font-size: 13px; font-weight: 650; min-width: 220px; }
-.primary { background: #fff; color: var(--navy); }
-.text-link { font-size: 13px; color: rgba(255,255,255,.74); border-bottom: 1px solid rgba(255,255,255,.35); padding-bottom: 4px; }
-.hero-proof { display: flex; align-items: center; gap: 15px; margin-top: 52px; font-size: 10px; letter-spacing: .1em; color: rgba(255,255,255,.44); }
-.hero-proof i { width: 24px; height: 1px; background: rgba(255,255,255,.25); }
+.y-hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(rgba(242,166,90,.05) 1px, transparent 1px);
+  background-size: 100% 82px;
+}
+.y-hero-inner {
+  position: relative; display: grid; grid-template-columns: 1fr 1.05fr;
+  gap: clamp(48px, 6vw, 92px); align-items: center;
+  padding-top: clamp(76px, 9vw, 112px); padding-bottom: clamp(76px, 9vw, 112px);
+}
+.y-hero h1 { font-size: clamp(36px, 4.7vw,64px); line-height: 1.4; font-weight: 600; letter-spacing: .01em; }
+.y-hero h1 em { font-style: normal; color: var(--amber-light); }
+.y-hero-lead { margin-top: 30px; max-width: 30em; font-size: 17px; line-height: 2.1; color: rgba(255,255,255,.78); }
+.y-hero-actions { margin-top: 42px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.y-steps-inline { margin-top: 40px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 16px; color: rgba(255,255,255,.62); }
+.y-steps-inline i { font-style: normal; width: 26px; height: 1px; background: rgba(242,166,90,.6); }
 
-.hero-visual { position: relative; min-width: 0; }
-.visual-glow { position: absolute; inset: -20%; background: radial-gradient(circle, rgba(242,166,90,.22), transparent 58%); }
-.product-screen { position: relative; width: 100%; max-width: 680px; margin: auto; background: #f4f7fa; color: var(--ink); border: 1px solid rgba(255,255,255,.32); box-shadow: 0 36px 90px rgba(0,0,0,.42); transform: perspective(1300px) rotateY(-3deg) rotateX(1deg); }
-.screen-bar { height: 56px; background: #fff; border-bottom: 1px solid #dce4ea; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font-size: 12px; }
-.screen-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
-.brand-mark { display: grid; place-items: center; width: 26px; height: 26px; background: var(--navy); color: white; }
-.screen-status { color: #258b67; background: #e7f5ee; padding: 6px 10px; border-radius: 20px; }
-.screen-body { padding: clamp(20px, 3vw, 34px); }
-.screen-kicker { font: 10px var(--font-geist-mono), monospace; color: #8692a1; letter-spacing: .08em; }
-.screen-title-row { display: flex; align-items: center; justify-content: space-between; margin: 20px 0 24px; }
-.screen-title-row p { margin: 0 0 7px; color: #647386; font-size: 11px; }
-.screen-title-row h3 { margin: 0; font-size: clamp(18px, 2vw, 27px); }
-.score-ring { width: 70px; height: 70px; border: 5px solid #4bb59b; border-left-color: #d7e4e2; border-radius: 50%; display: grid; place-content: center; text-align: center; }
-.score-ring strong { font-size: 21px; line-height: 1; }
-.score-ring span { font-size: 8px; color: #7b8795; }
-.screen-metrics { display: grid; grid-template-columns: repeat(3,1fr); background: white; border: 1px solid #dce4ea; }
-.screen-metrics div { padding: 16px; border-right: 1px solid #dce4ea; }
-.screen-metrics div:last-child { border: 0; }
-.screen-metrics span { display: block; color: #7c8997; font-size: 9px; margin-bottom: 7px; }
-.screen-metrics strong { font-size: clamp(12px, 1.3vw, 17px); }
-.good { color: #278a6b; }
-.reason-panel { margin-top: 15px; background: white; border: 1px solid #dce4ea; }
-.reason-head { padding: 12px 15px; display: flex; justify-content: space-between; border-bottom: 1px solid #e5eaef; font-size: 10px; font-weight: 700; }
-.reason-head span:last-child { color: #8994a0; font-weight: 400; }
-.reason-panel ul { list-style: none; padding: 5px 15px 10px; margin: 0; }
-.reason-panel li { font-size: clamp(11px, 1vw, 13px); padding: 9px 0; display: flex; align-items: center; gap: 9px; border-bottom: 1px solid #edf0f3; }
-.reason-panel li:last-child { border: 0; }
-.dot { width: 7px; height: 7px; border-radius: 50%; flex: 0 0 auto; }
-.good-dot { background: #40ad8b; }.warn-dot { background: #e6a139; }
-.float-card { position: absolute; background: rgba(255,255,255,.96); color: var(--ink); box-shadow: 0 15px 40px rgba(0,0,0,.23); padding: 13px 17px; display: flex; align-items: center; gap: 12px; min-width: 190px; }
-.float-card small, .float-card strong { display: block; }.float-card small { font-size: 8px; color: #82909e; margin-bottom: 3px; }.float-card strong { font-size: 10px; }
-.float-icon { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; font-weight: 800; font-size: 11px; color: #208969; background: #ddf2eb; }
-.float-top { right: -35px; top: 17%; }
+.y-btn {
+  display: inline-flex; align-items: center; justify-content: space-between; gap: 34px;
+  min-width: 296px; padding: 19px 24px; background: var(--amber); color: var(--white);
+  font-size: 16px; font-weight: 500; letter-spacing: .03em;
+  box-shadow: 0 16px 36px -14px rgba(217,102,42,.85);
+  transition: transform .25s cubic-bezier(.2,.7,.3,1), box-shadow .25s, background .25s;
+}
+.y-btn:hover { transform: translateY(-2px); background: #e5742f; box-shadow: 0 22px 44px -14px rgba(217,102,42,.95); }
 
-.section { padding: 120px clamp(24px, 7vw, 112px); }
-.section-heading { display: grid; grid-template-columns: 1fr 1.25fr .75fr; gap: 40px; align-items: end; margin-bottom: 58px; }
-.section-heading .eyebrow { align-self: start; }
-.section-heading h2, .how h2, .final-cta h2 { font-family: "Noto Serif JP", "Yu Mincho", serif; font-size: clamp(32px, 3.4vw, 50px); font-weight: 500; line-height: 1.48; margin: 0; }
-.section-heading > p:last-child { color: var(--muted); line-height: 1.9; font-size: 13px; }
-.product-grid { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); max-width: 1060px; margin-left: auto; }
-.product-card { padding: 34px; min-height: 420px; border-right: 1px solid var(--line); display: flex; flex-direction: column; transition: .25s ease; }
-.product-card:last-child { border: 0; }.product-card:hover { background: #f8fafc; transform: translateY(-4px); box-shadow: 0 15px 35px rgba(19,35,56,.08); }
-.product-card.featured { background: var(--navy); color: white; }
-.card-top { display: flex; justify-content: space-between; font: 10px var(--font-geist-mono), monospace; color: #8896a5; }
-.card-top b { color: #378f70; background: #e5f4ee; padding: 5px 8px; font-weight: 600; }.featured .card-top b { color: #f2c896; background: rgba(74,177,148,.15); }
-.card-icon { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid #cbd6e0; margin: 48px 0 28px; color: #c1631f; font-weight: 700; }
-.featured .card-icon { border-color: rgba(255,255,255,.3); color: #f2a65a; }
-.calendar-icon { font-size: 12px; }.yen-icon { font-size: 19px; }
-.card-question { font-size: 13px; color: #5a6b7a; margin: 0 0 8px; }.featured .card-question { color: #a3b5c4; }
-.product-card h3 { margin: 0 0 18px; font-size: 26px; }.product-card > p:not(.card-question) { color: var(--muted); line-height: 1.9; font-size: 14px; margin: 0 0 26px; }.featured > p:not(.card-question) { color: rgba(255,255,255,.68); }
-.product-card a, .quiet-link { margin-top: auto; font-size: 12px; font-weight: 650; display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 17px; }.featured a { border-color: rgba(255,255,255,.16); }.quiet-link { color: #83909d; }
-.next-expansion { max-width: 1060px; margin: 20px 0 0 auto; border: 1px solid var(--line); padding: 25px 30px; display: grid; grid-template-columns: 1.1fr 1.7fr .8fr; align-items: center; gap: 30px; background: #f8fafc; }
-.next-expansion span { font: 9px var(--font-geist-mono), monospace; color: #6a8499; letter-spacing: .15em; }
-.next-expansion h3 { font: 500 19px "Noto Serif JP", serif; margin: 9px 0 0; }
-.next-expansion p { color: var(--muted); font-size: 11px; line-height: 1.8; }
-.next-expansion b { text-align: right; color: #6a7886; font-size: 10px; letter-spacing: .06em; }
+/* ── hero mockup ── */
+.y-screen { position: relative; }
+.y-screen-card {
+  background: var(--white); color: var(--ink);
+  box-shadow: 0 40px 90px -34px rgba(0,0,0,.7); overflow: hidden;
+}
+.y-screen-top {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 18px 24px; border-bottom: 1px solid var(--line);
+}
+.y-screen-brand { display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 500; }
+.y-screen-mark { width: 30px; height: 30px; display: grid; place-items: center; background: var(--navy); color: var(--white); font-size: 16px; }
+.y-screen-state { padding: 6px 14px; font-size: 16px; color: #1f7a52; background: #e4f4ec; }
+.y-screen-body { padding: 26px 24px 28px; }
+.y-screen-case { font-size: 16px; color: var(--muted); }
+.y-verdict { margin-top: 18px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.y-verdict-label { font-size: 16px; color: var(--muted); }
+.y-verdict h3 { margin-top: 8px; font-size: 25px; line-height: 1.5; }
+.y-ring {
+  flex: none; width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center; text-align: center;
+  background: conic-gradient(var(--amber) 0 72%, #e7edf3 72% 100%);
+}
+.y-ring span { width: 76px; height: 76px; border-radius: 50%; background: var(--white); display: grid; place-items: center; align-content: center; gap: 2px; }
+.y-ring b { font-family: var(--serif); font-size: 24px; color: var(--navy); }
+.y-ring small { font-size: 16px; color: var(--muted); }
+.y-dates { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); }
+.y-dates div { padding: 16px 14px; border-right: 1px solid var(--line); }
+.y-dates div:last-child { border-right: 0; }
+.y-dates dt { font-size: 16px; color: var(--muted); }
+.y-dates dd { margin-top: 7px; font-size: 20px; font-weight: 500; color: var(--navy); }
+.y-dates .is-key dd { color: var(--amber); }
+.y-reasons { margin-top: 24px; }
+.y-reasons-head { display: flex; align-items: center; justify-content: space-between; font-size: 16px; color: var(--muted); }
+.y-reasons ul { margin: 12px 0 0; padding: 0; list-style: none; }
+.y-reasons li { position: relative; padding: 12px 0 12px 24px; font-size: 16px; line-height: 1.7; border-bottom: 1px solid #eef1f5; }
+.y-reasons li:last-child { border-bottom: 0; }
+.y-reasons li::before { content: ""; position: absolute; left: 4px; top: 20px; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
+.y-screen-badge {
+  position: absolute; right: -14px; bottom: 54px; display: flex; align-items: center; gap: 14px;
+  padding: 16px 20px; background: var(--white); box-shadow: 0 24px 50px -22px rgba(0,0,0,.55);
+}
+.y-screen-badge svg { color: #1f7a52; flex: none; }
+.y-screen-badge small { display: block; font-size: 16px; color: var(--muted); }
+.y-screen-badge b { display: block; margin-top: 4px; font-size: 16px; font-weight: 500; }
 
-.outcomes { background: #eef3f7; }
-.outcomes-heading { display: grid; grid-template-columns: .7fr 2fr; gap: 40px; align-items: start; margin-bottom: 60px; }
-.outcomes-heading h2 { font-family: "Noto Serif JP", "Yu Mincho", serif; font-size: clamp(32px, 3.5vw, 52px); font-weight: 500; line-height: 1.5; margin: 0; }
-.outcomes-heading > div > p { max-width: 760px; color: var(--muted); font-size: 14px; line-height: 2; margin: 25px 0 0; }
-.outcome-flow { display: grid; grid-template-columns: repeat(3, 1fr); background: white; border: 1px solid #d5e0e8; }
-.outcome-flow article { min-height: 300px; padding: 34px; border-right: 1px solid #d5e0e8; position: relative; }
-.outcome-flow article:last-child { border-right: 0; }
-.outcome-flow article::after { content: "→"; position: absolute; right: -13px; top: 50%; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: #eef3f7; color: #52748d; font-size: 12px; z-index: 1; }
-.outcome-flow article:last-child::after { display: none; }
-.outcome-number { font: 10px var(--font-geist-mono), monospace; color: #b8703c; letter-spacing: .12em; }
-.outcome-before { display: inline-block; margin: 44px 0 16px; padding: 6px 10px; background: #edf1f4; color: #778592; font-size: 10px; }
-.outcome-flow h3 { margin: 0 0 17px; font: 500 25px "Noto Serif JP", serif; color: #123a57; }
-.outcome-flow article > p:last-child { color: var(--muted); font-size: 13px; line-height: 1.9; margin: 0; }
-.outcome-flow .impact-card { background: var(--navy); color: white; }
-.impact-card .outcome-number { color: #f2a65a; }
-.impact-card .outcome-before { background: rgba(255,255,255,.1); color: rgba(255,255,255,.58); }
-.outcome-flow .impact-card h3 { color: white; }
-.outcome-flow .impact-card > p:last-child { color: rgba(255,255,255,.6); }
-.outcome-summary { margin: 22px 0 0; padding: 26px 28px; display: flex; align-items: center; justify-content: center; gap: 20px; background: white; border: 1px solid #d5e0e8; color: #384c5e; font-size: 15px; }
-.outcome-summary span { color: #c1631f; font: 700 12px var(--font-geist-mono), monospace; letter-spacing: .14em; }
-.outcome-summary i { color: #d9662a; font-style: normal; font-size: 22px; }
+/* ── section heads ── */
+.y-head { display: grid; grid-template-columns: .78fr 1.22fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+.y-kicker { display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 500; letter-spacing: .06em; color: var(--amber); }
+.y-kicker::before { content: ""; width: 26px; height: 1px; background: currentColor; }
+.y-h2 { font-size: clamp(29px, 3.4vw,48px); line-height: 1.5; letter-spacing: .01em; }
+.y-note { margin-top: 26px; font-size: 16px; line-height: 2.1; color: var(--muted); max-width: 42em; }
+.y-dark .y-kicker { color: var(--amber-light); }
+.y-dark .y-note { color: rgba(255,255,255,.74); }
 
-.how { background: var(--navy); color: white; }
-.how-copy { display: grid; grid-template-columns: .7fr 1.3fr .8fr; gap: 40px; align-items: end; }
-.how-copy > p:last-child { color: rgba(255,255,255,.55); font-size: 13px; line-height: 1.9; }
-.steps { margin-top: 72px; display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 32px; }
-.steps article { border-top: 1px solid rgba(255,255,255,.2); padding-top: 25px; min-height: 150px; }
-.steps article span { color: #f2a65a; font: 10px var(--font-geist-mono), monospace; }.steps article h3 { margin: 17px 0 10px; font-size: 19px; }.steps article p { color: rgba(255,255,255,.58); font-size: 13px; line-height: 1.8; }.steps > i { font-style: normal; color: #4b6476; }
+/* ── products ── */
+.y-product-grid { margin-top: clamp(48px, 6vw, 76px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 2.4vw, 30px); }
+.y-product {
+  display: flex; flex-direction: column; padding: clamp(30px, 3.2vw, 46px);
+  border: 1px solid var(--line); background: var(--white);
+  transition: border-color .3s, box-shadow .3s, transform .3s cubic-bezier(.2,.7,.3,1);
+}
+.y-product:hover { border-color: var(--amber); box-shadow: 0 24px 54px -32px rgba(10,37,64,.5); transform: translateY(-4px); }
+.y-product.is-lead {
+  color: var(--white); border-color: transparent;
+  background: radial-gradient(70% 90% at 6% 0%, rgba(217,102,42,.5), transparent 60%), linear-gradient(140deg, var(--abyss), #103050);
+}
+.y-product-tag { align-self: flex-start; padding: 7px 14px; font-size: 16px; color: #1f7a52; background: #e4f4ec; }
+.y-product.is-lead .y-product-tag { color: var(--amber-light); background: rgba(242,166,90,.14); }
+.y-product-icon { margin-top: 28px; width: 50px; height: 50px; display: grid; place-items: center; border: 1px solid var(--line); color: var(--amber); }
+.y-product.is-lead .y-product-icon { border-color: rgba(242,166,90,.4); color: var(--amber-light); }
+.y-product-q { margin-top: 26px; font-size: 16px; color: var(--muted); }
+.y-product.is-lead .y-product-q { color: rgba(255,255,255,.66); }
+.y-product h3 { margin-top: 10px; font-size: clamp(24px, 2.4vw,30px); }
+.y-product > p { margin-top: 18px; font-size: 16px; line-height: 2; color: var(--muted); }
+.y-product.is-lead > p { color: rgba(255,255,255,.78); }
+.y-product-links { margin-top: auto; padding-top: 30px; display: grid; gap: 14px; }
+.y-product-link {
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  padding-top: 16px; border-top: 1px solid var(--line); font-size: 16px; font-weight: 500;
+  transition: color .25s;
+}
+.y-product.is-lead .y-product-link { border-color: rgba(255,255,255,.18); }
+.y-product-link:hover { color: var(--amber); }
+.y-product.is-lead .y-product-link:hover { color: var(--amber-light); }
+.y-product-link.is-sub { font-weight: 400; color: var(--muted); }
+.y-product.is-lead .y-product-link.is-sub { color: rgba(255,255,255,.6); }
 
-.trust { background: var(--paper); }
-.trust-heading { grid-template-columns: .7fr 1.8fr; }
-.numbers { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #cdd8e1; border-bottom: 1px solid #cdd8e1; }
-.numbers div { padding: 40px 24px; border-right: 1px solid #cdd8e1; }.numbers div:last-child { border: 0; }
-.numbers strong { display: block; font: 500 clamp(36px, 4vw, 56px) var(--font-geist-sans), sans-serif; color: #c1631f; margin-bottom: 15px; }.numbers strong small { font-size: 14px; margin-left: 5px; }.numbers span { font-size: 14px; color: #56666f; }
-.new-business-banner { padding: 34px clamp(24px, 7vw, 112px); background: #eef3f7; border-top: 1px solid #d6e1e9; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
-.new-business-banner > div { display: flex; align-items: center; gap: 28px; }
-.new-business-banner span { font: 9px var(--font-geist-mono), monospace; color: #b8703c; letter-spacing: .16em; white-space: nowrap; }
-.new-business-banner p { margin: 0; color: #43596b; font: 500 16px "Noto Serif JP", serif; }
-.new-business-banner a { min-width: 210px; padding: 14px 0; display: flex; justify-content: space-between; border-bottom: 1px solid #7290a4; color: #c1631f; font-size: 12px; font-weight: 650; }
+.y-next {
+  margin-top: clamp(22px, 2.4vw, 30px); padding: clamp(24px, 2.6vw, 34px);
+  border: 1px solid var(--line); background: var(--mist);
+  display: grid; grid-template-columns: .8fr 2.2fr; gap: clamp(20px, 4vw, 56px); align-items: center;
+}
+.y-next h3 { font-size: 20px; line-height: 1.6; }
+.y-next p { font-size: 16px; line-height: 2; color: var(--muted); }
 
-.final-cta { padding: 110px 24px; text-align: center; background: linear-gradient(135deg, #0a263b, #0d3b55); color: white; }.final-cta .eyebrow { justify-content: center; }.final-cta > p:not(.eyebrow) { color: rgba(255,255,255,.58); margin: 28px 0 38px; font-size: 13px; }.white-button { background: white; color: var(--navy); margin: auto; }
-.site-footer { position: relative; overflow: hidden; padding: 76px clamp(24px, 6vw, 90px) 28px; background: #eef2f5; color: var(--navy); }
-.footer-curve { position: absolute; right: -12vw; bottom: -22vw; width: 58vw; height: 34vw; min-width: 620px; min-height: 360px; border-radius: 100% 0 0; background: #d9662a; transform: rotate(-4deg); transform-origin: bottom right; }
-.footer-main, .footer-bottom { position: relative; z-index: 1; }
-.footer-main { display: grid; grid-template-columns: .8fr 2.2fr; gap: clamp(60px, 10vw, 150px); align-items: start; }
-.footer-logo { color: var(--navy); font-size: 16px; }
-.footer-logo .logo-symbol { border-color: rgba(7,27,46,.4); }
-.footer-brand > p { margin: 30px 0 0; color: #6b7885; font: 500 15px/1.9 "Noto Serif JP", serif; }
-.footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(34px, 5vw, 78px); }
-.footer-nav > div { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
-.footer-nav a, .footer-nav span { color: #778491; font-size: 11px; line-height: 1.55; }
-.footer-nav a { transition: color .2s ease; }
-.footer-nav a:hover { color: #d9662a; }
-.footer-nav .footer-heading { width: 100%; margin-bottom: 5px; color: var(--navy); font-size: 13px; font-weight: 750; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-.footer-bottom { margin-top: 76px; padding-top: 22px; border-top: 1px solid #ced7df; display: flex; align-items: center; justify-content: space-between; max-width: 74%; }
-.footer-bottom small { color: #8a949e; font-size: 9px; }
-.footer-bottom > div { display: flex; align-items: center; gap: 25px; }
-.footer-bottom a { color: #566674; font-size: 10px; font-weight: 650; }
-.html-download { padding: 8px 12px; border: 1px solid #aebbc6; letter-spacing: .04em; transition: .2s ease; }
-.html-download:hover { border-color: #d9662a; color: #d9662a; }
+/* ── outcomes ── */
+.y-outcomes { background: var(--mist); }
+.y-outcome-grid { margin-top: clamp(48px, 6vw, 76px); display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.y-outcome { padding: clamp(28px, 3vw, 42px); background: var(--white); transition: background .3s, transform .3s cubic-bezier(.2,.7,.3,1); }
+.y-outcome:hover { background: #fbf8f5; transform: translateY(-3px); }
+.y-outcome.is-key { background: var(--navy); color: var(--white); }
+.y-outcome.is-key:hover { background: #0d2c4b; }
+.y-outcome-chip { display: inline-block; padding: 7px 13px; font-size: 16px; color: var(--muted); background: var(--mist); }
+.y-outcome.is-key .y-outcome-chip { color: var(--amber-light); background: rgba(242,166,90,.14); }
+.y-outcome h3 { margin-top: 20px; font-size: 24px; }
+.y-outcome p { margin-top: 16px; font-size: 16px; line-height: 2; color: var(--muted); }
+.y-outcome.is-key p { color: rgba(255,255,255,.76); }
+.y-shift {
+  margin-top: clamp(22px, 2.4vw, 30px); padding: 24px clamp(20px, 3vw, 36px);
+  border: 1px solid var(--line); background: var(--white);
+  display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;
+  font-size: 16px; line-height: 1.8;
+}
+.y-shift dt { color: var(--muted); }
+.y-shift dd { font-weight: 500; }
+.y-shift div { display: flex; align-items: center; gap: 12px; }
+.y-shift i { font-style: normal; font-size: 20px; color: var(--amber); }
 
-.company-header { background: rgba(6,24,39,.97); }
-.company-back-link { color: #f2a65a; font-size: 11px; display: flex; align-items: center; gap: 14px; padding-bottom: 5px; border-bottom: 1px solid rgba(242,166,90,.5); }
-.company-page { background: white; }
-.company-hero { min-height: 620px; padding: 178px clamp(24px, 7vw, 112px) 100px; background: radial-gradient(circle at 80% 28%, rgba(242,166,90,.24), transparent 28%), linear-gradient(125deg, #061827, #0d3048); color: white; display: flex; flex-direction: column; justify-content: center; }
-.company-hero h1 { margin: 0; font: 500 clamp(44px, 5.4vw, 76px)/1.42 "Noto Serif JP", "Yu Mincho", serif; letter-spacing: .02em; }
-.company-hero > p:last-child { margin: 38px 0 0; color: rgba(255,255,255,.62); font-size: 15px; line-height: 2.1; }
-.company-message { display: grid; grid-template-columns: .65fr 1.7fr; gap: clamp(40px, 8vw, 130px); }
-.company-message h2, .company-section-title h2, .company-contact h2 { margin: 0; font: 500 clamp(34px, 3.8vw, 54px)/1.5 "Noto Serif JP", "Yu Mincho", serif; }
-.company-message > div > p { max-width: 780px; color: var(--muted); font-size: 14px; line-height: 2.2; margin: 30px 0 0; }
-.company-businesses { background: var(--paper); }
-.company-section-title { display: grid; grid-template-columns: .65fr 1.7fr; gap: clamp(40px, 8vw, 130px); margin-bottom: 58px; }
-.company-business-grid { margin-left: auto; max-width: 1060px; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); }
-.company-business-grid article { min-height: 330px; padding: 38px; background: white; border-right: 1px solid var(--line); display: flex; flex-direction: column; }
-.company-business-grid article:last-child { border: 0; background: var(--navy); color: white; }
-.company-business-grid article > span { color: #b8703c; font: 10px var(--font-geist-mono), monospace; }
-.company-business-grid h3 { margin: 50px 0 17px; font: 500 26px "Noto Serif JP", serif; }
-.company-business-grid p { color: var(--muted); font-size: 13px; line-height: 2; margin: 0 0 28px; }
-.company-business-grid article:last-child p { color: rgba(255,255,255,.6); }
-.company-business-grid a { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; font-weight: 650; display: flex; justify-content: space-between; }
-.company-business-grid article:last-child a { border-color: rgba(255,255,255,.16); }
-.company-profile { background: var(--navy); color: white; display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(60px, 10vw, 160px); }
-.profile-role { color: #f2a65a; font-size: 12px; letter-spacing: .15em; margin: 0 0 15px; }
-.profile-photo-frame { width: 100%; max-width: 240px; aspect-ratio: 3/4; overflow: hidden; margin-bottom: 36px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.15); }
-.profile-photo { width: 100%; height: 100%; object-fit: cover; display: block; }
-.profile-title h2 { margin: 0; font: 500 clamp(38px, 4.5vw, 62px) "Noto Serif JP", serif; }
-.profile-en { color: rgba(255,255,255,.35); font: 10px var(--font-geist-mono), monospace; letter-spacing: .18em; }
-.profile-copy > p { color: rgba(255,255,255,.65); font-size: 14px; line-height: 2.1; margin: 0 0 22px; }
-.profile-copy ul { list-style: none; padding: 0; margin: 42px 0 0; border-top: 1px solid rgba(255,255,255,.16); }
-.profile-copy li { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.16); color: rgba(255,255,255,.8); font-size: 12px; }
-.company-outline dl { max-width: 920px; margin: 0 0 0 auto; border-top: 1px solid var(--line); }
-.company-outline dl div { display: grid; grid-template-columns: 180px 1fr; padding: 24px 0; border-bottom: 1px solid var(--line); }
-.company-outline dt { color: #708090; font-size: 11px; }
-.company-outline dd { margin: 0; font-size: 13px; }
-.company-outline dd a { color: #c1631f; border-bottom: 1px solid #8bb7ce; }
-.company-contact { padding: 100px 24px; text-align: center; color: white; background: linear-gradient(135deg, #0b263b, #0d3d57); }
-.company-contact .eyebrow { justify-content: center; }
-.company-contact h2 { margin-bottom: 38px; }
+/* ── how ── */
+.y-dark { position: relative; overflow: hidden; color: var(--white); background: var(--navy); }
+.y-dark::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(52% 58% at 50% 0%, rgba(217,102,42,.26), transparent 68%); }
+.y-dark > * { position: relative; }
+.y-steps { margin-top: clamp(48px, 6vw, 76px); display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: clamp(18px, 2.4vw, 32px); align-items: stretch; }
+.y-step { padding: clamp(26px, 2.8vw, 36px); border: 1px solid rgba(242,166,90,.22); background: rgba(255,255,255,.04); backdrop-filter: blur(6px); transition: border-color .3s, background .3s, transform .3s cubic-bezier(.2,.7,.3,1); }
+.y-step:hover { border-color: rgba(242,166,90,.5); background: rgba(255,255,255,.07); transform: translateY(-4px); }
+.y-step h3 { font-size: 22px; line-height: 1.55; }
+.y-step p { margin-top: 16px; font-size: 16px; line-height: 2; color: rgba(255,255,255,.72); }
+.y-step-arrow { display: grid; place-items: center; font-size: 20px; color: rgba(242,166,90,.7); }
 
+/* ── credentials ── */
+.y-numbers { margin-top: clamp(48px, 6vw, 76px); display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.y-numbers div { padding: clamp(30px, 3vw, 42px); background: var(--white); }
+.y-numbers b { display: block; font-family: var(--serif); font-size: clamp(34px, 3.6vw,52px); font-weight: 500; color: var(--amber); line-height: 1.2; }
+.y-numbers b small { font-size: 18px; margin-left: 6px; }
+.y-numbers span { display: block; margin-top: 14px; font-size: 16px; line-height: 1.8; color: var(--muted); }
+
+/* ── cross banner ── */
+.y-cross {
+  margin-top: clamp(48px, 5vw, 72px); padding: clamp(28px, 3vw, 40px);
+  border: 1px solid var(--line); background: var(--mist);
+  display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+}
+.y-cross h3 { font-size: 20px; line-height: 1.6; }
+.y-cross p { margin-top: 12px; font-size: 16px; line-height: 1.9; color: var(--muted); max-width: 44em; }
+.y-cross a { display: inline-flex; align-items: center; gap: 14px; padding: 15px 22px; font-size: 16px; font-weight: 500; color: var(--white); background: var(--navy); transition: background .25s, transform .25s; }
+.y-cross a:hover { background: #123253; transform: translateY(-2px); }
+
+/* ── cta ── */
+.y-cta {
+  position: relative; overflow: hidden; text-align: center; color: var(--white);
+  padding: clamp(88px, 11vw, 140px) clamp(22px, 7vw, 112px);
+  background: radial-gradient(50% 70% at 50% 0%, rgba(217,102,42,.42), transparent 66%), linear-gradient(150deg, var(--abyss), #0c2843);
+}
+.y-cta h2 { font-size: clamp(28px, 3.4vw,46px); line-height: 1.55; }
+.y-cta p { margin: 26px auto 40px; max-width: 38em; font-size: 17px; line-height: 2.1; color: rgba(255,255,255,.78); }
+.y-cta .y-btn { margin: 0 auto; background: var(--white); color: var(--navy); box-shadow: 0 18px 44px -18px rgba(0,0,0,.6); }
+.y-cta .y-btn:hover { background: #fdf0e6; }
+
+/* ── footer ── */
+.y-footer { padding: clamp(56px, 6vw, 84px) clamp(22px, 7vw, 112px) 40px; background: var(--white); border-top: 1px solid var(--line); }
+.y-footer-main { display: grid; grid-template-columns: .9fr 2.1fr; gap: clamp(36px, 5vw, 80px); }
+.y-footer-brand .y-logo { color: var(--navy); }
+.y-footer-brand p { margin-top: 20px; font-size: 16px; line-height: 2; color: var(--muted); }
+.y-footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.y-footer-nav div { display: flex; flex-direction: column; gap: 13px; font-size: 16px; color: var(--muted); }
+.y-footer-heading { font-weight: 500; color: var(--ink); display: flex; justify-content: space-between; }
+.y-footer-nav a:hover { color: var(--amber); }
+.y-footer-bottom { margin-top: clamp(40px, 5vw, 64px); padding-top: 24px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 20px; font-size: 16px; color: var(--muted); }
+.y-footer-bottom a:hover { color: var(--amber); }
+
+/* ── responsive ── */
+@media (max-width: 1240px) { .y-nav { gap: 18px; } }
+@media (max-width: 1120px) {
+  .y-hero-inner { grid-template-columns: 1fr; gap: 58px; }
+  .y-head { grid-template-columns: 1fr; gap: 26px; }
+  .y-steps { grid-template-columns: 1fr; }
+  .y-step-arrow { transform: rotate(90deg); }
+  .y-numbers { grid-template-columns: repeat(2, 1fr); }
+  .y-screen-badge { position: static; margin-top: 18px; }
+}
 @media (max-width: 980px) {
-  .site-header nav { display: none; }
-  .hero { grid-template-columns: 1fr; padding-top: 130px; }
-  .hero-copy { max-width: 680px; }
-  .hero-visual { max-width: 720px; width: 92%; margin: 15px auto 0; }
-  .section-heading, .how-copy { grid-template-columns: 1fr; }
-  .outcomes-heading { grid-template-columns: 1fr; }
-  .section-heading .eyebrow { margin-bottom: 0; }
-  .product-grid { grid-template-columns: 1fr; }
-  .product-card { border-right: 0; border-bottom: 1px solid var(--line); min-height: 370px; }
-  .steps { grid-template-columns: 1fr; }.steps > i { transform: rotate(90deg); text-align: center; }
-  .numbers { grid-template-columns: 1fr 1fr; }.numbers div:nth-child(2) { border-right: 0; }.numbers div:nth-child(-n+2) { border-bottom: 1px solid #cdd8e1; }
-  .next-expansion { grid-template-columns: 1fr; }
-  .outcome-flow { grid-template-columns: 1fr; }
-  .outcome-flow article { border-right: 0; border-bottom: 1px solid #d5e0e8; }
-  .outcome-flow article:last-child { border-bottom: 0; }
-  .outcome-flow article::after { right: auto; left: 50%; top: auto; bottom: -13px; transform: rotate(90deg); }
-  .next-expansion b { text-align: left; }
-  .company-message, .company-section-title, .company-profile { grid-template-columns: 1fr; }
-  .company-business-grid { grid-template-columns: 1fr; }
-  .company-business-grid article { border-right: 0; border-bottom: 1px solid var(--line); }
+  .y-nav { display: none; }
+  .y-header-cta { max-width: 48vw; }
+  .y-product-grid { grid-template-columns: 1fr; }
+  .y-outcome-grid { grid-template-columns: 1fr; }
+  .y-next, .y-cross { grid-template-columns: 1fr; display: grid; }
+  .y-footer-main { grid-template-columns: 1fr; }
+  .y-footer-nav { grid-template-columns: 1fr; gap: 24px; }
 }
+@media (max-width: 620px) {
+  .y-header { height: 68px; }
+  .y-logo span { display: none; }
+  .y-header-cta { gap: 10px; padding: 8px 12px; }
+  .y-btn { min-width: 100%; gap: 18px; }
+  .y-numbers { grid-template-columns: 1fr; }
+  .y-dates { grid-template-columns: 1fr; }
+  .y-dates div { border-right: 0; border-bottom: 1px solid var(--line); }
+  .y-dates div:last-child { border-bottom: 0; }
+  .y-verdict { flex-direction: column; align-items: flex-start; }
+  .y-footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+  
+/* ── company additions ── */
+.y-biz-grid { margin-top: clamp(48px, 6vw, 76px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 2.4vw, 30px); }
+.y-biz { display: flex; flex-direction: column; padding: clamp(30px, 3.2vw, 46px); border: 1px solid var(--line); background: var(--white); transition: border-color .3s, box-shadow .3s, transform .3s cubic-bezier(.2,.7,.3,1); }
+.y-biz:hover { border-color: var(--amber); box-shadow: 0 24px 54px -32px rgba(10,37,64,.5); transform: translateY(-4px); }
+.y-biz.is-alt { color: var(--white); border-color: transparent; background: radial-gradient(70% 90% at 6% 0%, rgba(217,102,42,.46), transparent 60%), linear-gradient(140deg, var(--abyss), #103050); }
+.y-biz-icon { width: 50px; height: 50px; display: grid; place-items: center; border: 1px solid var(--line); color: var(--amber); }
+.y-biz.is-alt .y-biz-icon { border-color: rgba(242,166,90,.4); color: var(--amber-light); }
+.y-biz h3 { margin-top: 26px; font-size: clamp(24px, 2.4vw,30px); }
+.y-biz > p { margin-top: 18px; font-size: 16px; line-height: 2; color: var(--muted); }
+.y-biz.is-alt > p { color: rgba(255,255,255,.78); }
+.y-biz a { margin-top: auto; padding-top: 30px; display: flex; align-items: center; justify-content: space-between; gap: 20px; font-size: 16px; font-weight: 500; transition: color .25s; }
+.y-biz a span.rule { display: none; }
+.y-biz a { border-top: 0; }
+.y-biz-link { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); }
+.y-biz.is-alt .y-biz-link { border-color: rgba(255,255,255,.18); }
+.y-biz-link:hover { color: var(--amber); }
+.y-biz.is-alt .y-biz-link:hover { color: var(--amber-light); }
 
-@media (max-width: 600px) {
-  .site-header { height: 68px; padding: 0 14px; }.site-header .logo > span:last-child { display: none; }
-  .header-business-cta { min-width: 0; padding: 9px 11px; gap: 8px; font-size: 10px; }
-  .header-business-cta small { font-size: 7px; letter-spacing: .03em; }
-  .hero { min-height: auto; padding: 115px 22px 70px; gap: 70px; }.hero h1 { font-size: 39px; }.hero-lead br { display: none; }.hero-actions { align-items: flex-start; flex-direction: column; }.hero-proof { flex-wrap: wrap; margin-top: 38px; }
-  .hero-visual { width: 100%; }.product-screen { transform: none; }.float-card { display: none; }.screen-metrics { grid-template-columns: 1fr; }.screen-metrics div { border-right: 0; border-bottom: 1px solid #dce4ea; }.score-ring { width: 58px; height: 58px; }
-  .section { padding: 80px 22px; }.section-heading { margin-bottom: 40px; }.section-heading h2, .how h2, .final-cta h2 { font-size: 31px; }.product-card { padding: 28px; }
-  .numbers { grid-template-columns: 1fr; }.numbers div { border-right: 0 !important; border-bottom: 1px solid #cdd8e1 !important; }.numbers div:last-child { border-bottom: 0 !important; }
-  .next-expansion { padding: 24px; }
-  .outcome-flow article { min-height: auto; padding: 28px; }
-  .outcome-before { margin-top: 30px; }
-  .outcome-summary { align-items: flex-start; flex-direction: column; gap: 9px; }
-  .outcome-summary i { transform: rotate(90deg); align-self: center; }
-  .new-business-banner, .new-business-banner > div { align-items: flex-start; flex-direction: column; }
-  .new-business-banner { gap: 22px; padding: 30px 22px; }
-  .new-business-banner > div { gap: 10px; }
-  .new-business-banner a { width: 100%; }
-  .company-back-link { font-size: 10px; gap: 7px; }
-  .company-hero { min-height: 540px; padding: 140px 22px 80px; }
-  .company-hero > p:last-child br { display: none; }
-  .company-business-grid article { min-height: 300px; padding: 28px; }
-  .company-outline dl div { grid-template-columns: 1fr; gap: 10px; }
-  .company-contact { padding: 80px 22px; }
-  .site-footer { padding: 58px 22px 24px; }
-  .footer-curve { right: -430px; bottom: -280px; min-width: 640px; min-height: 430px; opacity: .9; }
-  .footer-main { grid-template-columns: 1fr; gap: 48px; }
-  .footer-nav { grid-template-columns: 1fr; gap: 38px; }
-  .footer-brand > p { margin-top: 22px; }
-  .footer-bottom { max-width: 100%; margin-top: 55px; align-items: flex-start; flex-direction: column-reverse; gap: 24px; }
-  .footer-bottom > div { align-items: flex-start; flex-direction: column; gap: 15px; }
-}
+.y-profile { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(40px, 7vw, 110px); align-items: start; }
+.y-photo { width: 100%; max-width: 300px; aspect-ratio: 3/4; overflow: hidden; background: rgba(255,255,255,.06); border: 1px solid rgba(242,166,90,.28); }
+.y-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.y-profile-role { margin-top: 30px; font-size: 16px; letter-spacing: .06em; color: var(--amber-light); }
+.y-profile h2 { margin-top: 12px; font-size: clamp(34px, 4vw,56px); }
+.y-profile-body p { font-size: 17px; line-height: 2.15; color: rgba(255,255,255,.8); }
+.y-profile-body p + p { margin-top: 22px; }
+.y-creds { margin: 40px 0 0; padding: 0; list-style: none; border-top: 1px solid rgba(255,255,255,.18); }
+.y-creds li { padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,.18); font-size: 16px; line-height: 1.8; color: rgba(255,255,255,.88); }
+
+.y-outline { max-width: 980px; margin: clamp(48px, 6vw, 76px) 0 0 auto; border-top: 1px solid var(--line); }
+.y-outline > div { display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 26px 0; border-bottom: 1px solid var(--line); }
+.y-outline dt { font-size: 16px; color: var(--muted); }
+.y-outline dd { font-size: 16px; line-height: 1.9; color: var(--ink); }
+
+@media (max-width: 1120px) { .y-profile { grid-template-columns: 1fr; gap: 44px; } }
+@media (max-width: 980px) { .y-biz-grid { grid-template-columns: 1fr; } .y-outline { margin-left: 0; } }
+@media (max-width: 620px) { .y-outline > div { grid-template-columns: 1fr; gap: 8px; } }
+  
+body small { font-size: 16px; }
 </style>
 </head>
 <body>
 
-      <header class="site-header company-header">
-        <a class="logo" href="/" aria-label="ゆくひ合同会社 トップ">
-          <img src="logo.png" alt="ゆくひ合同会社" class="logo-image">
-          <span>ゆくひ合同会社</span>
-        </a>
-        <nav aria-label="会社案内ナビゲーション">
-          <a href="#message">私たちについて</a>
-          <a href="#profile">代表プロフィール</a>
-          <a href="#outline">会社概要</a>
-        </nav>
-        <a class="company-back-link" href="/">
-          納期AIへ戻る <span aria-hidden="true">↗</span>
-        </a>
-      </header>
+<header class="y-header">
+  <a class="y-logo" href="/" aria-label="ゆくひ合同会社 トップ">
+    <img src="logo.png" alt=""><span>ゆくひ合同会社</span>
+  </a>
+  <nav class="y-nav" aria-label="メインナビゲーション">
+    <a href="#message">私たちの考え方</a>
+    <a href="#business">事業領域</a>
+    <a href="#profile">代表プロフィール</a>
+    <a href="#outline">会社概要</a>
+  </nav>
+  <a class="y-header-cta" href="/">
+    <span><small>属人化した納期・見積もり判断を仕組みに</small>納期AIはこちら</span>
+    <span aria-hidden="true">↗</span>
+  </a>
+</header>
 
-      <main class="company-page">
-        <section class="company-hero">
-          <p class="eyebrow light"><span></span> ABOUT YUKUHI</p>
-          <h1>現場の判断を、<br>会社の力に変える。</h1>
-          <p>
-            ゆくひ合同会社は、製造現場で人に蓄積された経験と判断を、
-            <br>
-            組織で再現できる仕組みに変える会社です。
-          </p>
-        </section>
+<main>
 
-        <section class="company-message section" id="message">
-          <p class="eyebrow"><span></span> OUR APPROACH</p>
-          <div>
-            <h2>技術からではなく、<br>現場の問いから始める。</h2>
-            <p>
-              「いつ納品できるか」「この金額で受けてよいか」。
-              製造業には、ベテランの経験がなければ答えにくい問いが数多くあります。
-              YUKUHIは、その判断基準を現場とともに整理し、AIが根拠とともに提示できる形へ実装します。
-            </p>
-            <p>
-              AIに決定を任せるのではなく、人がよりよく判断できる状態をつくる。
-              現場・現物・現実を起点に、使われ続ける仕組みまで伴走します。
-            </p>
-          </div>
-        </section>
+  <section class="y-hero" aria-labelledby="hero-title">
+    <div class="y-wrap y-hero-inner" style="grid-template-columns:1fr">
+      <div>
+        <h1 id="hero-title">現場の判断を、<br><em>会社の力に変える。</em></h1>
+        <p class="y-hero-lead">ゆくひ合同会社は、製造現場で人に蓄積された経験と判断を、組織で再現できる仕組みに変える会社です。</p>
+      </div>
+    </div>
+  </section>
 
-        <section class="company-businesses section">
-          <div class="company-section-title">
-            <p class="eyebrow"><span></span> BUSINESS</p>
-            <h2>2つの事業領域</h2>
-          </div>
-          <div class="company-business-grid">
-            <article>
-              <span>01</span>
-              <h3>製造業向け判断AI</h3>
-              <p>納期回答や見積もりなど、属人化した現場判断を、根拠とともに再現できる仕組みへ変えます。</p>
-              <a href="/">納期AIを見る <span aria-hidden="true">↗</span></a>
-            </article>
-            <article>
-              <span>02</span>
-              <h3>新規事業支援</h3>
-              <p>社内ベンチャーの立案、顧客開拓、分社化、Exitの実践経験をもとに、構想から事業化まで伴走します。</p>
-              <a href="https://yukuhi.jp/new-business.html">新規事業支援を見る <span aria-hidden="true">↗</span></a>
-            </article>
-          </div>
-        </section>
-
-        <section class="company-profile section" id="profile">
-          <div class="profile-title">
-            <div class="profile-photo-frame">
-              <img src="profile.jpg" alt="長谷川 祐貴" class="profile-photo">
-            </div>
-            <p class="eyebrow light"><span></span> FOUNDER</p>
-            <p class="profile-role">代表</p>
-            <h2>長谷川 祐貴</h2>
-            <p class="profile-en">YUKI HASEGAWA</p>
-          </div>
-          <div class="profile-copy">
-            <p>
-              製造業で25年以上、技術・事業開発・戦略企画に従事。
-              社内ベンチャー「Sharing FACTORY」を立案し、事業責任者として分社化・事業売却までを経験。
-            </p>
-            <p>
-              現在は、製造現場の属人的な判断をAIで構造化する事業と、
-              大企業の新規事業を実践経験から支援する事業を展開しています。
-            </p>
-            <ul>
-              <li>中小企業診断士</li>
-              <li>製造業AI関連特許 1件権利化・4件出願中</li>
-              <li>社内ベンチャー立案・分社化・Exit</li>
-              <li>製造業での実務経験 25年以上</li>
-            </ul>
-          </div>
-        </section>
-
-        <section class="company-outline section" id="outline">
-          <div class="company-section-title">
-            <p class="eyebrow"><span></span> COMPANY</p>
-            <h2>会社概要</h2>
-          </div>
-          <dl>
-            <div><dt>会社名</dt><dd>ゆくひ合同会社</dd></div>
-            <div><dt>代表</dt><dd>長谷川 祐貴</dd></div>
-            <div><dt>所在地</dt><dd>〒450-0002 愛知県名古屋市中村区名駅4丁目24番5号 第2森ビル401</dd></div>
-            <div><dt>設立</dt><dd>2026年1月14日</dd></div>
-            <div><dt>事業内容</dt><dd>製造業向けAI開発・導入支援、新規事業支援、講演・研修</dd></div>
-          </dl>
-        </section>
-
-        <section class="company-contact">
-          <p class="eyebrow light"><span></span> CONTACT</p>
-          <h2>現場の判断や、新規事業について<br>お聞かせください。</h2>
-          <a class="button white-button" href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">
-            相談する <span aria-hidden="true">↗</span>
-          </a>
-        </section>
-      </main>
-
-      <footer class="site-footer">
-        <div class="footer-curve" aria-hidden="true"></div>
-        <div class="footer-main">
-          <div class="footer-brand">
-            <div class="logo footer-logo"><img src="logo.png" alt="ゆくひ合同会社" class="logo-image"><span>ゆくひ合同会社</span></div>
-            <p>製造業の判断を、<br>会社の仕組みに。</p>
-          </div>
-          <nav class="footer-nav" aria-label="フッターナビゲーション">
-            <div>
-              <a class="footer-heading" href="/company">会社概要 <span aria-hidden="true">↗</span></a>
-              <a href="/company#message">私たちについて</a>
-              <a href="/company#profile">代表プロフィール</a>
-              <a href="/company#outline">会社情報</a>
-            </div>
-            <div>
-              <a class="footer-heading" href="https://yukuhi.jp/new-business.html">新規事業支援 <span aria-hidden="true">↗</span></a>
-              <span>構想から事業化まで</span>
-              <span>社内ベンチャー・Exit経験</span>
-              <a href="https://yukuhi.jp/new-business.html">支援内容を見る</a>
-            </div>
-            <div>
-              <a class="footer-heading" href="/#products">製造業の属人化解消 <span aria-hidden="true">↗</span></a>
-              <a href="/#products">納期AI・見積もり判断AI</a>
-              <a href="/#outcomes">導入効果</a>
-              <a href="/#how">導入イメージ</a>
-            </div>
-          </nav>
+  <section class="y-section" id="message" aria-labelledby="message-title">
+    <div class="y-wrap">
+      <div class="y-head">
+        <p class="y-kicker">私たちの考え方</p>
+        <div>
+          <h2 class="y-h2" id="message-title">技術からではなく、<br>現場の問いから始める。</h2>
+          <p class="y-note">「いつ納品できるか」「この金額で受けてよいか」。製造業には、ベテランの経験がなければ答えにくい問いが数多くあります。その判断基準を現場とともに整理し、AIが根拠とともに提示できる形へ実装します。</p>
+          <p class="y-note">AIが判断を組み立て、人は例外だけを確認する。現場・現物・現実を起点に、使われ続ける仕組みまで伴走します。</p>
         </div>
-        <div class="footer-bottom">
-          <small>© 2026 YUKUHI LLC</small>
-          <div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">お問い合わせ</a>
-            <a class="html-download" href="/yukuhi-company.html" download>会社案内HTMLをダウンロード ↓</a>
-          </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="y-section y-outcomes" id="business" aria-labelledby="business-title">
+    <div class="y-wrap">
+      <div class="y-head">
+        <p class="y-kicker">事業領域</p>
+        <div>
+          <h2 class="y-h2" id="business-title">2つの事業領域</h2>
+          <p class="y-note">製造現場の判断を仕組みに変える事業と、新規事業の実践を通じて次世代リーダーを育てる事業。どちらも、実際にやり切った経験から組み立てています。</p>
         </div>
-      </footer>
-    
+      </div>
+      <div class="y-biz-grid">
+        <article class="y-biz is-alt">
+          <div class="y-biz-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg></div>
+          <h3>製造業向け判断AI</h3>
+          <p>納期回答や見積もりなど、属人化した現場判断を、根拠とともに再現できる仕組みへ変えます。</p>
+          <a class="y-biz-link" href="/">納期AI・見積もり判断AIを見る <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="y-biz">
+          <div class="y-biz-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/></svg></div>
+          <h3>新規事業支援</h3>
+          <p>新規事業の実践を通じて、製造業の次世代リーダーを育てます。社内ベンチャー制度の設計者と、事業化・分社化の実践者が伴走します。</p>
+          <a class="y-biz-link" href="/new-business.html">新規事業支援を見る <span aria-hidden="true">↗</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="y-section y-dark" id="profile" aria-labelledby="profile-title">
+    <div class="y-wrap y-profile">
+      <div>
+        <div class="y-photo"><img src="profile.jpg" alt="長谷川 祐貴"></div>
+        <p class="y-profile-role">代表</p>
+        <h2 id="profile-title">長谷川 祐貴</h2>
+      </div>
+      <div class="y-profile-body">
+        <p>製造業28年。技術・事業企画・新規事業の立ち上げに従事してきました。日本特殊陶業（現Niterra）初の社内ベンチャー「Sharing FACTORY」を立案し、事業責任者として分社化・事業売却までを経験しています。</p>
+        <p>現在は、製造現場の属人的な判断をAIで構造化する事業と、新規事業の実践を通じて次世代リーダーを育てる事業を展開しています。</p>
+        <ul class="y-creds">
+          <li>中小企業診断士</li>
+          <li>製造業AI関連特許 1件権利化・4件出願中</li>
+          <li>社内ベンチャー立案・分社化・Exit</li>
+          <li>製造業での実務経験 28年</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="y-section" id="outline" aria-labelledby="outline-title">
+    <div class="y-wrap">
+      <div class="y-head">
+        <p class="y-kicker">会社概要</p>
+        <div><h2 class="y-h2" id="outline-title">会社概要</h2></div>
+      </div>
+      <dl class="y-outline">
+        <div><dt>会社名</dt><dd>ゆくひ合同会社</dd></div>
+        <div><dt>代表</dt><dd>長谷川 祐貴</dd></div>
+        <div><dt>所在地</dt><dd>〒450-0002 愛知県名古屋市中村区名駅4丁目24番5号 第2森ビル401</dd></div>
+        <div><dt>設立</dt><dd>2026年1月</dd></div>
+        <div><dt>事業内容</dt><dd>製造業向けAI・DXサービスの企画・開発・導入支援／新規事業支援／講演・研修</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="y-cta" id="contact" aria-labelledby="cta-title">
+    <h2 id="cta-title">現場の判断や、新規事業について<br>お聞かせください。</h2>
+    <p>製造現場の属人化も、新規事業と人材育成も。まずは現在の状況を伺い、次の一歩を一緒に整理します。</p>
+    <a class="y-btn" href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">
+      自社の業務について相談する <span aria-hidden="true">↗</span>
+    </a>
+  </section>
+
+</main>
+
+<footer class="y-footer">
+  <div class="y-footer-main">
+    <div class="y-footer-brand">
+      <div class="y-logo"><img src="logo.png" alt=""><span>ゆくひ合同会社</span></div>
+      <p>製造業の判断を、<br>会社の仕組みに。</p>
+    </div>
+    <nav class="y-footer-nav" aria-label="フッターナビゲーション">
+      <div>
+        <a class="y-footer-heading" href="/company">会社案内 <span aria-hidden="true">↗</span></a>
+        <a href="#message">私たちの考え方</a>
+        <a href="#profile">代表プロフィール</a>
+        <a href="#outline">会社概要</a>
+      </div>
+      <div>
+        <a class="y-footer-heading" href="/new-business.html">新規事業支援 <span aria-hidden="true">↗</span></a>
+        <a href="/new-business.html#problem">よくある課題</a>
+        <a href="/new-business.html#partnership">2人について</a>
+        <a href="/new-business.html#programs">支援プログラム</a>
+        <a href="/new-business.html#talks">登壇実績</a>
+      </div>
+      <div>
+        <a class="y-footer-heading" href="/">製造業の属人化解消 <span aria-hidden="true">↗</span></a>
+        <a href="/#products">納期AI・見積もり判断AI</a>
+        <a href="/#outcomes">導入効果</a>
+        <a href="/#how">AIの仕組み</a>
+      </div>
+    </nav>
+  </div>
+  <div class="y-footer-bottom">
+    <small>© 2026 YUKUHI LLC</small>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">お問い合わせ</a>
+  </div>
+</footer>
+
 </body>
 </html>
