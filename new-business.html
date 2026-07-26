@@ -1,498 +1,682 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="実践者と専門コーチが、新規事業の構想から仮説検証、顧客開拓、事業化まで伴走する、ゆくひ合同会社の新規事業支援。">
-  <title>新規事業支援 | ゆくひ合同会社</title>
+  <meta name="description" content="新規事業の実践を通じて、製造業の次世代事業リーダーを育成します。社内ベンチャー制度の設計者と、事業化・分社化を経験した実践者が、組織・チーム・リーダー個人を支援します。">
+  <title>次世代リーダー育成・新規事業支援 | ゆくひ合同会社</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-
 :root {
-  --navy: #071b2e;
-  --navy-2: #0c2942;
-  --blue: #d9662a;
-  --cyan: #f2a65a;
-  --ink: #132338;
-  --muted: #637083;
-  --line: #dce4ec;
-  --paper: #f4f7fa;
+  --abyss: #04121f;
+  --navy: #0a2540;
+  --azure: #1f6feb;
+  --sky: #6ea8fe;
+  --mist: #eef3fa;
+  --ink: #0d1f33;
+  --muted: #52697f;
+  --line: #d5e0ed;
   --white: #ffffff;
-  --font-geist-mono: 'SFMono-Regular', Menlo, Consolas, monospace;
-  --font-geist-sans: -apple-system, 'Segoe UI', 'Noto Sans JP', sans-serif;
+  --serif: "Noto Serif JP", "Yu Mincho", serif;
+  --sans: "Noto Sans JP", -apple-system, "Segoe UI", sans-serif;
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
+  font-family: var(--sans);
+  font-weight: 400;
   color: var(--ink);
   background: var(--white);
-  font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
-  letter-spacing: .02em;
+  -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; text-decoration: none; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 500; margin: 0; }
+p { margin: 0; }
+dl, dd { margin: 0; }
+img { max-width: 100%; }
+:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
 
-.site-header {
-  height: 78px;
-  padding: 0 clamp(24px, 5vw, 80px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(255,255,255,.13);
-  position: fixed;
-  inset: 0 0 auto;
-  z-index: 20;
-  color: white;
-  background: rgba(6,24,39,.93);
-  backdrop-filter: blur(14px);
+.nb-wrap { padding: 0 clamp(22px, 7vw, 112px); }
+.nb-section { padding: clamp(84px, 11vw, 148px) 0; }
+
+/* ── header ───────────────────────────────── */
+.nb-header {
+  position: sticky; top: 0; z-index: 50;
+  height: 76px; display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; padding: 0 clamp(16px, 3.4vw, 40px);
+  background: rgba(4,18,31,.86); backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(110,168,254,.16);
+  color: var(--white);
 }
-.logo { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 700; letter-spacing: .08em; }
-.logo-symbol { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.55); font-family: serif; font-size: 18px; }
-.logo-image { height: 32px; width: auto; display: block; border-radius: 4px; }
-.site-header nav { display: flex; gap: clamp(18px, 2.5vw, 38px); font-size: 12px; color: rgba(255,255,255,.68); }
-.site-header nav a:hover { color: #fff; }
-.header-business-cta { min-width: 284px; padding: 10px 15px; color: var(--navy); background: #f0a961; display: flex; align-items: center; justify-content: space-between; gap: 18px; font-size: 12px; font-weight: 750; white-space: nowrap; box-shadow: 0 7px 24px rgba(0,0,0,.18); transition: .2s ease; }
-.header-business-cta:hover { background: white; transform: translateY(-1px); }
-.header-business-cta span, .header-business-cta small { display: block; }
-.header-business-cta small { margin-bottom: 2px; color: #31566b; font-size: 8px; font-weight: 550; letter-spacing: .08em; }
+.nb-logo { display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 500; letter-spacing: .04em; }
+.nb-logo img { height: 32px; width: auto; display: block; border-radius: 4px; }
+.nb-nav { display: flex; gap: 24px; font-size: 16px; }
+.nb-nav a { position: relative; padding: 6px 0; color: rgba(255,255,255,.74); transition: color .25s; }
+.nb-nav a::after {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 1px;
+  background: var(--sky); transition: width .3s ease;
+}
+.nb-nav a:hover { color: var(--white); }
+.nb-nav a:hover::after { width: 100%; }
+.nb-header-cta {
+  display: flex; align-items: center; gap: 16px;
+  padding: 9px 16px; border: 1px solid rgba(110,168,254,.34);
+  font-size: 16px; line-height: 1.5; transition: border-color .25s, background .25s;
+}
+.nb-header-cta:hover { border-color: var(--sky); background: rgba(31,111,235,.14); }
+.nb-header-cta small { display: block; font-size: 16px; color: var(--sky); letter-spacing: .06em; }
 
-.hero {
-  min-height: 800px;
-  padding: 148px clamp(24px, 6.5vw, 104px) 80px;
+/* ── hero ─────────────────────────────────── */
+.nb-hero {
+  position: relative; overflow: hidden; color: var(--white);
   background:
-    radial-gradient(circle at 78% 35%, rgba(217,102,42,.28), transparent 27%),
-    linear-gradient(125deg, #061827 0%, #0a253b 65%, #0d3048 100%);
-  color: white;
-  display: grid;
-  grid-template-columns: .9fr 1.1fr;
-  align-items: center;
-  gap: clamp(48px, 7vw, 110px);
-  overflow: hidden;
+    radial-gradient(58% 74% at 12% 8%, rgba(31,111,235,.42), transparent 62%),
+    radial-gradient(46% 62% at 88% 82%, rgba(110,168,254,.20), transparent 66%),
+    linear-gradient(158deg, var(--abyss) 0%, #0a2540 52%, #0f3157 100%);
 }
-.eyebrow { font-family: var(--font-geist-mono), monospace; font-size: 11px; font-weight: 650; letter-spacing: .18em; color: #b8703c; display: flex; align-items: center; gap: 10px; margin: 0 0 26px; }
-.eyebrow span { width: 30px; height: 1px; background: currentColor; }
-.hero .eyebrow, .eyebrow.light { color: #f2a65a; }
-.hero h1 { margin: 0; font-family: "Noto Serif JP", "Yu Mincho", serif; font-weight: 500; letter-spacing: .01em; font-size: clamp(38px, 3.15vw, 50px); line-height: 1.48; }
-.hero h1 em { color: #f2a65a; font-style: normal; }
-.hero-lead { font-size: clamp(15px, 1.35vw, 19px); line-height: 2; color: rgba(255,255,255,.71); margin: 34px 0 36px; }
-.hero-actions { display: flex; align-items: center; gap: 30px; }
-.button { display: inline-flex; align-items: center; justify-content: space-between; gap: 38px; padding: 17px 22px; font-size: 13px; font-weight: 650; min-width: 220px; }
-.primary { background: #fff; color: var(--navy); }
-.text-link { font-size: 13px; color: rgba(255,255,255,.74); border-bottom: 1px solid rgba(255,255,255,.35); padding-bottom: 4px; }
-.hero-proof { display: flex; align-items: center; gap: 15px; margin-top: 52px; font-size: 10px; letter-spacing: .1em; color: rgba(255,255,255,.44); }
-.hero-proof i { width: 24px; height: 1px; background: rgba(255,255,255,.25); }
-
-.hero-visual { position: relative; min-width: 0; }
-.visual-glow { position: absolute; inset: -20%; background: radial-gradient(circle, rgba(242,166,90,.22), transparent 58%); }
-.product-screen { position: relative; width: 100%; max-width: 680px; margin: auto; background: #f4f7fa; color: var(--ink); border: 1px solid rgba(255,255,255,.32); box-shadow: 0 36px 90px rgba(0,0,0,.42); transform: perspective(1300px) rotateY(-3deg) rotateX(1deg); }
-.screen-bar { height: 56px; background: #fff; border-bottom: 1px solid #dce4ea; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font-size: 12px; }
-.screen-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
-.brand-mark { display: grid; place-items: center; width: 26px; height: 26px; background: var(--navy); color: white; }
-.screen-status { color: #258b67; background: #e7f5ee; padding: 6px 10px; border-radius: 20px; }
-.screen-body { padding: clamp(20px, 3vw, 34px); }
-.screen-kicker { font: 10px var(--font-geist-mono), monospace; color: #8692a1; letter-spacing: .08em; }
-.screen-title-row { display: flex; align-items: center; justify-content: space-between; margin: 20px 0 24px; }
-.screen-title-row p { margin: 0 0 7px; color: #647386; font-size: 11px; }
-.screen-title-row h3 { margin: 0; font-size: clamp(18px, 2vw, 27px); }
-.score-ring { width: 70px; height: 70px; border: 5px solid #4bb59b; border-left-color: #d7e4e2; border-radius: 50%; display: grid; place-content: center; text-align: center; }
-.score-ring strong { font-size: 21px; line-height: 1; }
-.score-ring span { font-size: 8px; color: #7b8795; }
-.screen-metrics { display: grid; grid-template-columns: repeat(3,1fr); background: white; border: 1px solid #dce4ea; }
-.screen-metrics div { padding: 16px; border-right: 1px solid #dce4ea; }
-.screen-metrics div:last-child { border: 0; }
-.screen-metrics span { display: block; color: #7c8997; font-size: 9px; margin-bottom: 7px; }
-.screen-metrics strong { font-size: clamp(12px, 1.3vw, 17px); }
-.good { color: #278a6b; }
-.reason-panel { margin-top: 15px; background: white; border: 1px solid #dce4ea; }
-.reason-head { padding: 12px 15px; display: flex; justify-content: space-between; border-bottom: 1px solid #e5eaef; font-size: 10px; font-weight: 700; }
-.reason-head span:last-child { color: #8994a0; font-weight: 400; }
-.reason-panel ul { list-style: none; padding: 5px 15px 10px; margin: 0; }
-.reason-panel li { font-size: clamp(11px, 1vw, 13px); padding: 9px 0; display: flex; align-items: center; gap: 9px; border-bottom: 1px solid #edf0f3; }
-.reason-panel li:last-child { border: 0; }
-.dot { width: 7px; height: 7px; border-radius: 50%; flex: 0 0 auto; }
-.good-dot { background: #40ad8b; }.warn-dot { background: #e6a139; }
-.float-card { position: absolute; background: rgba(255,255,255,.96); color: var(--ink); box-shadow: 0 15px 40px rgba(0,0,0,.23); padding: 13px 17px; display: flex; align-items: center; gap: 12px; min-width: 190px; }
-.float-card small, .float-card strong { display: block; }.float-card small { font-size: 8px; color: #82909e; margin-bottom: 3px; }.float-card strong { font-size: 10px; }
-.float-icon { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; font-weight: 800; font-size: 11px; color: #208969; background: #ddf2eb; }
-.float-top { right: -35px; top: 17%; }
-
-.section { padding: 120px clamp(24px, 7vw, 112px); }
-.section-heading { display: grid; grid-template-columns: 1fr 1.25fr .75fr; gap: 40px; align-items: end; margin-bottom: 58px; }
-.section-heading .eyebrow { align-self: start; }
-.section-heading h2, .how h2, .final-cta h2 { font-family: "Noto Serif JP", "Yu Mincho", serif; font-size: clamp(32px, 3.4vw, 50px); font-weight: 500; line-height: 1.48; margin: 0; }
-.section-heading > p:last-child { color: var(--muted); line-height: 1.9; font-size: 13px; }
-.product-grid { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); max-width: 1060px; margin-left: auto; }
-.product-card { padding: 34px; min-height: 420px; border-right: 1px solid var(--line); display: flex; flex-direction: column; transition: .25s ease; }
-.product-card:last-child { border: 0; }.product-card:hover { background: #f8fafc; transform: translateY(-4px); box-shadow: 0 15px 35px rgba(19,35,56,.08); }
-.product-card.featured { background: var(--navy); color: white; }
-.card-top { display: flex; justify-content: space-between; font: 10px var(--font-geist-mono), monospace; color: #8896a5; }
-.card-top b { color: #378f70; background: #e5f4ee; padding: 5px 8px; font-weight: 600; }.featured .card-top b { color: #f2c896; background: rgba(74,177,148,.15); }
-.card-icon { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid #cbd6e0; margin: 48px 0 28px; color: #c1631f; font-weight: 700; }
-.featured .card-icon { border-color: rgba(255,255,255,.3); color: #f2a65a; }
-.calendar-icon { font-size: 12px; }.yen-icon { font-size: 19px; }
-.card-question { font-size: 13px; color: #5a6b7a; margin: 0 0 8px; }.featured .card-question { color: #a3b5c4; }
-.product-card h3 { margin: 0 0 18px; font-size: 26px; }.product-card > p:not(.card-question) { color: var(--muted); line-height: 1.9; font-size: 14px; margin: 0 0 26px; }.featured > p:not(.card-question) { color: rgba(255,255,255,.68); }
-.product-card a, .quiet-link { margin-top: auto; font-size: 12px; font-weight: 650; display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 17px; }.featured a { border-color: rgba(255,255,255,.16); }.quiet-link { color: #83909d; }
-.next-expansion { max-width: 1060px; margin: 20px 0 0 auto; border: 1px solid var(--line); padding: 25px 30px; display: grid; grid-template-columns: 1.1fr 1.7fr .8fr; align-items: center; gap: 30px; background: #f8fafc; }
-.next-expansion span { font: 9px var(--font-geist-mono), monospace; color: #6a8499; letter-spacing: .15em; }
-.next-expansion h3 { font: 500 19px "Noto Serif JP", serif; margin: 9px 0 0; }
-.next-expansion p { color: var(--muted); font-size: 11px; line-height: 1.8; }
-.next-expansion b { text-align: right; color: #6a7886; font-size: 10px; letter-spacing: .06em; }
-
-.outcomes { background: #eef3f7; }
-.outcomes-heading { display: grid; grid-template-columns: .7fr 2fr; gap: 40px; align-items: start; margin-bottom: 60px; }
-.outcomes-heading h2 { font-family: "Noto Serif JP", "Yu Mincho", serif; font-size: clamp(32px, 3.5vw, 52px); font-weight: 500; line-height: 1.5; margin: 0; }
-.outcomes-heading > div > p { max-width: 760px; color: var(--muted); font-size: 14px; line-height: 2; margin: 25px 0 0; }
-.outcome-flow { display: grid; grid-template-columns: repeat(3, 1fr); background: white; border: 1px solid #d5e0e8; }
-.outcome-flow article { min-height: 300px; padding: 34px; border-right: 1px solid #d5e0e8; position: relative; }
-.outcome-flow article:last-child { border-right: 0; }
-.outcome-flow article::after { content: "→"; position: absolute; right: -13px; top: 50%; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: #eef3f7; color: #52748d; font-size: 12px; z-index: 1; }
-.outcome-flow article:last-child::after { display: none; }
-.outcome-number { font: 10px var(--font-geist-mono), monospace; color: #b8703c; letter-spacing: .12em; }
-.outcome-before { display: inline-block; margin: 44px 0 16px; padding: 6px 10px; background: #edf1f4; color: #778592; font-size: 10px; }
-.outcome-flow h3 { margin: 0 0 17px; font: 500 25px "Noto Serif JP", serif; color: #123a57; }
-.outcome-flow article > p:last-child { color: var(--muted); font-size: 13px; line-height: 1.9; margin: 0; }
-.outcome-flow .impact-card { background: var(--navy); color: white; }
-.impact-card .outcome-number { color: #f2a65a; }
-.impact-card .outcome-before { background: rgba(255,255,255,.1); color: rgba(255,255,255,.58); }
-.outcome-flow .impact-card h3 { color: white; }
-.outcome-flow .impact-card > p:last-child { color: rgba(255,255,255,.6); }
-.outcome-summary { margin: 22px 0 0; padding: 26px 28px; display: flex; align-items: center; justify-content: center; gap: 20px; background: white; border: 1px solid #d5e0e8; color: #384c5e; font-size: 15px; }
-.outcome-summary span { color: #c1631f; font: 700 12px var(--font-geist-mono), monospace; letter-spacing: .14em; }
-.outcome-summary i { color: #d9662a; font-style: normal; font-size: 22px; }
-
-.how { background: var(--navy); color: white; }
-.how-copy { display: grid; grid-template-columns: .7fr 1.3fr .8fr; gap: 40px; align-items: end; }
-.how-copy > p:last-child { color: rgba(255,255,255,.55); font-size: 13px; line-height: 1.9; }
-.steps { margin-top: 72px; display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 32px; }
-.steps article { border-top: 1px solid rgba(255,255,255,.2); padding-top: 25px; min-height: 150px; }
-.steps article span { color: #f2a65a; font: 10px var(--font-geist-mono), monospace; }.steps article h3 { margin: 17px 0 10px; font-size: 19px; }.steps article p { color: rgba(255,255,255,.58); font-size: 13px; line-height: 1.8; }.steps > i { font-style: normal; color: #4b6476; }
-
-.trust { background: var(--paper); }
-.trust-heading { grid-template-columns: .7fr 1.8fr; }
-.numbers { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #cdd8e1; border-bottom: 1px solid #cdd8e1; }
-.numbers div { padding: 40px 24px; border-right: 1px solid #cdd8e1; }.numbers div:last-child { border: 0; }
-.numbers strong { display: block; font: 500 clamp(36px, 4vw, 56px) var(--font-geist-sans), sans-serif; color: #c1631f; margin-bottom: 15px; }.numbers strong small { font-size: 14px; margin-left: 5px; }.numbers span { font-size: 14px; color: #56666f; }
-.new-business-banner { padding: 34px clamp(24px, 7vw, 112px); background: #eef3f7; border-top: 1px solid #d6e1e9; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
-.new-business-banner > div { display: flex; align-items: center; gap: 28px; }
-.new-business-banner span { font: 9px var(--font-geist-mono), monospace; color: #b8703c; letter-spacing: .16em; white-space: nowrap; }
-.new-business-banner p { margin: 0; color: #43596b; font: 500 16px "Noto Serif JP", serif; }
-.new-business-banner a { min-width: 210px; padding: 14px 0; display: flex; justify-content: space-between; border-bottom: 1px solid #7290a4; color: #c1631f; font-size: 12px; font-weight: 650; }
-
-.final-cta { padding: 110px 24px; text-align: center; background: linear-gradient(135deg, #0a263b, #0d3b55); color: white; }.final-cta .eyebrow { justify-content: center; }.final-cta > p:not(.eyebrow) { color: rgba(255,255,255,.58); margin: 28px 0 38px; font-size: 13px; }.white-button { background: white; color: var(--navy); margin: auto; }
-.site-footer { position: relative; overflow: hidden; padding: 76px clamp(24px, 6vw, 90px) 28px; background: #eef2f5; color: var(--navy); }
-.footer-curve { position: absolute; right: -12vw; bottom: -22vw; width: 58vw; height: 34vw; min-width: 620px; min-height: 360px; border-radius: 100% 0 0; background: #d9662a; transform: rotate(-4deg); transform-origin: bottom right; }
-.footer-main, .footer-bottom { position: relative; z-index: 1; }
-.footer-main { display: grid; grid-template-columns: .8fr 2.2fr; gap: clamp(60px, 10vw, 150px); align-items: start; }
-.footer-logo { color: var(--navy); font-size: 16px; }
-.footer-logo .logo-symbol { border-color: rgba(7,27,46,.4); }
-.footer-brand > p { margin: 30px 0 0; color: #6b7885; font: 500 15px/1.9 "Noto Serif JP", serif; }
-.footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(34px, 5vw, 78px); }
-.footer-nav > div { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
-.footer-nav a, .footer-nav span { color: #778491; font-size: 11px; line-height: 1.55; }
-.footer-nav a { transition: color .2s ease; }
-.footer-nav a:hover { color: #d9662a; }
-.footer-nav .footer-heading { width: 100%; margin-bottom: 5px; color: var(--navy); font-size: 13px; font-weight: 750; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-.footer-bottom { margin-top: 76px; padding-top: 22px; border-top: 1px solid #ced7df; display: flex; align-items: center; justify-content: space-between; max-width: 74%; }
-.footer-bottom small { color: #8a949e; font-size: 9px; }
-.footer-bottom > div { display: flex; align-items: center; gap: 25px; }
-.footer-bottom a { color: #566674; font-size: 10px; font-weight: 650; }
-.html-download { padding: 8px 12px; border: 1px solid #aebbc6; letter-spacing: .04em; transition: .2s ease; }
-.html-download:hover { border-color: #d9662a; color: #d9662a; }
-
-.company-header { background: rgba(6,24,39,.97); }
-.company-back-link { color: #f2a65a; font-size: 11px; display: flex; align-items: center; gap: 14px; padding-bottom: 5px; border-bottom: 1px solid rgba(242,166,90,.5); }
-.company-page { background: white; }
-.company-hero { min-height: 620px; padding: 178px clamp(24px, 7vw, 112px) 100px; background: radial-gradient(circle at 80% 28%, rgba(242,166,90,.24), transparent 28%), linear-gradient(125deg, #061827, #0d3048); color: white; display: flex; flex-direction: column; justify-content: center; }
-.company-hero h1 { margin: 0; font: 500 clamp(44px, 5.4vw, 76px)/1.42 "Noto Serif JP", "Yu Mincho", serif; letter-spacing: .02em; }
-.company-hero > p:last-child { margin: 38px 0 0; color: rgba(255,255,255,.62); font-size: 15px; line-height: 2.1; }
-.company-message { display: grid; grid-template-columns: .65fr 1.7fr; gap: clamp(40px, 8vw, 130px); }
-.company-message h2, .company-section-title h2, .company-contact h2 { margin: 0; font: 500 clamp(34px, 3.8vw, 54px)/1.5 "Noto Serif JP", "Yu Mincho", serif; }
-.company-message > div > p { max-width: 780px; color: var(--muted); font-size: 14px; line-height: 2.2; margin: 30px 0 0; }
-.company-businesses { background: var(--paper); }
-.company-section-title { display: grid; grid-template-columns: .65fr 1.7fr; gap: clamp(40px, 8vw, 130px); margin-bottom: 58px; }
-.company-business-grid { margin-left: auto; max-width: 1060px; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); }
-.company-business-grid article { min-height: 330px; padding: 38px; background: white; border-right: 1px solid var(--line); display: flex; flex-direction: column; }
-.company-business-grid article:last-child { border: 0; background: var(--navy); color: white; }
-.company-business-grid article > span { color: #b8703c; font: 10px var(--font-geist-mono), monospace; }
-.company-business-grid h3 { margin: 50px 0 17px; font: 500 26px "Noto Serif JP", serif; }
-.company-business-grid p { color: var(--muted); font-size: 13px; line-height: 2; margin: 0 0 28px; }
-.company-business-grid article:last-child p { color: rgba(255,255,255,.6); }
-.company-business-grid a { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; font-weight: 650; display: flex; justify-content: space-between; }
-.company-business-grid article:last-child a { border-color: rgba(255,255,255,.16); }
-.company-profile { background: var(--navy); color: white; display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(60px, 10vw, 160px); }
-.profile-role { color: #f2a65a; font-size: 12px; letter-spacing: .15em; margin: 0 0 15px; }
-.profile-title h2 { margin: 0; font: 500 clamp(38px, 4.5vw, 62px) "Noto Serif JP", serif; }
-.profile-en { color: rgba(255,255,255,.35); font: 10px var(--font-geist-mono), monospace; letter-spacing: .18em; }
-.profile-copy > p { color: rgba(255,255,255,.65); font-size: 14px; line-height: 2.1; margin: 0 0 22px; }
-.profile-copy ul { list-style: none; padding: 0; margin: 42px 0 0; border-top: 1px solid rgba(255,255,255,.16); }
-.profile-copy li { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.16); color: rgba(255,255,255,.8); font-size: 12px; }
-.company-outline dl { max-width: 920px; margin: 0 0 0 auto; border-top: 1px solid var(--line); }
-.company-outline dl div { display: grid; grid-template-columns: 180px 1fr; padding: 24px 0; border-bottom: 1px solid var(--line); }
-.company-outline dt { color: #708090; font-size: 11px; }
-.company-outline dd { margin: 0; font-size: 13px; }
-.company-outline dd a { color: #c1631f; border-bottom: 1px solid #8bb7ce; }
-.company-contact { padding: 100px 24px; text-align: center; color: white; background: linear-gradient(135deg, #0b263b, #0d3d57); }
-.company-contact .eyebrow { justify-content: center; }
-.company-contact h2 { margin-bottom: 38px; }
-
-@media (max-width: 980px) {
-  .site-header nav { display: none; }
-  .hero { grid-template-columns: 1fr; padding-top: 130px; }
-  .hero-copy { max-width: 680px; }
-  .hero-visual { max-width: 720px; width: 92%; margin: 15px auto 0; }
-  .section-heading, .how-copy { grid-template-columns: 1fr; }
-  .outcomes-heading { grid-template-columns: 1fr; }
-  .section-heading .eyebrow { margin-bottom: 0; }
-  .product-grid { grid-template-columns: 1fr; }
-  .product-card { border-right: 0; border-bottom: 1px solid var(--line); min-height: 370px; }
-  .steps { grid-template-columns: 1fr; }.steps > i { transform: rotate(90deg); text-align: center; }
-  .numbers { grid-template-columns: 1fr 1fr; }.numbers div:nth-child(2) { border-right: 0; }.numbers div:nth-child(-n+2) { border-bottom: 1px solid #cdd8e1; }
-  .next-expansion { grid-template-columns: 1fr; }
-  .outcome-flow { grid-template-columns: 1fr; }
-  .outcome-flow article { border-right: 0; border-bottom: 1px solid #d5e0e8; }
-  .outcome-flow article:last-child { border-bottom: 0; }
-  .outcome-flow article::after { right: auto; left: 50%; top: auto; bottom: -13px; transform: rotate(90deg); }
-  .next-expansion b { text-align: left; }
-  .company-message, .company-section-title, .company-profile { grid-template-columns: 1fr; }
-  .company-business-grid { grid-template-columns: 1fr; }
-  .company-business-grid article { border-right: 0; border-bottom: 1px solid var(--line); }
+.nb-hero::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(110,168,254,.055) 1px, transparent 1px);
+  background-size: 100% 82px; pointer-events: none;
 }
-
-@media (max-width: 600px) {
-  .site-header { height: 68px; padding: 0 14px; }.site-header .logo > span:last-child { display: none; }
-  .header-business-cta { min-width: 0; padding: 9px 11px; gap: 8px; font-size: 10px; }
-  .header-business-cta small { font-size: 7px; letter-spacing: .03em; }
-  .hero { min-height: auto; padding: 115px 22px 70px; gap: 70px; }.hero h1 { font-size: 39px; }.hero-lead br { display: none; }.hero-actions { align-items: flex-start; flex-direction: column; }.hero-proof { flex-wrap: wrap; margin-top: 38px; }
-  .hero-visual { width: 100%; }.product-screen { transform: none; }.float-card { display: none; }.screen-metrics { grid-template-columns: 1fr; }.screen-metrics div { border-right: 0; border-bottom: 1px solid #dce4ea; }.score-ring { width: 58px; height: 58px; }
-  .section { padding: 80px 22px; }.section-heading { margin-bottom: 40px; }.section-heading h2, .how h2, .final-cta h2 { font-size: 31px; }.product-card { padding: 28px; }
-  .numbers { grid-template-columns: 1fr; }.numbers div { border-right: 0 !important; border-bottom: 1px solid #cdd8e1 !important; }.numbers div:last-child { border-bottom: 0 !important; }
-  .next-expansion { padding: 24px; }
-  .outcome-flow article { min-height: auto; padding: 28px; }
-  .outcome-before { margin-top: 30px; }
-  .outcome-summary { align-items: flex-start; flex-direction: column; gap: 9px; }
-  .outcome-summary i { transform: rotate(90deg); align-self: center; }
-  .new-business-banner, .new-business-banner > div { align-items: flex-start; flex-direction: column; }
-  .new-business-banner { gap: 22px; padding: 30px 22px; }
-  .new-business-banner > div { gap: 10px; }
-  .new-business-banner a { width: 100%; }
-  .company-back-link { font-size: 10px; gap: 7px; }
-  .company-hero { min-height: 540px; padding: 140px 22px 80px; }
-  .company-hero > p:last-child br { display: none; }
-  .company-business-grid article { min-height: 300px; padding: 28px; }
-  .company-outline dl div { grid-template-columns: 1fr; gap: 10px; }
-  .company-contact { padding: 80px 22px; }
-  .site-footer { padding: 58px 22px 24px; }
-  .footer-curve { right: -430px; bottom: -280px; min-width: 640px; min-height: 430px; opacity: .9; }
-  .footer-main { grid-template-columns: 1fr; gap: 48px; }
-  .footer-nav { grid-template-columns: 1fr; gap: 38px; }
-  .footer-brand > p { margin-top: 22px; }
-  .footer-bottom { max-width: 100%; margin-top: 55px; align-items: flex-start; flex-direction: column-reverse; gap: 24px; }
-  .footer-bottom > div { align-items: flex-start; flex-direction: column; gap: 15px; }
+.nb-hero-inner {
+  position: relative; display: grid; grid-template-columns: 1.12fr .88fr;
+  gap: clamp(48px, 7vw, 100px); align-items: center;
+  padding-top: clamp(80px, 10vw, 124px); padding-bottom: clamp(80px, 10vw, 124px);
 }
+.nb-hero h1 { font-size: clamp(38px, 5.2vw,70px); line-height: 1.38; letter-spacing: .01em; font-weight: 600; }
+.nb-hero h1 em { font-style: normal; color: var(--sky); }
+.nb-hero-lead { margin-top: 32px; max-width: 32em; font-size: clamp(16px, 1.25vw,17px); line-height: 2.1; color: rgba(255,255,255,.76); }
+.nb-hero-pillars {
+  margin-top: 30px; padding-left: 22px; border-left: 2px solid rgba(110,168,254,.5);
+  display: grid; gap: 9px; font-size: 16px; line-height: 1.85; color: rgba(255,255,255,.86);
+}
+.nb-hero-actions { margin-top: 44px; display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
+.nb-btn {
+  display: inline-flex; align-items: center; justify-content: space-between; gap: 36px;
+  min-width: 300px; padding: 19px 24px;
+  background: var(--azure); color: var(--white);
+  font-size: 16px; font-weight: 500; letter-spacing: .03em;
+  box-shadow: 0 16px 36px -14px rgba(31,111,235,.85);
+  transition: transform .25s cubic-bezier(.2,.7,.3,1), box-shadow .25s, background .25s;
+}
+.nb-btn:hover { transform: translateY(-2px); background: #2f7ef5; box-shadow: 0 22px 44px -14px rgba(31,111,235,.95); }
+.nb-btn span { font-size: 16px; }
+.nb-partner { font-size: 16px; letter-spacing: .05em; color: rgba(255,255,255,.55); }
+.nb-partner b { font-weight: 500; color: rgba(255,255,255,.88); }
 
-/* ─── NEW BUSINESS PAGE ADDITIONS ─── */
-.nb-hero { min-height: 560px; }
-.nb-hero .hero-lead-text { margin: 38px 0 0; color: rgba(255,255,255,.62); font-size: 15px; line-height: 2.1; }
-.nb-hero .partner-line { margin-top: 40px; color: rgba(255,255,255,.5); font-size: 12px; letter-spacing: .04em; }
-.nb-hero .partner-line b { color: rgba(255,255,255,.85); font-weight: 650; }
+.nb-path { position: relative; padding-left: 30px; }
+.nb-path::before {
+  content: ""; position: absolute; left: 5px; top: 16px; bottom: 44px; width: 1px;
+  background: linear-gradient(180deg, rgba(110,168,254,.18), var(--sky));
+}
+.nb-path-step {
+  position: relative; padding: 21px 26px; margin-bottom: 13px;
+  background: rgba(255,255,255,.045); border: 1px solid rgba(110,168,254,.18);
+  backdrop-filter: blur(6px);
+  transition: transform .3s cubic-bezier(.2,.7,.3,1), border-color .3s, background .3s;
+}
+.nb-path-step:hover { transform: translateX(6px); border-color: rgba(110,168,254,.44); background: rgba(255,255,255,.075); }
+.nb-path-step::before {
+  content: ""; position: absolute; left: -30px; top: 25px;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--abyss); border: 1px solid var(--sky);
+}
+.nb-path-step h3 { font-size: 19px; letter-spacing: .03em; }
+.nb-path-step.is-goal {
+  background: linear-gradient(120deg, rgba(31,111,235,.92), rgba(15,49,87,.92));
+  border-color: transparent; margin-bottom: 0;
+  box-shadow: 0 18px 44px -18px rgba(31,111,235,.9);
+}
+.nb-path-step.is-goal::before { background: var(--sky); border-color: var(--sky); }
+.nb-path-note { margin-top: 20px; padding-left: 30px; font-size: 16px; letter-spacing: .06em; color: rgba(110,168,254,.78); }
 
-.nb-problem-grid { margin-top: 58px; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-.nb-problem-grid article { padding: 34px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.nb-problem-grid h4 { margin: 0 0 14px; font: 500 18px "Noto Serif JP", serif; color: var(--navy); }
-.nb-problem-grid p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.9; }
-.nb-problem-icon { width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid #cbd6e0; margin-bottom: 22px; color: #c1631f; }
+/* ── section heads ────────────────────────── */
+.nb-head { display: grid; grid-template-columns: .78fr 1.22fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+.nb-kicker { display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 500; letter-spacing: .1em; color: var(--azure); }
+.nb-kicker::before { content: ""; width: 26px; height: 1px; background: currentColor; }
+.nb-h2 { font-size: clamp(29px, 3.4vw,48px); line-height: 1.5; letter-spacing: .01em; }
+.nb-head-note { margin-top: 26px; font-size: 16px; line-height: 2.1; color: var(--muted); max-width: 42em; }
+.nb-dark .nb-kicker { color: var(--sky); }
+.nb-dark .nb-head-note { color: rgba(255,255,255,.72); }
 
-.nb-support-note { max-width: 900px; margin: -20px 0 40px; color: var(--muted); font-size: 14px; line-height: 2; }
-.nb-support-table { max-width: 1060px; margin: 0 0 0 auto; border-top: 1px solid var(--line); }
-.nb-support-table > div { display: grid; grid-template-columns: 1.4fr .9fr 2fr; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--line); align-items: start; }
-.nb-support-table h3 { margin: 0; font: 500 19px "Noto Serif JP", serif; color: var(--navy); }
-.nb-support-table .duration { color: #b8703c; font: 10px var(--font-geist-mono), monospace; letter-spacing: .1em; }
-.nb-support-table p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.9; }
-.nb-support-format { margin: 30px 0 0; color: #566674; font-size: 13px; }
+/* ── problems ─────────────────────────────── */
+.nb-problems { background: var(--mist); }
+.nb-problem-grid {
+  margin-top: clamp(48px, 6vw, 76px);
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: var(--line); border: 1px solid var(--line);
+}
+.nb-problem-card { padding: clamp(28px, 3vw, 42px); background: var(--white); transition: background .3s, transform .3s cubic-bezier(.2,.7,.3,1); }
+.nb-problem-card:hover { background: #f8fbff; transform: translateY(-3px); }
+.nb-problem-card svg { color: var(--azure); }
+.nb-problem-card h3 { margin-top: 24px; font-size: 20px; line-height: 1.6; }
+.nb-problem-card p { margin-top: 16px; font-size: 16px; line-height: 2; color: var(--muted); }
 
-.nb-achievements-grid { margin-top: 58px; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-.nb-achievements-grid div { min-height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 14px; font-size: 13px; font-weight: 650; color: var(--navy); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.nb-ach-icon { color: #c1631f; }
+/* ── approach ─────────────────────────────── */
+.nb-approach-lead {
+  margin-top: clamp(44px, 5vw, 68px); margin-left: auto; max-width: 1060px;
+  font-family: var(--serif); font-size: clamp(19px, 2vw,26px); line-height: 2; color: var(--navy);
+  padding-left: clamp(0px, 2vw, 26px); border-left: 2px solid var(--azure);
+}
+.nb-approach-body { margin: 34px 0 0 auto; max-width: 1060px; display: grid; gap: 22px; font-size: 16px; line-height: 2.1; color: var(--muted); }
 
-@media (max-width: 980px) {
+/* ── partnership ──────────────────────────── */
+.nb-dark { position: relative; overflow: hidden; color: var(--white); background: var(--navy); }
+.nb-dark::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(52% 58% at 50% 0%, rgba(31,111,235,.30), transparent 68%);
+  pointer-events: none;
+}
+.nb-dark > * { position: relative; }
+
+.nb-converge { margin-top: clamp(52px, 6vw, 82px); }
+.nb-converge-tracks { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); }
+.nb-track {
+  padding: clamp(28px, 3vw, 40px);
+  border: 1px solid rgba(110,168,254,.22); background: rgba(255,255,255,.04); backdrop-filter: blur(6px);
+  transition: border-color .3s, background .3s, transform .3s cubic-bezier(.2,.7,.3,1);
+}
+.nb-track:hover { border-color: rgba(110,168,254,.5); background: rgba(255,255,255,.07); transform: translateY(-4px); }
+.nb-track-role { font-size: 18px; font-weight: 500; color: var(--sky); letter-spacing: .02em; }
+.nb-track h3 { margin-top: 22px; font-size: clamp(24px, 2.4vw,30px); line-height: 1.5; }
+.nb-track-org { margin-top: 10px; font-size: 16px; letter-spacing: .04em; color: rgba(255,255,255,.6); }
+.nb-track p { margin-top: 22px; font-size: 16px; line-height: 2.05; color: rgba(255,255,255,.74); }
+
+.nb-converge-link { display: block; width: 100%; height: 84px; }
+.nb-converge-link path { stroke: rgba(110,168,254,.55); stroke-width: 1.25; fill: none; }
+.nb-converge-link circle { fill: var(--sky); stroke: none; }
+.nb-converge-stack { display: none; }
+
+.nb-outcome {
+  max-width: 760px; margin: 0 auto; padding: clamp(30px, 3.4vw, 44px); text-align: center;
+  background: linear-gradient(125deg, rgba(31,111,235,.94), rgba(10,37,64,.94));
+  box-shadow: 0 30px 70px -30px rgba(31,111,235,.9);
+}
+.nb-outcome-label { font-size: 16px; letter-spacing: .14em; color: rgba(255,255,255,.72); }
+.nb-outcome h3 { margin-top: 14px; font-size: clamp(26px, 3vw,38px); letter-spacing: .02em; }
+.nb-outcome p { margin-top: 16px; font-size: 16px; line-height: 2; color: rgba(255,255,255,.8); }
+.nb-outcome-steps {
+  margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.2);
+  display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; font-size: 16px;
+}
+.nb-outcome-steps i { font-style: normal; color: rgba(255,255,255,.5); }
+
+/* ── programs ─────────────────────────────── */
+.nb-programs { background: var(--white); }
+
+.nb-entry {
+  margin-top: clamp(48px, 6vw, 76px); padding: clamp(32px, 4vw, 56px);
+  color: var(--white); position: relative; overflow: hidden;
+  background:
+    radial-gradient(60% 90% at 8% 0%, rgba(31,111,235,.55), transparent 62%),
+    linear-gradient(140deg, var(--abyss), #103257);
+  box-shadow: 0 34px 76px -34px rgba(10,37,64,.75);
+}
+.nb-entry-tag {
+  display: inline-block; padding: 7px 14px; margin-bottom: 24px;
+  font-size: 16px; font-weight: 500; letter-spacing: .08em;
+  color: var(--sky); border: 1px solid rgba(110,168,254,.45);
+}
+.nb-entry h3 { font-size: clamp(25px, 3vw,38px); line-height: 1.5; }
+.nb-entry > p { margin-top: 22px; max-width: 46em; font-size: 16px; line-height: 2.1; color: rgba(255,255,255,.78); }
+.nb-entry-meta {
+  margin-top: 38px; padding-top: 32px; border-top: 1px solid rgba(110,168,254,.28);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 26px clamp(30px, 5vw, 70px);
+}
+.nb-entry-meta dt { font-size: 16px; letter-spacing: .1em; color: var(--sky); }
+.nb-entry-meta dd { margin-top: 9px; font-size: 16px; line-height: 1.9; color: rgba(255,255,255,.9); }
+
+.nb-flow { display: grid; justify-items: center; }
+.nb-flow-stem { width: 1px; height: 40px; background: linear-gradient(180deg, rgba(31,111,235,.25), var(--azure)); }
+.nb-flow-node {
+  padding: 11px 26px; font-size: 16px; font-weight: 500; letter-spacing: .04em;
+  color: var(--navy); background: var(--mist); border: 1px solid var(--azure);
+}
+.nb-flow-caption { margin-top: 18px; font-size: 16px; letter-spacing: .03em; color: var(--muted); text-align: center; }
+.nb-flow-fan { display: block; width: 100%; height: 74px; margin-top: 14px; }
+.nb-flow-fan path { stroke: rgba(31,111,235,.45); stroke-width: 1.25; fill: none; }
+.nb-flow-stack { display: none; }
+
+.nb-support-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 2.4vw, 30px); }
+.nb-support {
+  display: flex; flex-direction: column; padding: clamp(26px, 2.8vw, 38px);
+  border: 1px solid var(--line); background: var(--white);
+  transition: border-color .3s, box-shadow .3s, transform .3s cubic-bezier(.2,.7,.3,1);
+}
+.nb-support:hover { border-color: var(--azure); box-shadow: 0 22px 50px -30px rgba(10,37,64,.5); transform: translateY(-4px); }
+.nb-support-for { font-size: 18px; font-weight: 500; color: var(--azure); letter-spacing: .02em; }
+.nb-support h3 { margin-top: 14px; font-size: clamp(19px, 1.7vw,22px); line-height: 1.6; }
+.nb-support > p { margin-top: 18px; font-size: 16px; line-height: 2; color: var(--muted); }
+.nb-support-meta { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); display: grid; gap: 14px; }
+.nb-support-meta dt { font-size: 16px; letter-spacing: .09em; color: var(--muted); }
+.nb-support-meta dd { margin-top: 5px; font-size: 16px; line-height: 1.8; color: var(--navy); font-weight: 500; }
+.nb-tags { margin-top: 24px; padding-top: 4px; display: flex; gap: 8px; flex-wrap: wrap; }
+.nb-tag { padding: 7px 13px; font-size: 16px; letter-spacing: .03em; color: var(--navy); background: var(--mist); border: 1px solid var(--line); }
+
+.nb-audience {
+  margin-top: clamp(48px, 5vw, 72px); padding: clamp(26px, 3vw, 38px);
+  border: 1px solid var(--line); background: var(--mist);
+  display: grid; grid-template-columns: .8fr 2.2fr; gap: clamp(20px, 4vw, 56px); align-items: center;
+}
+.nb-audience h3 { font-size: 19px; line-height: 1.6; }
+.nb-audience ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 30px; }
+.nb-audience li { position: relative; padding-left: 20px; font-size: 16px; line-height: 1.8; color: var(--navy); }
+.nb-audience li::before { content: ""; position: absolute; left: 0; top: 11px; width: 9px; height: 1px; background: var(--azure); }
+
+/* ── talks ────────────────────────────────── */
+.nb-talks { background: var(--mist); }
+.nb-talk-grid {
+  margin-top: clamp(44px, 5vw, 68px);
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
+  background: var(--line); border: 1px solid var(--line);
+}
+.nb-talk-grid div {
+  min-height: 116px; padding: 18px 12px; background: var(--white);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  text-align: center; font-size: 16px; font-weight: 500; color: var(--navy);
+  transition: background .3s, color .3s;
+}
+.nb-talk-grid div:hover { background: var(--azure); color: var(--white); }
+.nb-talk-grid svg { color: var(--azure); transition: color .3s; }
+.nb-talk-grid div:hover svg { color: var(--white); }
+
+/* ── cta ──────────────────────────────────── */
+.nb-cta {
+  position: relative; overflow: hidden; text-align: center; color: var(--white);
+  padding: clamp(88px, 11vw, 140px) clamp(22px, 7vw, 112px);
+  background:
+    radial-gradient(50% 70% at 50% 0%, rgba(31,111,235,.5), transparent 66%),
+    linear-gradient(150deg, var(--abyss), #0d2e50);
+}
+.nb-cta h2 { font-size: clamp(28px, 3.4vw,46px); line-height: 1.55; }
+.nb-cta p { margin: 26px auto 40px; max-width: 38em; font-size: 16px; line-height: 2.1; color: rgba(255,255,255,.76); }
+.nb-cta .nb-btn { background: var(--white); color: var(--navy); box-shadow: 0 18px 44px -18px rgba(0,0,0,.6); }
+.nb-cta .nb-btn:hover { background: #eaf2ff; }
+
+/* ── footer ───────────────────────────────── */
+.nb-footer { padding: clamp(56px, 6vw, 84px) clamp(22px, 7vw, 112px) 40px; background: var(--white); border-top: 1px solid var(--line); }
+.nb-footer-main { display: grid; grid-template-columns: .9fr 2.1fr; gap: clamp(36px, 5vw, 80px); }
+.nb-footer-brand .nb-logo { color: var(--navy); }
+.nb-footer-brand p { margin-top: 20px; font-size: 16px; line-height: 2; color: var(--muted); }
+.nb-footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.nb-footer-nav div { display: flex; flex-direction: column; gap: 13px; font-size: 16px; color: var(--muted); }
+.nb-footer-heading { font-weight: 500; color: var(--ink); display: flex; justify-content: space-between; }
+.nb-footer-nav a:hover { color: var(--azure); }
+.nb-footer-bottom {
+  margin-top: clamp(40px, 5vw, 64px); padding-top: 24px; border-top: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  font-size: 16px; color: var(--muted);
+}
+.nb-footer-bottom a:hover { color: var(--azure); }
+
+/* ── responsive ───────────────────────────── */
+@media (max-width: 1180px) {
+  .nb-nav { gap: 18px; font-size: 16px; }
+}
+@media (max-width: 1024px) {
+  .nb-support-grid { grid-template-columns: 1fr; }
+  .nb-flow-fan { display: none; }
+  .nb-flow-stack { display: block; width: 1px; height: 46px; margin: 16px auto 0; background: linear-gradient(180deg, var(--azure), rgba(31,111,235,.25)); }
+}
+@media (max-width: 1080px) {
+  .nb-hero-inner { grid-template-columns: 1fr; gap: 60px; }
+  .nb-head { grid-template-columns: 1fr; gap: 26px; }
+  .nb-approach-lead, .nb-approach-body { margin-left: 0; }
+  .nb-audience { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+  .nb-nav { display: none; }
+  .nb-header-cta { max-width: 46vw; }
   .nb-problem-grid { grid-template-columns: 1fr; }
-  .nb-support-table > div { grid-template-columns: 1fr; gap: 8px; }
-  .nb-achievements-grid { grid-template-columns: repeat(2, 1fr); }
+  .nb-converge-tracks { grid-template-columns: 1fr; gap: 18px; }
+  .nb-converge-link { display: none; }
+  .nb-converge-stack { display: block; width: 1px; height: 52px; margin: 4px auto; background: linear-gradient(180deg, rgba(110,168,254,.2), var(--sky)); }
+  .nb-entry-meta { grid-template-columns: 1fr; }
+  .nb-talk-grid { grid-template-columns: repeat(2, 1fr); }
+  .nb-footer-main { grid-template-columns: 1fr; }
+  .nb-footer-nav { grid-template-columns: 1fr; gap: 24px; }
 }
+@media (max-width: 600px) {
+  .nb-header { height: 66px; }
+  .nb-logo span { display: none; }
+  .nb-header-cta { gap: 10px; padding: 8px 12px; }
+  .nb-btn { min-width: 100%; gap: 20px; }
+  .nb-audience ul { grid-template-columns: 1fr; }
+  .nb-footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+  
+body small { font-size: 16px; }
 </style>
 </head>
 <body>
 
-      <header class="site-header">
-        <a class="logo" href="/" aria-label="ゆくひ合同会社 トップ">
-          <img src="logo.png" alt="ゆくひ合同会社" class="logo-image">
-          <span>ゆくひ合同会社</span>
-        </a>
-        <nav aria-label="メインナビゲーション">
-          <a href="#problem">課題</a>
-          <a href="#support">支援内容</a>
-          <a href="#partnership">体制</a>
-          <a href="/company">YUKUHI</a>
-        </nav>
-        <a class="header-business-cta" href="/">
-          <span><small>属人化した納期・見積もり判断を仕組みに</small>納期AIはこちら</span>
-          <span aria-hidden="true">↗</span>
-        </a>
-      </header>
+<header class="nb-header">
+  <a class="nb-logo" href="/" aria-label="ゆくひ合同会社 トップ">
+    <img src="logo.png" alt="">
+    <span>ゆくひ合同会社</span>
+  </a>
+  <nav class="nb-nav" aria-label="メインナビゲーション">
+    <a href="#problem">よくある課題</a>
+    <a href="#approach">私たちの考え方</a>
+    <a href="#partnership">2人について</a>
+    <a href="#programs">支援プログラム</a>
+    <a href="#talks">登壇実績</a>
+  </nav>
+  <a class="nb-header-cta" href="/">
+    <span><small>属人化した納期・見積もり判断を仕組みに</small>納期AIはこちら</span>
+    <span aria-hidden="true">↗</span>
+  </a>
+</header>
 
-      <main class="company-page">
-        <section class="company-hero nb-hero">
-          <p class="eyebrow light"><span></span> NEW BUSINESS SUPPORT</p>
-          <h1>実践者と学び、<br>事業をつくる。</h1>
-          <p class="hero-lead-text">
-            構想で終わらせない。<br>
-            事業と人を、同時に育てる。
-          </p>
-          <a class="button primary" href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">
-            新規事業について相談する <span aria-hidden="true">↗</span>
-          </a>
-          <p class="partner-line">ゆくひ合同会社 <b>×</b> 株式会社Nuevo Lab</p>
-        </section>
+<main>
 
-        <section class="company-message section" id="problem">
-          <p class="eyebrow"><span></span> STRUCTURE</p>
-          <div>
-            <h2>新規事業が止まる理由は、<br>アイデア不足ではない。</h2>
-            <p>顧客検証や事業化まで進まない、自ら動く人材が育たない、研修が成果につながらない。<br>その構造を、実践知で解きほぐす。</p>
-          </div>
-        </section>
-
-        <section class="section" style="padding-top:0;background:var(--paper)">
-          <div class="nb-problem-grid">
-            <article>
-              <div class="nb-problem-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/></svg></div>
-              <h4>新規事業が事業化しない</h4>
-              <p>アイデアは出ても、顧客検証や事業化まで進まない。</p>
-            </article>
-            <article>
-              <div class="nb-problem-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c1.2-4 4-6 7-6s5.8 2 7 6"/></svg></div>
-              <h4>自ら動く人材が育たない</h4>
-              <p>社員が指示待ちになり、変革を担う人材が育たない。</p>
-            </article>
-            <article>
-              <div class="nb-problem-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h11a3 3 0 0 1 3 3v11H7a3 3 0 0 1-3-3V5z"/><line x1="8" y1="9" x2="14" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/></svg></div>
-              <h4>研修が成果につながらない</h4>
-              <p>研修を実施しても、実際の行動や事業成果につながらない。</p>
-            </article>
-          </div>
-        </section>
-
-        <section class="company-businesses section" id="partnership" style="background:var(--white)">
-          <div class="company-section-title">
-            <p class="eyebrow"><span></span> PARTNERSHIP</p>
-            <h2>社内ベンチャーを、<br>仕組みから生んだ2人。</h2>
-          </div>
-          <p class="nb-support-note" style="margin-left:auto;max-width:1060px">
-            日本特殊陶業初の社内ベンチャー「Sharing FACTORY」。プログラムを設計・伴走した株式会社Nuevo Lab 寺澤のぞみと、
-            事業を立ち上げ、スピンオフ・売却まで導いた長谷川。実体験から体系化した事業創出プロセスを、実行支援として提供する。
-          </p>
-          <div class="company-business-grid">
-            <article>
-              <span>01 / PROGRAM</span>
-              <h3>寺澤のぞみ<br>Nuevo Lab</h3>
-              <p>事業家を育てる社内ベンチャープログラムの実務リーダーとして、設計・伴走を担当。新規事業・人材組織開発コンサルタント。</p>
-            </article>
-            <article>
-              <span>02 / BUSINESS</span>
-              <h3>長谷川 祐貴<br>ゆくひ合同会社</h3>
-              <p>プログラムから「Sharing FACTORY」を立ち上げ、事業化・スピンオフ・売却までを実現。新規事業実践家／中小企業診断士。</p>
-            </article>
-          </div>
-        </section>
-
-        <section class="section" id="support" style="background:var(--paper)">
-          <div class="section-heading">
-            <p class="eyebrow"><span></span> SUPPORT</p>
-            <h2>提供する支援</h2>
-            <p>貴社の課題や人材育成方針に合わせて、講演・研修・伴走支援を組み合わせてご提案します。</p>
-          </div>
-          <div class="nb-support-table">
-            <div>
-              <div><span class="duration">期間例：3〜6か月</span><h3>新規事業創出・<br>事業化支援</h3></div>
-              <div class="duration">講演／研修／伴走</div>
-              <p>顧客課題の発見から検証・事業化まで、実践を通じて伴走します。</p>
-            </div>
-            <div>
-              <div><span class="duration">期間例：1日研修〜6か月伴走</span><h3>自律型人材・<br>組織開発支援</h3></div>
-              <div class="duration">講演／研修／伴走</div>
-              <p>実際の組織課題に取り組み、自ら考え、周囲を巻き込み、行動する人材を育成します。</p>
-            </div>
-            <div>
-              <div><span class="duration">期間例：3〜12か月</span><h3>次世代リーダー<br>育成支援</h3></div>
-              <div class="duration">講演／研修／伴走</div>
-              <p>経営視点、意思決定力、組織課題の構造化を学び、変革テーマの実行まで伴走します。</p>
-            </div>
-          </div>
-          <p class="nb-support-format">※ テーマに応じて、起業家・デザイナー・マーケター・VCなどの追加メンターをアサインします。</p>
-        </section>
-
-        <section class="section" id="achievements">
-          <div class="section-heading">
-            <p class="eyebrow"><span></span> ACHIEVEMENTS</p>
-            <h2>実践から得た知見を、<br>次の挑戦へ。</h2>
-            <p>製造業・研究機関・大手企業にて、新規事業創出・事業化支援をテーマに登壇しています。</p>
-          </div>
-          <div class="nb-achievements-grid">
-            <div><svg class="nb-ach-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v9a4 4 0 0 0 8 0V4"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>ノリタケ</div>
-            <div><svg class="nb-ach-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v9a4 4 0 0 0 8 0V4"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>産業技術総合研究所</div>
-            <div><svg class="nb-ach-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v9a4 4 0 0 0 8 0V4"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>日本ガイシ</div>
-            <div><svg class="nb-ach-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v9a4 4 0 0 0 8 0V4"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>Niterra</div>
-            <div><svg class="nb-ach-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v9a4 4 0 0 0 8 0V4"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>豊田合成</div>
-          </div>
-        </section>
-
-        <section class="final-cta" id="contact">
-          <p class="eyebrow light"><span></span> CONTACT</p>
-          <h2>構想を、<br>動く事業へ。</h2>
-          <p>新規事業の立ち上げや、社内での推進に課題を感じている方へ。まずは現在の状況をお聞かせください。</p>
-          <a class="button white-button" href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">
-            新規事業について相談する <span aria-hidden="true">↗</span>
-          </a>
-        </section>
-      </main>
-
-      <footer class="site-footer">
-        <div class="footer-curve" aria-hidden="true"></div>
-        <div class="footer-main">
-          <div class="footer-brand">
-            <div class="logo footer-logo"><img src="logo.png" alt="ゆくひ合同会社" class="logo-image"><span>ゆくひ合同会社</span></div>
-            <p>事業と人を、<br>同時に育てる。</p>
-          </div>
-          <nav class="footer-nav" aria-label="フッターナビゲーション">
-            <div>
-              <a class="footer-heading" href="/company">会社概要 <span aria-hidden="true">↗</span></a>
-              <a href="/company#message">私たちについて</a>
-              <a href="/company#profile">代表プロフィール</a>
-              <a href="/company#outline">会社情報</a>
-            </div>
-            <div>
-              <a class="footer-heading" href="#support">新規事業支援 <span aria-hidden="true">↗</span></a>
-              <span>講演・研修・伴走支援</span>
-              <span>Nuevo Labとの共同提供</span>
-              <a href="#support">支援内容を見る</a>
-            </div>
-            <div>
-              <a class="footer-heading" href="/">製造業の属人化解消 <span aria-hidden="true">↗</span></a>
-              <a href="/#products">納期AI・見積もり判断AI</a>
-              <a href="/#outcomes">導入効果</a>
-              <a href="/#how">導入イメージ</a>
-            </div>
-          </nav>
+  <!-- HERO -->
+  <section class="nb-hero" aria-labelledby="hero-title">
+    <div class="nb-wrap nb-hero-inner">
+      <div>
+        <h1 id="hero-title">事業をつくる経験が、<br><em>次のリーダーをつくる。</em></h1>
+        <p class="nb-hero-lead">
+          製造業の技術者・管理職を、自ら顧客に向き合い、周囲を巻き込み、事業を動かせる人材へ。
+          社内ベンチャー制度の設計者と、事業化・分社化を経験した実践者が伴走します。
+        </p>
+        <div class="nb-hero-pillars">
+          <p>組織には、挑戦が生まれる仕組みを。</p>
+          <p>チームには、実践を通じた成長を。</p>
+          <p>リーダーには、事業を前に進める伴走を。</p>
         </div>
-        <div class="footer-bottom">
-          <small>© 2026 YUKUHI LLC</small>
-          <div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">お問い合わせ</a>
-            <a class="html-download" href="/new-business.html" download>HTMLをダウンロード ↓</a>
-          </div>
+        <div class="nb-hero-actions">
+          <a class="nb-btn" href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">
+            講演・ワークショップについて相談する <span aria-hidden="true">↗</span>
+          </a>
+          <p class="nb-partner"><b>ゆくひ合同会社</b> × <b>株式会社Nuevo Lab</b></p>
         </div>
-      </footer>
+      </div>
+
+      <div class="nb-path" aria-label="育成で身につく実践のプロセス">
+        <article class="nb-path-step"><h3>課題を見つける</h3></article>
+        <article class="nb-path-step"><h3>顧客に向き合う</h3></article>
+        <article class="nb-path-step"><h3>周囲を巻き込む</h3></article>
+        <article class="nb-path-step is-goal"><h3>事業を動かす</h3></article>
+        <p class="nb-path-note">新規事業の実践を通じて、次世代リーダーを育てます</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="nb-section nb-problems" id="problem" aria-labelledby="problem-title">
+    <div class="nb-wrap">
+      <div class="nb-head">
+        <p class="nb-kicker">よくある課題</p>
+        <div>
+          <h2 class="nb-h2" id="problem-title">次世代リーダー育成が、<br>研修だけで終わっていませんか。</h2>
+          <p class="nb-head-note">
+            知識を学ぶだけでは、正解のない状況で意思決定し、周囲を巻き込み、事業を動かせる人材は育ちません。
+            新規事業という実践の場を使い、学びを行動に変えることが必要です。
+          </p>
+        </div>
+      </div>
+
+      <div class="nb-problem-grid">
+        <article class="nb-problem-card">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h11a3 3 0 0 1 3 3v11H7a3 3 0 0 1-3-3V5z"/><line x1="8" y1="9" x2="14" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/></svg>
+          <h3>研修が行動に変わらない</h3>
+          <p>研修の満足度は高くても、現場に戻ると従来の業務に埋もれ、実際の挑戦につながらない。</p>
+        </article>
+        <article class="nb-problem-card">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3"/><path d="M12 18v3"/><path d="M4.6 7.5l2.6 1.5"/><path d="M16.8 15l2.6 1.5"/><path d="M4.6 16.5l2.6-1.5"/><path d="M16.8 9l2.6-1.5"/><circle cx="12" cy="12" r="3.2"/></svg>
+          <h3>正解のないテーマを任せられない</h3>
+          <p>既存業務では優秀でも、答えのない課題を自ら見つけ、判断し、前に進める人材が育っていない。</p>
+        </article>
+        <article class="nb-problem-card">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c1.2-4 4-6 7-6s5.8 2 7 6"/></svg>
+          <h3>新規事業を動かす担い手がいない</h3>
+          <p>制度やアイデア募集はあるものの、顧客に会い、社内を巻き込み、事業化まで進めるリーダーが不足している。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section class="nb-section" id="approach" aria-labelledby="approach-title">
+    <div class="nb-wrap">
+      <div class="nb-head">
+        <p class="nb-kicker">私たちの考え方</p>
+        <div>
+          <h2 class="nb-h2" id="approach-title">新規事業は、<br>次世代リーダーを育てる実践機会です。</h2>
+        </div>
+      </div>
+
+      <p class="nb-approach-lead">
+        顧客に会う。仮説を修正する。周囲を巻き込む。経営に提案する。正解のない状況で意思決定する。
+      </p>
+      <div class="nb-approach-body">
+        <p>新規事業には、これからのリーダーに必要な経験が凝縮されています。私たちは、架空のケースではなく、自社の実テーマに取り組む過程を人材育成の場に変えます。</p>
+        <p>事業だけをつくって人が育たない。人だけを育てて事業が動かない。その分断をなくし、事業と人を同時に育てます。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERSHIP -->
+  <section class="nb-section nb-dark" id="partnership" aria-labelledby="partnership-title">
+    <div class="nb-wrap">
+      <div class="nb-head">
+        <p class="nb-kicker">2人について</p>
+        <div>
+          <h2 class="nb-h2" id="partnership-title">制度をつくった人と、<br>事業をつくった人。</h2>
+          <p class="nb-head-note">
+            新規事業の支援者は、たいていどちらか一方です。私たちは、社内ベンチャー制度を設計した側と、
+            その制度から実際に事業を立ち上げて売却まで持っていった側が、同じチームで伴走します。
+          </p>
+        </div>
+      </div>
+
+      <div class="nb-converge">
+        <div class="nb-converge-tracks">
+          <article class="nb-track">
+            <p class="nb-track-role">制度・人材・組織</p>
+            <h3>寺澤 のぞみ</h3>
+            <p class="nb-track-org">株式会社Nuevo Lab 代表取締役 ／ 新規事業・人材組織開発コンサルタント</p>
+            <p>事業家を育てる社内ベンチャープログラムの実務リーダーとして、設計と伴走を担当。挑戦を続ける推進者と、自律的に動くチームを育てます。</p>
+          </article>
+          <article class="nb-track">
+            <p class="nb-track-role">事業・顧客・意思決定</p>
+            <h3>長谷川 祐貴</h3>
+            <p class="nb-track-org">ゆくひ合同会社 代表 ／ 新規事業実践家・中小企業診断士</p>
+            <p>製造業28年。そのプログラムから「Sharing FACTORY」を立ち上げ、経営・顧客開拓・分社化、そして売却までを自ら担いました。</p>
+          </article>
+        </div>
+
+        <svg class="nb-converge-link" viewBox="0 0 1200 84" preserveAspectRatio="none" aria-hidden="true">
+          <path vector-effect="non-scaling-stroke" d="M300 0 V34 Q300 50 320 50 H600"/>
+          <path vector-effect="non-scaling-stroke" d="M900 0 V34 Q900 50 880 50 H600"/>
+          <path vector-effect="non-scaling-stroke" d="M600 50 V84"/>
+          <circle cx="600" cy="50" r="4"/>
+        </svg>
+        <div class="nb-converge-stack" aria-hidden="true"></div>
+
+        <div class="nb-outcome">
+          <p class="nb-outcome-label">制度と実践から生まれた事業</p>
+          <h3>Sharing FACTORY</h3>
+          <p>日本特殊陶業（現Niterra）初の社内ベンチャー。社内ベンチャー制度の設計から、事業の立ち上げ、顧客開拓、分社化・売却まで。私たちは、制度と事業の両側から新規事業の現実を経験しています。</p>
+          <p class="nb-outcome-steps">立ち上げ <i>→</i> 事業化 <i>→</i> 分社化 <i>→</i> 売却</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section class="nb-section nb-programs" id="programs" aria-labelledby="programs-title">
+    <div class="nb-wrap">
+      <div class="nb-head">
+        <p class="nb-kicker">支援プログラム</p>
+        <div>
+          <h2 class="nb-h2" id="programs-title">課題に合わせて、<br>組織・チーム・リーダーを支援します。</h2>
+          <p class="nb-head-note">
+            まずは講演とワークショップを通じて、自社の新規事業と人材育成がどこで止まっているのかを明らかにします。
+            その結果をもとに、必要な支援を設計します。
+          </p>
+        </div>
+      </div>
+
+      <article class="nb-entry" aria-labelledby="entry-title">
+        <p class="nb-entry-tag">最初のご依頼はこちらから</p>
+        <h3 id="entry-title">講演・課題発見ワークショップ</h3>
+        <p>社内ベンチャーの制度設計と、事業化・分社化を経験した2人の実体験から学び、自社の新規事業が進まない理由と、育成すべき次世代リーダー像を明らかにします。</p>
+        <dl class="nb-entry-meta">
+          <div><dt>対象</dt><dd>経営層、人事・人材開発、経営企画、新規事業部門</dd></div>
+          <div><dt>形式</dt><dd>講演＋ワークショップ</dd></div>
+          <div><dt>標準時間</dt><dd>半日</dd></div>
+          <div><dt>成果</dt><dd>停滞要因、育成人材像、次に必要な取り組みの整理</dd></div>
+        </dl>
+      </article>
+
+      <div class="nb-flow">
+        <div class="nb-flow-stem" aria-hidden="true"></div>
+        <p class="nb-flow-node">課題を診断</p>
+        <p class="nb-flow-caption">ワークショップで明らかになった課題に応じて、3つの支援へ</p>
+        <svg class="nb-flow-fan" viewBox="0 0 1200 74" preserveAspectRatio="none" aria-hidden="true">
+          <path vector-effect="non-scaling-stroke" d="M600 0 V26"/>
+          <path vector-effect="non-scaling-stroke" d="M190 74 V44 Q190 26 206 26 H994 Q1010 26 1010 44 V74"/>
+          <path vector-effect="non-scaling-stroke" d="M600 26 V74"/>
+        </svg>
+        <div class="nb-flow-stack" aria-hidden="true"></div>
+      </div>
+
+      <div class="nb-support-grid">
+        <article class="nb-support">
+          <p class="nb-support-for">組織</p>
+          <h3>社内起業家・次世代リーダー育成の仕組み構築</h3>
+          <p>挑戦する人材が継続的に生まれ、育つ制度と環境を設計します。対象者の選抜、育成プログラム、評価方法、上司・経営層の関わり方まで支援します。</p>
+          <dl class="nb-support-meta">
+            <div><dt>主担当</dt><dd>株式会社Nuevo Lab</dd></div>
+            <div><dt>対象</dt><dd>人事・人材開発、経営企画</dd></div>
+          </dl>
+          <div class="nb-tags">
+            <span class="nb-tag">制度設計</span>
+            <span class="nb-tag">人材要件</span>
+            <span class="nb-tag">選抜・評価</span>
+            <span class="nb-tag">組織開発</span>
+          </div>
+        </article>
+
+        <article class="nb-support">
+          <p class="nb-support-for">チーム</p>
+          <h3>次世代事業リーダー育成プログラム</h3>
+          <p>自社の実テーマを使い、顧客インタビュー、仮説検証、社内提案までを3〜6か月かけて実践します。知識を学ぶだけでなく、実際に行動し、事業と人を同時に育てます。</p>
+          <dl class="nb-support-meta">
+            <div><dt>共同担当</dt><dd>ゆくひ合同会社 × 株式会社Nuevo Lab</dd></div>
+            <div><dt>対象</dt><dd>次世代リーダー候補、新規事業チーム</dd></div>
+          </dl>
+          <div class="nb-tags">
+            <span class="nb-tag">顧客インタビュー</span>
+            <span class="nb-tag">仮説検証</span>
+            <span class="nb-tag">チーム形成</span>
+            <span class="nb-tag">経営提案</span>
+          </div>
+        </article>
+
+        <article class="nb-support">
+          <p class="nb-support-for">リーダー個人</p>
+          <h3>新規事業リーダー個別メンタリング</h3>
+          <p>すでに新規事業テーマを持つ責任者・プロジェクトリーダーに対して、顧客検証、社内合意、予算化、経営会議などの具体的な課題を整理し、次の行動と意思決定につなげます。</p>
+          <dl class="nb-support-meta">
+            <div><dt>主担当</dt><dd>ゆくひ合同会社 代表 長谷川 祐貴</dd></div>
+            <div><dt>対象</dt><dd>新規事業責任者、プロジェクトリーダー</dd></div>
+          </dl>
+          <div class="nb-tags">
+            <span class="nb-tag">90日間の検証計画</span>
+            <span class="nb-tag">顧客提案レビュー</span>
+            <span class="nb-tag">社内合意</span>
+            <span class="nb-tag">意思決定支援</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="nb-audience">
+        <h3>このような部門の皆さまへ</h3>
+        <ul>
+          <li>人事・人材開発部門</li>
+          <li>経営企画部門</li>
+          <li>新規事業部門</li>
+          <li>技術者・管理職の選抜育成を担当する部門</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TALKS -->
+  <section class="nb-section nb-talks" id="talks" aria-labelledby="talks-title">
+    <div class="nb-wrap">
+      <div class="nb-head">
+        <p class="nb-kicker">登壇実績</p>
+        <div>
+          <h2 class="nb-h2" id="talks-title">実践から得た知見を、<br>次の挑戦へ。</h2>
+          <p class="nb-head-note">製造業・研究機関・大手企業にて、新規事業創出と事業化をテーマに登壇しています。</p>
+        </div>
+      </div>
+      <div class="nb-talk-grid">
+        <div><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4v9a4 4 0 0 0 8 0V4"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>ノリタケ</div>
+        <div><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4v9a4 4 0 0 0 8 0V4"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>産業技術総合研究所</div>
+        <div><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4v9a4 4 0 0 0 8 0V4"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>日本ガイシ</div>
+        <div><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4v9a4 4 0 0 0 8 0V4"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>Niterra</div>
+        <div><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4v9a4 4 0 0 0 8 0V4"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>豊田合成</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="nb-cta" id="contact" aria-labelledby="cta-title">
+    <h2 id="cta-title">まずは、自社の課題を知ることから。</h2>
+    <p>新規事業が進まない理由は、事業テーマ、組織の仕組み、人材の経験など、企業によって異なります。講演とワークショップを通じて、自社がどこで止まっているのかを一緒に整理します。</p>
+    <a class="nb-btn" href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">
+      講演・ワークショップについて相談する <span aria-hidden="true">↗</span>
+    </a>
+  </section>
+
+</main>
+
+<footer class="nb-footer">
+  <div class="nb-footer-main">
+    <div class="nb-footer-brand">
+      <div class="nb-logo"><img src="logo.png" alt=""><span>ゆくひ合同会社</span></div>
+      <p>事業と人を、<br>同時に育てる。</p>
+    </div>
+    <nav class="nb-footer-nav" aria-label="フッターナビゲーション">
+      <div>
+        <a class="nb-footer-heading" href="/company">会社案内 <span aria-hidden="true">↗</span></a>
+        <a href="/company#message">私たちの考え方</a>
+        <a href="/company#profile">代表プロフィール</a>
+        <a href="/company#outline">会社概要</a>
+      </div>
+      <div>
+        <a class="nb-footer-heading" href="#programs">新規事業支援 <span aria-hidden="true">↗</span></a>
+        <a href="#problem">よくある課題</a>
+        <a href="#approach">私たちの考え方</a>
+        <a href="#partnership">2人について</a>
+        <a href="#programs">支援プログラム</a>
+        <a href="#talks">登壇実績</a>
+      </div>
+      <div>
+        <a class="nb-footer-heading" href="/">製造業の属人化解消 <span aria-hidden="true">↗</span></a>
+        <a href="/#products">納期AI・見積もり判断AI</a>
+        <a href="/#outcomes">導入効果</a>
+        <a href="/#how">AIの仕組み</a>
+      </div>
+    </nav>
+  </div>
+  <div class="nb-footer-bottom">
+    <small>© 2026 YUKUHI LLC</small>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">お問い合わせ</a>
+  </div>
+</footer>
 
 </body>
 </html>
