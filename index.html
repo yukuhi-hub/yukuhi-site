@@ -1,1181 +1,557 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ゆくひ合同会社 | Industrial Intelligence</title>
-<meta name="description" content="製造業の変革を、構造化と実行で現実にする。現場に蓄積された判断を再現可能な仕組みに変える製造業判断AIと、構想から事業化まで伴走する新規事業支援。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --navy-dark: #06111e;
-    --white: #fafaf8;
-    --ink: #1a1a1a;
-    --accent: #b8551a;
-    --muted: #6b7280;
-    --bg-section: #f9f8f6;
-  }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="納期回答・見積もり判断など、製造現場の属人化した判断をAIで会社の仕組みに変える、ゆくひ合同会社の製造業判断AI。">
+  <title>YUKUHI 製造業判断AI</title>
+  <style>
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+:root {
+  --navy: #071b2e;
+  --navy-2: #0c2942;
+  --blue: #d9662a;
+  --cyan: #f2a65a;
+  --ink: #132338;
+  --muted: #637083;
+  --line: #dce4ec;
+  --paper: #f4f7fa;
+  --white: #ffffff;
+  --font-geist-mono: 'SFMono-Regular', Menlo, Consolas, monospace;
+  --font-geist-sans: -apple-system, 'Segoe UI', 'Noto Sans JP', sans-serif;
+}
 
-  body {
-    font-family: 'Noto Sans JP', sans-serif;
-    background: var(--white);
-    color: var(--ink);
-    line-height: 1.8;
-    font-size: 16px;
-    font-weight: 300;
-  }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--white);
+  font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+  letter-spacing: .02em;
+}
+a { color: inherit; text-decoration: none; }
 
-  body.menu-open { overflow: hidden; }
+.site-header {
+  height: 78px;
+  padding: 0 clamp(24px, 5vw, 80px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,.13);
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 20;
+  color: white;
+  background: rgba(6,24,39,.93);
+  backdrop-filter: blur(14px);
+}
+.logo { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 700; letter-spacing: .08em; }
+.logo-symbol { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.55); font-family: serif; font-size: 18px; }
+.logo-image { height: 32px; width: auto; display: block; border-radius: 4px; }
+.site-header nav { display: flex; gap: clamp(18px, 2.5vw, 38px); font-size: 12px; color: rgba(255,255,255,.68); }
+.site-header nav a:hover { color: #fff; }
+.header-business-cta { min-width: 284px; padding: 10px 15px; color: var(--navy); background: #f0a961; display: flex; align-items: center; justify-content: space-between; gap: 18px; font-size: 12px; font-weight: 750; white-space: nowrap; box-shadow: 0 7px 24px rgba(0,0,0,.18); transition: .2s ease; }
+.header-business-cta:hover { background: white; transform: translateY(-1px); }
+.header-business-cta span, .header-business-cta small { display: block; }
+.header-business-cta small { margin-bottom: 2px; color: #31566b; font-size: 8px; font-weight: 550; letter-spacing: .08em; }
 
-  /* ─── SKIP LINK ─── */
-  .skip-link {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: var(--accent);
-    color: var(--white);
-    padding: 8px 16px;
-    text-decoration: none;
-    font-size: 14px;
-    z-index: 200;
-    transition: top 0.3s;
-  }
-  .skip-link:focus { top: 0; }
+.hero {
+  min-height: 800px;
+  padding: 148px clamp(24px, 6.5vw, 104px) 80px;
+  background:
+    radial-gradient(circle at 78% 35%, rgba(217,102,42,.28), transparent 27%),
+    linear-gradient(125deg, #061827 0%, #0a253b 65%, #0d3048 100%);
+  color: white;
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  align-items: center;
+  gap: clamp(48px, 7vw, 110px);
+  overflow: hidden;
+}
+.eyebrow { font-family: var(--font-geist-mono), monospace; font-size: 11px; font-weight: 650; letter-spacing: .18em; color: #b8703c; display: flex; align-items: center; gap: 10px; margin: 0 0 26px; }
+.eyebrow span { width: 30px; height: 1px; background: currentColor; }
+.hero .eyebrow, .eyebrow.light { color: #f2a65a; }
+.hero h1 { margin: 0; font-family: "Noto Serif JP", "Yu Mincho", serif; font-weight: 500; letter-spacing: .01em; font-size: clamp(38px, 3.15vw, 50px); line-height: 1.48; }
+.hero h1 em { color: #f2a65a; font-style: normal; }
+.hero-lead { font-size: clamp(15px, 1.35vw, 19px); line-height: 2; color: rgba(255,255,255,.71); margin: 34px 0 36px; }
+.hero-actions { display: flex; align-items: center; gap: 30px; }
+.button { display: inline-flex; align-items: center; justify-content: space-between; gap: 38px; padding: 17px 22px; font-size: 13px; font-weight: 650; min-width: 220px; }
+.primary { background: #fff; color: var(--navy); }
+.text-link { font-size: 13px; color: rgba(255,255,255,.74); border-bottom: 1px solid rgba(255,255,255,.35); padding-bottom: 4px; }
+.hero-proof { display: flex; align-items: center; gap: 15px; margin-top: 52px; font-size: 10px; letter-spacing: .1em; color: rgba(255,255,255,.44); }
+.hero-proof i { width: 24px; height: 1px; background: rgba(255,255,255,.25); }
 
-  /* ─── NAV (統一) ─── */
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background: rgba(6,17,30,0.92);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    padding: 0 80px;
-    height: 88px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .nav-logo {
-    height: 56px;
-    opacity: 0.92;
-    transition: opacity 0.4s;
-    position: relative;
-    z-index: 101;
-  }
-  .nav-logo:hover { opacity: 1; }
-  
-  .nav-links {
-    display: flex;
-    gap: 64px;
-    list-style: none;
-  }
-  
-  .nav-links a {
-    font-size: 15px;
-    font-weight: 400;
-    color: rgba(250,250,248,0.65);
-    text-decoration: none;
-    transition: all 0.4s;
-    letter-spacing: 0.06em;
-    position: relative;
-    padding-bottom: 2px;
-  }
-  
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: rgba(184,85,26,0);
-    transition: all 0.4s;
-  }
-  
-  .nav-links a:hover {
-    color: rgba(250,250,248,0.95);
-    text-shadow: 0 0 8px rgba(184,85,26,0.15);
-  }
-  
-  .nav-links a:hover::after {
-    background: rgba(184,85,26,0.7);
-  }
-  
-  .nav-cta {
-    color: rgba(250,250,248,0.65) !important;
-    font-size: 13px !important;
-    letter-spacing: 0.08em !important;
-    border-bottom: 1px solid rgba(184,85,26,0.3) !important;
-    padding-bottom: 2px !important;
-  }
-  
-  .nav-cta:hover { 
-    color: var(--white) !important;
-    border-bottom-color: rgba(184,85,26,0.7) !important;
-  }
+.hero-visual { position: relative; min-width: 0; }
+.visual-glow { position: absolute; inset: -20%; background: radial-gradient(circle, rgba(242,166,90,.22), transparent 58%); }
+.product-screen { position: relative; width: 100%; max-width: 680px; margin: auto; background: #f4f7fa; color: var(--ink); border: 1px solid rgba(255,255,255,.32); box-shadow: 0 36px 90px rgba(0,0,0,.42); transform: perspective(1300px) rotateY(-3deg) rotateX(1deg); }
+.screen-bar { height: 56px; background: #fff; border-bottom: 1px solid #dce4ea; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font-size: 12px; }
+.screen-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.brand-mark { display: grid; place-items: center; width: 26px; height: 26px; background: var(--navy); color: white; }
+.screen-status { color: #258b67; background: #e7f5ee; padding: 6px 10px; border-radius: 20px; }
+.screen-body { padding: clamp(20px, 3vw, 34px); }
+.screen-kicker { font: 10px var(--font-geist-mono), monospace; color: #8692a1; letter-spacing: .08em; }
+.screen-title-row { display: flex; align-items: center; justify-content: space-between; margin: 20px 0 24px; }
+.screen-title-row p { margin: 0 0 7px; color: #647386; font-size: 11px; }
+.screen-title-row h3 { margin: 0; font-size: clamp(18px, 2vw, 27px); }
+.score-ring { width: 70px; height: 70px; border: 5px solid #4bb59b; border-left-color: #d7e4e2; border-radius: 50%; display: grid; place-content: center; text-align: center; }
+.score-ring strong { font-size: 21px; line-height: 1; }
+.score-ring span { font-size: 8px; color: #7b8795; }
+.screen-metrics { display: grid; grid-template-columns: repeat(3,1fr); background: white; border: 1px solid #dce4ea; }
+.screen-metrics div { padding: 16px; border-right: 1px solid #dce4ea; }
+.screen-metrics div:last-child { border: 0; }
+.screen-metrics span { display: block; color: #7c8997; font-size: 9px; margin-bottom: 7px; }
+.screen-metrics strong { font-size: clamp(12px, 1.3vw, 17px); }
+.good { color: #278a6b; }
+.reason-panel { margin-top: 15px; background: white; border: 1px solid #dce4ea; }
+.reason-head { padding: 12px 15px; display: flex; justify-content: space-between; border-bottom: 1px solid #e5eaef; font-size: 10px; font-weight: 700; }
+.reason-head span:last-child { color: #8994a0; font-weight: 400; }
+.reason-panel ul { list-style: none; padding: 5px 15px 10px; margin: 0; }
+.reason-panel li { font-size: clamp(11px, 1vw, 13px); padding: 9px 0; display: flex; align-items: center; gap: 9px; border-bottom: 1px solid #edf0f3; }
+.reason-panel li:last-child { border: 0; }
+.dot { width: 7px; height: 7px; border-radius: 50%; flex: 0 0 auto; }
+.good-dot { background: #40ad8b; }.warn-dot { background: #e6a139; }
+.float-card { position: absolute; background: rgba(255,255,255,.96); color: var(--ink); box-shadow: 0 15px 40px rgba(0,0,0,.23); padding: 13px 17px; display: flex; align-items: center; gap: 12px; min-width: 190px; }
+.float-card small, .float-card strong { display: block; }.float-card small { font-size: 8px; color: #82909e; margin-bottom: 3px; }.float-card strong { font-size: 10px; }
+.float-icon { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; font-weight: 800; font-size: 11px; color: #208969; background: #ddf2eb; }
+.float-top { right: -35px; top: 17%; }
 
-  /* ─── HAMBURGER ─── */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    position: relative;
-    z-index: 101;
-  }
-  
-  .hamburger span {
-    width: 24px;
-    height: 1px;
-    background: rgba(250,250,248,0.7);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .hamburger:hover span { background: rgba(250,250,248,0.95); }
-  
-  .hamburger.active span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-  .hamburger.active span:nth-child(2) { opacity: 0; }
-  .hamburger.active span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
+.section { padding: 120px clamp(24px, 7vw, 112px); }
+.section-heading { display: grid; grid-template-columns: 1fr 1.25fr .75fr; gap: 40px; align-items: end; margin-bottom: 58px; }
+.section-heading .eyebrow { align-self: start; }
+.section-heading h2, .how h2, .final-cta h2 { font-family: "Noto Serif JP", "Yu Mincho", serif; font-size: clamp(32px, 3.4vw, 50px); font-weight: 500; line-height: 1.48; margin: 0; }
+.section-heading > p:last-child { color: var(--muted); line-height: 1.9; font-size: 13px; }
+.product-grid { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); max-width: 1060px; margin-left: auto; }
+.product-card { padding: 34px; min-height: 420px; border-right: 1px solid var(--line); display: flex; flex-direction: column; transition: .25s ease; }
+.product-card:last-child { border: 0; }.product-card:hover { background: #f8fafc; transform: translateY(-4px); box-shadow: 0 15px 35px rgba(19,35,56,.08); }
+.product-card.featured { background: var(--navy); color: white; }
+.card-top { display: flex; justify-content: space-between; font: 10px var(--font-geist-mono), monospace; color: #8896a5; }
+.card-top b { color: #378f70; background: #e5f4ee; padding: 5px 8px; font-weight: 600; }.featured .card-top b { color: #f2c896; background: rgba(74,177,148,.15); }
+.card-icon { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid #cbd6e0; margin: 48px 0 28px; color: #c1631f; font-weight: 700; }
+.featured .card-icon { border-color: rgba(255,255,255,.3); color: #f2a65a; }
+.calendar-icon { font-size: 12px; }.yen-icon { font-size: 19px; }
+.card-question { font-size: 13px; color: #5a6b7a; margin: 0 0 8px; }.featured .card-question { color: #a3b5c4; }
+.product-card h3 { margin: 0 0 18px; font-size: 26px; }.product-card > p:not(.card-question) { color: var(--muted); line-height: 1.9; font-size: 14px; margin: 0 0 26px; }.featured > p:not(.card-question) { color: rgba(255,255,255,.68); }
+.product-card a, .quiet-link { margin-top: auto; font-size: 12px; font-weight: 650; display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 17px; }.featured a { border-color: rgba(255,255,255,.16); }.quiet-link { color: #83909d; }
+.card-secondary-link { margin-top: 12px !important; border-top: 0 !important; padding-top: 0 !important; font-size: 11px !important; font-weight: 500 !important; color: #8aa0b3 !important; }
+.featured .card-secondary-link { color: rgba(255,255,255,.5) !important; }
+.next-expansion { max-width: 1060px; margin: 20px 0 0 auto; border: 1px solid var(--line); padding: 25px 30px; display: grid; grid-template-columns: 1.1fr 1.7fr .8fr; align-items: center; gap: 30px; background: #f8fafc; }
+.next-expansion span { font: 9px var(--font-geist-mono), monospace; color: #6a8499; letter-spacing: .15em; }
+.next-expansion h3 { font: 500 19px "Noto Serif JP", serif; margin: 9px 0 0; }
+.next-expansion p { color: var(--muted); font-size: 11px; line-height: 1.8; }
+.next-expansion b { text-align: right; color: #6a7886; font-size: 10px; letter-spacing: .06em; }
 
-  .mobile-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(6,17,30,0.97);
-    backdrop-filter: blur(20px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 48px;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 99;
-  }
-  
-  .mobile-menu.active {
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  .mobile-menu a {
-    font-size: 24px;
-    font-weight: 400;
-    color: rgba(250,250,248,0.7);
-    text-decoration: none;
-    letter-spacing: 0.06em;
-    transition: all 0.4s;
-  }
-  
-  .mobile-menu a:hover {
-    color: rgba(250,250,248,1);
-    text-shadow: 0 0 12px rgba(184,85,26,0.3);
-  }
-  
-  .mobile-menu-cta {
-    margin-top: 32px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid rgba(184,85,26,0.4);
-  }
+.outcomes { background: #eef3f7; }
+.outcomes-heading { display: grid; grid-template-columns: .7fr 2fr; gap: 40px; align-items: start; margin-bottom: 60px; }
+.outcomes-heading h2 { font-family: "Noto Serif JP", "Yu Mincho", serif; font-size: clamp(32px, 3.5vw, 52px); font-weight: 500; line-height: 1.5; margin: 0; }
+.outcomes-heading > div > p { max-width: 760px; color: var(--muted); font-size: 14px; line-height: 2; margin: 25px 0 0; }
+.outcome-flow { display: grid; grid-template-columns: repeat(3, 1fr); background: white; border: 1px solid #d5e0e8; }
+.outcome-flow article { min-height: 300px; padding: 34px; border-right: 1px solid #d5e0e8; position: relative; }
+.outcome-flow article:last-child { border-right: 0; }
+.outcome-flow article::after { content: "→"; position: absolute; right: -13px; top: 50%; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: #eef3f7; color: #52748d; font-size: 12px; z-index: 1; }
+.outcome-flow article:last-child::after { display: none; }
+.outcome-number { font: 10px var(--font-geist-mono), monospace; color: #b8703c; letter-spacing: .12em; }
+.outcome-before { display: inline-block; margin: 44px 0 16px; padding: 6px 10px; background: #edf1f4; color: #778592; font-size: 10px; }
+.outcome-flow h3 { margin: 0 0 17px; font: 500 25px "Noto Serif JP", serif; color: #123a57; }
+.outcome-flow article > p:last-child { color: var(--muted); font-size: 13px; line-height: 1.9; margin: 0; }
+.outcome-flow .impact-card { background: var(--navy); color: white; }
+.impact-card .outcome-number { color: #f2a65a; }
+.impact-card .outcome-before { background: rgba(255,255,255,.1); color: rgba(255,255,255,.58); }
+.outcome-flow .impact-card h3 { color: white; }
+.outcome-flow .impact-card > p:last-child { color: rgba(255,255,255,.6); }
+.outcome-summary { margin: 22px 0 0; padding: 26px 28px; display: flex; align-items: center; justify-content: center; gap: 20px; background: white; border: 1px solid #d5e0e8; color: #384c5e; font-size: 15px; }
+.outcome-summary span { color: #c1631f; font: 700 12px var(--font-geist-mono), monospace; letter-spacing: .14em; }
+.outcome-summary i { color: #d9662a; font-style: normal; font-size: 22px; }
 
-  /* ─── HERO ─── */
-  .hero {
-    padding-top: 88px;
-    min-height: 100vh;
-    background: var(--navy-dark);
-    display: flex;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background-image: url('hero-bg.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 1;
-    pointer-events: none;
-  }
-  
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      135deg, 
-      rgba(6,17,30,0.5) 0%,
-      rgba(12,30,48,0.42) 50%, 
-      rgba(6,17,30,0.5) 100%
-    );
-    pointer-events: none;
-    z-index: 1;
-  }
-  
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); opacity: 0.2; }
-    50% { transform: translateY(-40px); opacity: 0.5; }
-  }
-  
-  .hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: 
-      radial-gradient(2px 2px at 75% 25%, rgba(184,85,26,0.25), transparent),
-      radial-gradient(1px 1px at 85% 75%, rgba(184,85,26,0.2), transparent),
-      radial-gradient(1px 1px at 50% 50%, rgba(255,255,255,0.15), transparent),
-      radial-gradient(1px 1px at 70% 30%, rgba(184,85,26,0.15), transparent);
-    background-size: 300% 300%;
-    animation: float 28s ease-in-out infinite;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.5;
-  }
+.how { background: var(--navy); color: white; }
+.how-copy { display: grid; grid-template-columns: .7fr 1.3fr .8fr; gap: 40px; align-items: end; }
+.how-copy > p:last-child { color: rgba(255,255,255,.55); font-size: 13px; line-height: 1.9; }
+.steps { margin-top: 72px; display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 32px; }
+.steps article { border-top: 1px solid rgba(255,255,255,.2); padding-top: 25px; min-height: 150px; }
+.steps article span { color: #f2a65a; font: 10px var(--font-geist-mono), monospace; }.steps article h3 { margin: 17px 0 10px; font-size: 19px; }.steps article p { color: rgba(255,255,255,.58); font-size: 13px; line-height: 1.8; }.steps > i { font-style: normal; color: #4b6476; }
 
-  .hero-container {
-    max-width: 1480px;
-    margin: 0 auto;
-    padding: 180px 100px 120px 100px;
-    position: relative;
-    z-index: 2;
-  }
+.trust { background: var(--paper); }
+.trust-heading { grid-template-columns: .7fr 1.8fr; }
+.numbers { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #cdd8e1; border-bottom: 1px solid #cdd8e1; }
+.numbers div { padding: 40px 24px; border-right: 1px solid #cdd8e1; }.numbers div:last-child { border: 0; }
+.numbers strong { display: block; font: 500 clamp(36px, 4vw, 56px) var(--font-geist-sans), sans-serif; color: #c1631f; margin-bottom: 15px; }.numbers strong small { font-size: 14px; margin-left: 5px; }.numbers span { font-size: 14px; color: #56666f; }
+.new-business-banner { padding: 34px clamp(24px, 7vw, 112px); background: #eef3f7; border-top: 1px solid #d6e1e9; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+.new-business-banner > div { display: flex; align-items: center; gap: 28px; }
+.new-business-banner span { font: 9px var(--font-geist-mono), monospace; color: #b8703c; letter-spacing: .16em; white-space: nowrap; }
+.new-business-banner p { margin: 0; color: #43596b; font: 500 16px "Noto Serif JP", serif; }
+.new-business-banner a { min-width: 210px; padding: 14px 0; display: flex; justify-content: space-between; border-bottom: 1px solid #7290a4; color: #c1631f; font-size: 12px; font-weight: 650; }
 
-  .hero-text-area {
-    max-width: 1100px;
-  }
+.final-cta { padding: 110px 24px; text-align: center; background: linear-gradient(135deg, #0a263b, #0d3b55); color: white; }.final-cta .eyebrow { justify-content: center; }.final-cta > p:not(.eyebrow) { color: rgba(255,255,255,.58); margin: 28px 0 38px; font-size: 13px; }.white-button { background: white; color: var(--navy); margin: auto; }
+.site-footer { position: relative; overflow: hidden; padding: 76px clamp(24px, 6vw, 90px) 28px; background: #eef2f5; color: var(--navy); }
+.footer-curve { position: absolute; right: -12vw; bottom: -22vw; width: 58vw; height: 34vw; min-width: 620px; min-height: 360px; border-radius: 100% 0 0; background: #d9662a; transform: rotate(-4deg); transform-origin: bottom right; }
+.footer-main, .footer-bottom { position: relative; z-index: 1; }
+.footer-main { display: grid; grid-template-columns: .8fr 2.2fr; gap: clamp(60px, 10vw, 150px); align-items: start; }
+.footer-logo { color: var(--navy); font-size: 16px; }
+.footer-logo .logo-symbol { border-color: rgba(7,27,46,.4); }
+.footer-brand > p { margin: 30px 0 0; color: #6b7885; font: 500 15px/1.9 "Noto Serif JP", serif; }
+.footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(34px, 5vw, 78px); }
+.footer-nav > div { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.footer-nav a, .footer-nav span { color: #778491; font-size: 11px; line-height: 1.55; }
+.footer-nav a { transition: color .2s ease; }
+.footer-nav a:hover { color: #d9662a; }
+.footer-nav .footer-heading { width: 100%; margin-bottom: 5px; color: var(--navy); font-size: 13px; font-weight: 750; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.footer-bottom { margin-top: 76px; padding-top: 22px; border-top: 1px solid #ced7df; display: flex; align-items: center; justify-content: space-between; max-width: 74%; }
+.footer-bottom small { color: #8a949e; font-size: 9px; }
+.footer-bottom > div { display: flex; align-items: center; gap: 25px; }
+.footer-bottom a { color: #566674; font-size: 10px; font-weight: 650; }
+.html-download { padding: 8px 12px; border: 1px solid #aebbc6; letter-spacing: .04em; transition: .2s ease; }
+.html-download:hover { border-color: #d9662a; color: #d9662a; }
 
-  .hero-text-area h1 {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(60px, 7vw, 96px);
-    color: var(--white);
-    line-height: 1.55;
-    margin-bottom: 64px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-  }
+.company-header { background: rgba(6,24,39,.97); }
+.company-back-link { color: #f2a65a; font-size: 11px; display: flex; align-items: center; gap: 14px; padding-bottom: 5px; border-bottom: 1px solid rgba(242,166,90,.5); }
+.company-page { background: white; }
+.company-hero { min-height: 620px; padding: 178px clamp(24px, 7vw, 112px) 100px; background: radial-gradient(circle at 80% 28%, rgba(242,166,90,.24), transparent 28%), linear-gradient(125deg, #061827, #0d3048); color: white; display: flex; flex-direction: column; justify-content: center; }
+.company-hero h1 { margin: 0; font: 500 clamp(44px, 5.4vw, 76px)/1.42 "Noto Serif JP", "Yu Mincho", serif; letter-spacing: .02em; }
+.company-hero > p:last-child { margin: 38px 0 0; color: rgba(255,255,255,.62); font-size: 15px; line-height: 2.1; }
+.company-message { display: grid; grid-template-columns: .65fr 1.7fr; gap: clamp(40px, 8vw, 130px); }
+.company-message h2, .company-section-title h2, .company-contact h2 { margin: 0; font: 500 clamp(34px, 3.8vw, 54px)/1.5 "Noto Serif JP", "Yu Mincho", serif; }
+.company-message > div > p { max-width: 780px; color: var(--muted); font-size: 14px; line-height: 2.2; margin: 30px 0 0; }
+.company-businesses { background: var(--paper); }
+.company-section-title { display: grid; grid-template-columns: .65fr 1.7fr; gap: clamp(40px, 8vw, 130px); margin-bottom: 58px; }
+.company-business-grid { margin-left: auto; max-width: 1060px; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); }
+.company-business-grid article { min-height: 330px; padding: 38px; background: white; border-right: 1px solid var(--line); display: flex; flex-direction: column; }
+.company-business-grid article:last-child { border: 0; background: var(--navy); color: white; }
+.company-business-grid article > span { color: #b8703c; font: 10px var(--font-geist-mono), monospace; }
+.company-business-grid h3 { margin: 50px 0 17px; font: 500 26px "Noto Serif JP", serif; }
+.company-business-grid p { color: var(--muted); font-size: 13px; line-height: 2; margin: 0 0 28px; }
+.company-business-grid article:last-child p { color: rgba(255,255,255,.6); }
+.company-business-grid a { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; font-weight: 650; display: flex; justify-content: space-between; }
+.company-business-grid article:last-child a { border-color: rgba(255,255,255,.16); }
+.company-profile { background: var(--navy); color: white; display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(60px, 10vw, 160px); }
+.profile-role { color: #f2a65a; font-size: 12px; letter-spacing: .15em; margin: 0 0 15px; }
+.profile-title h2 { margin: 0; font: 500 clamp(38px, 4.5vw, 62px) "Noto Serif JP", serif; }
+.profile-en { color: rgba(255,255,255,.35); font: 10px var(--font-geist-mono), monospace; letter-spacing: .18em; }
+.profile-copy > p { color: rgba(255,255,255,.65); font-size: 14px; line-height: 2.1; margin: 0 0 22px; }
+.profile-copy ul { list-style: none; padding: 0; margin: 42px 0 0; border-top: 1px solid rgba(255,255,255,.16); }
+.profile-copy li { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.16); color: rgba(255,255,255,.8); font-size: 12px; }
+.company-outline dl { max-width: 920px; margin: 0 0 0 auto; border-top: 1px solid var(--line); }
+.company-outline dl div { display: grid; grid-template-columns: 180px 1fr; padding: 24px 0; border-bottom: 1px solid var(--line); }
+.company-outline dt { color: #708090; font-size: 11px; }
+.company-outline dd { margin: 0; font-size: 13px; }
+.company-outline dd a { color: #c1631f; border-bottom: 1px solid #8bb7ce; }
+.company-contact { padding: 100px 24px; text-align: center; color: white; background: linear-gradient(135deg, #0b263b, #0d3d57); }
+.company-contact .eyebrow { justify-content: center; }
+.company-contact h2 { margin-bottom: 38px; }
 
-  .hero-sub {
-    font-size: 36px;
-    color: rgba(250,250,248,0.88);
-    line-height: 2.2;
-    margin-bottom: 80px;
-    font-weight: 300;
-    letter-spacing: 0.04em;
-    max-width: 800px;
-  }
+@media (max-width: 980px) {
+  .site-header nav { display: none; }
+  .hero { grid-template-columns: 1fr; padding-top: 130px; }
+  .hero-copy { max-width: 680px; }
+  .hero-visual { max-width: 720px; width: 92%; margin: 15px auto 0; }
+  .section-heading, .how-copy { grid-template-columns: 1fr; }
+  .outcomes-heading { grid-template-columns: 1fr; }
+  .section-heading .eyebrow { margin-bottom: 0; }
+  .product-grid { grid-template-columns: 1fr; }
+  .product-card { border-right: 0; border-bottom: 1px solid var(--line); min-height: 370px; }
+  .steps { grid-template-columns: 1fr; }.steps > i { transform: rotate(90deg); text-align: center; }
+  .numbers { grid-template-columns: 1fr 1fr; }.numbers div:nth-child(2) { border-right: 0; }.numbers div:nth-child(-n+2) { border-bottom: 1px solid #cdd8e1; }
+  .next-expansion { grid-template-columns: 1fr; }
+  .outcome-flow { grid-template-columns: 1fr; }
+  .outcome-flow article { border-right: 0; border-bottom: 1px solid #d5e0e8; }
+  .outcome-flow article:last-child { border-bottom: 0; }
+  .outcome-flow article::after { right: auto; left: 50%; top: auto; bottom: -13px; transform: rotate(90deg); }
+  .next-expansion b { text-align: left; }
+  .company-message, .company-section-title, .company-profile { grid-template-columns: 1fr; }
+  .company-business-grid { grid-template-columns: 1fr; }
+  .company-business-grid article { border-right: 0; border-bottom: 1px solid var(--line); }
+}
 
-  /* ─── HERO CARDS (軽量化) ─── */
-  .hero-services {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
-    margin-top: 100px;
-    max-width: 1200px;
-  }
-  
-  .service-card {
-    background: rgba(6,17,30,0.35);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.06);
-    padding: 48px;
-    border-radius: 2px;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .service-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(184,85,26,0) 0%, rgba(184,85,26,0.03) 100%);
-    opacity: 0;
-    transition: opacity 0.5s;
-    pointer-events: none;
-  }
-  
-  .service-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(184,85,26,0.2);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.2);
-  }
-  
-  .service-card:hover::before {
-    opacity: 1;
-  }
-  
-  .service-card-title {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 20px;
-    letter-spacing: 0.05em;
-  }
-  
-  .service-card-desc {
-    font-size: 16px;
-    line-height: 2.1;
-    color: rgba(250,250,248,0.65);
-    margin-bottom: 28px;
-    font-weight: 300;
-  }
-  
-  .service-card-features {
-    list-style: none;
-    margin-bottom: 36px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .service-card-features li {
-    font-size: 14px;
-    color: rgba(250,250,248,0.45);
-    font-weight: 300;
-    letter-spacing: 0.02em;
-  }
-  
-  .service-card-features li::before {
-    content: '・';
-    margin-right: 8px;
-    color: rgba(184,85,26,0.5);
-  }
-  
-  .service-card-link {
-    display: inline-block;
-    font-size: 15px;
-    font-weight: 400;
-    color: rgba(250,250,248,0.8);
-    text-decoration: none;
-    letter-spacing: 0.03em;
-    padding-bottom: 8px;
-    border-bottom: 1px solid rgba(184,85,26,0.3);
-    transition: all 0.6s;
-    position: relative;
-    z-index: 10;
-    cursor: pointer;
-  }
-  
-  .service-card-link::after {
-    content: '→';
-    margin-left: 12px;
-    font-size: 14px;
-    color: rgba(184,85,26,0.6);
-    transition: all 0.6s;
-  }
-  
-  .service-card:hover .service-card-link {
-    color: var(--white);
-    border-bottom-color: rgba(184,85,26,0.7);
-  }
-  
-  .service-card:hover .service-card-link::after {
-    margin-left: 20px;
-    color: rgba(184,85,26,1);
-  }
-
-  /* ─── SECTIONS ─── */
-  section { padding: 170px 0; }
-  .container { max-width: 1480px; margin: 0 auto; padding: 0 100px; }
-
-  .section-eyebrow {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    color: rgba(184,85,26,0.85);
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    margin-bottom: 56px;
-    font-weight: 400;
-  }
-  
-  .section-title {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(42px, 5vw, 68px);
-    font-weight: 700;
-    color: var(--ink);
-    line-height: 1.6;
-    margin-bottom: 140px;
-    letter-spacing: 0.05em;
-  }
-
-  /* ─── SERVICES ─── */
-  .services {
-    background: var(--white);
-  }
-
-  .dual-services {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 180px;
-  }
-  
-  .service-column h3 {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 44px;
-    font-weight: 700;
-    line-height: 1.65;
-    margin-bottom: 56px;
-    letter-spacing: 0.05em;
-  }
-  
-  .service-desc {
-    font-size: 19px;
-    line-height: 2.5;
-    color: var(--ink);
-    margin-bottom: 80px;
-    font-weight: 300;
-    letter-spacing: 0.02em;
-  }
-  
-  .service-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    margin-bottom: 96px;
-  }
-  
-  .service-list li {
-    font-size: 17px;
-    color: var(--muted);
-    font-weight: 300;
-    letter-spacing: 0.03em;
-  }
-  
-  .service-list li::before {
-    content: '—';
-    margin-right: 18px;
-    color: rgba(184,85,26,0.35);
-  }
-  
-  .service-link {
-    display: inline-block;
-    font-size: 17px;
-    font-weight: 400;
-    color: var(--ink);
-    text-decoration: none;
-    letter-spacing: 0.03em;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(26,26,26,0.2);
-    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    z-index: 5;
-    cursor: pointer;
-  }
-  
-  .service-link::after {
-    content: '→';
-    margin-left: 18px;
-    font-size: 15px;
-    color: rgba(184,85,26,0.5);
-    transition: all 0.7s;
-  }
-  
-  .service-link:hover {
-    border-bottom-color: rgba(184,85,26,0.75);
-  }
-  
-  .service-link:hover::after {
-    margin-left: 28px;
-    color: rgba(184,85,26,1);
-  }
-
-  /* ─── CREDIBILITY ─── */
-  .credibility-section {
-    background: var(--bg-section);
-  }
-  
-  .credibility-layout {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 180px;
-    align-items: start;
-  }
-  
-  .credibility-intro {
-    position: sticky;
-    top: 180px;
-  }
-  
-  .credibility-intro h2 {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(38px, 4.5vw, 60px);
-    font-weight: 700;
-    color: var(--ink);
-    line-height: 1.6;
-    margin-bottom: 48px;
-    letter-spacing: 0.05em;
-  }
-  
-  .credibility-intro p {
-    font-size: 19px;
-    line-height: 2.5;
-    color: var(--muted);
-    font-weight: 300;
-    letter-spacing: 0.02em;
-    margin-bottom: 56px;
-  }
-  
-  .credibility-image-frame {
-    width: 100%;
-    aspect-ratio: 16/11;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(26,26,26,0.03);
-    margin-top: 48px;
-  }
-  
-  .credibility-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.78) contrast(0.88) saturate(0.7) sepia(0.15) hue-rotate(-15deg);
-  }
-  
-  .credibility-image-frame::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(6,17,30,0.1) 0%, rgba(6,17,30,0.3) 100%);
-    z-index: 1;
-    pointer-events: none;
-  }
-  
-  .credibility-list {
-    display: flex;
-    flex-direction: column;
-    gap: 72px;
-  }
-  
-  .credibility-item h4 {
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: rgba(184,85,26,0.8);
-    margin-bottom: 20px;
-    font-weight: 700;
-  }
-  
-  .credibility-item p {
-    font-size: 21px;
-    line-height: 1.85;
-    color: var(--ink);
-    font-weight: 400;
-    letter-spacing: 0.03em;
-  }
-  
-  .credibility-item:first-child h4 {
-    font-size: 14px;
-    color: rgba(184,85,26,1);
-  }
-  
-  .credibility-item:first-child p {
-    font-size: 24px;
-    font-weight: 500;
-  }
-
-  /* ─── PROFILE ─── */
-  .profile-section {
-    background: var(--white);
-  }
-  
-  .profile-layout {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 180px;
-    align-items: start;
-  }
-  
-  .profile-image-area {
-    position: sticky;
-    top: 180px;
-  }
-  
-  .profile-frame {
-    width: 100%;
-    aspect-ratio: 3/4;
-    border: 1px solid rgba(26,26,26,0.03);
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .profile-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.85) contrast(0.92) saturate(0.75) sepia(0.12) hue-rotate(-10deg);
-  }
-  
-  .profile-frame::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(6,17,30,0.08) 0%, rgba(6,17,30,0.25) 100%);
-    z-index: 1;
-    pointer-events: none;
-  }
-  
-  .profile-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 52px;
-    z-index: 2;
-    background: linear-gradient(180deg, transparent 0%, rgba(6,17,30,0.6) 100%);
-  }
-  
-  .profile-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 8px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: rgba(250,250,248,0.5);
-    margin-bottom: 12px;
-  }
-  
-  .profile-name {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--white);
-    letter-spacing: 0.08em;
-  }
-  
-  .profile-content h3 {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 1.9;
-    margin-bottom: 72px;
-    letter-spacing: 0.05em;
-  }
-  
-  .profile-philosophy {
-    font-size: 19px;
-    line-height: 2.7;
-    color: var(--ink);
-    margin-bottom: 96px;
-    font-weight: 300;
-    letter-spacing: 0.02em;
-  }
-  
-  .profile-bio {
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
-  }
-  
-  .profile-bio-item h4 {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 14px;
-  }
-  
-  .profile-bio-item p {
-    font-size: 16px;
-    line-height: 2.2;
-    color: var(--ink);
-    font-weight: 300;
-    letter-spacing: 0.02em;
-  }
-
-  /* ─── FINAL CTA ─── */
-  .final-cta {
-    background: var(--navy-dark);
-    text-align: center;
-    padding: 160px 0;
-    position: relative;
-  }
-  
-  .final-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 50%, rgba(184,85,26,0.12) 0%, transparent 65%);
-    pointer-events: none;
-  }
-  
-  .final-cta h2 {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(42px, 5vw, 68px);
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 140px;
-    line-height: 1.65;
-    letter-spacing: 0.05em;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .final-cta-actions {
-    display: flex;
-    gap: 80px;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .final-link {
-    font-size: 19px;
-    font-weight: 400;
-    color: rgba(250,250,248,0.85);
-    text-decoration: none;
-    letter-spacing: 0.03em;
-    padding-bottom: 12px;
-    border-bottom: 1px solid rgba(184,85,26,0.25);
-    transition: all 0.7s;
-    position: relative;
-    z-index: 5;
-    cursor: pointer;
-  }
-  
-  .final-link::after {
-    content: '→';
-    margin-left: 22px;
-    font-size: 17px;
-    color: rgba(184,85,26,0.5);
-    transition: all 0.7s;
-  }
-  
-  .final-link:hover {
-    color: var(--white);
-    border-bottom-color: rgba(184,85,26,0.75);
-  }
-  
-  .final-link:hover::after {
-    margin-left: 34px;
-    color: rgba(184,85,26,1);
-  }
-
-  /* ─── COMPANY ─── */
-  .company-section {
-    padding: 180px 0;
-    background: var(--white);
-  }
-  
-  .company-grid {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 180px;
-  }
-  
-  .company-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 18px;
-    font-weight: 400;
-  }
-  
-  .company-value {
-    font-size: 17px;
-    line-height: 2.5;
-    color: var(--ink);
-    margin-bottom: 72px;
-    font-weight: 300;
-    letter-spacing: 0.02em;
-  }
-
-  /* ─── FOOTER ─── */
-  footer {
-    background: transparent;
-    padding: 96px;
-    text-align: center;
-    border-top: 1px solid rgba(26,26,26,0.05);
-  }
-  
-  .footer-logo {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--ink);
-    display: block;
-    margin-bottom: 24px;
-    letter-spacing: 0.08em;
-    opacity: 0.5;
-  }
-  
-  .footer-copy {
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-    opacity: 0.35;
-  }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 1400px) {
-    nav { padding: 0 60px; }
-    .container { padding: 0 60px; }
-    .hero-container { padding: 180px 60px 100px 60px; }
-    .hero-services { gap: 24px; }
-    .dual-services { gap: 140px; }
-    .credibility-layout { gap: 140px; }
-    .profile-layout { gap: 140px; }
-    .company-grid { gap: 140px; }
-  }
-
-  @media (max-width: 960px) {
-    nav { padding: 0 32px; height: 76px; }
-    .nav-logo { height: 44px; }
-    .container { padding: 0 32px; }
-    .nav-links { display: none; }
-    .hamburger { display: flex; }
-    
-    .hero-container { padding: 140px 32px 80px 32px; }
-    .hero-sub { font-size: 24px; }
-    .hero-services { grid-template-columns: 1fr; gap: 24px; }
-    
-    section { padding: 140px 0; }
-    
-    .dual-services { grid-template-columns: 1fr; gap: 120px; }
-    .credibility-layout { grid-template-columns: 1fr; gap: 100px; }
-    .credibility-intro { position: static; }
-    .profile-layout { grid-template-columns: 1fr; gap: 100px; }
-    .profile-image-area { position: static; }
-    .company-grid { grid-template-columns: 1fr; gap: 80px; }
-  }
+@media (max-width: 600px) {
+  .site-header { height: 68px; padding: 0 14px; }.site-header .logo > span:last-child { display: none; }
+  .header-business-cta { min-width: 0; padding: 9px 11px; gap: 8px; font-size: 10px; }
+  .header-business-cta small { font-size: 7px; letter-spacing: .03em; }
+  .hero { min-height: auto; padding: 115px 22px 70px; gap: 70px; }.hero h1 { font-size: 39px; }.hero-lead br { display: none; }.hero-actions { align-items: flex-start; flex-direction: column; }.hero-proof { flex-wrap: wrap; margin-top: 38px; }
+  .hero-visual { width: 100%; }.product-screen { transform: none; }.float-card { display: none; }.screen-metrics { grid-template-columns: 1fr; }.screen-metrics div { border-right: 0; border-bottom: 1px solid #dce4ea; }.score-ring { width: 58px; height: 58px; }
+  .section { padding: 80px 22px; }.section-heading { margin-bottom: 40px; }.section-heading h2, .how h2, .final-cta h2 { font-size: 31px; }.product-card { padding: 28px; }
+  .numbers { grid-template-columns: 1fr; }.numbers div { border-right: 0 !important; border-bottom: 1px solid #cdd8e1 !important; }.numbers div:last-child { border-bottom: 0 !important; }
+  .next-expansion { padding: 24px; }
+  .outcome-flow article { min-height: auto; padding: 28px; }
+  .outcome-before { margin-top: 30px; }
+  .outcome-summary { align-items: flex-start; flex-direction: column; gap: 9px; }
+  .outcome-summary i { transform: rotate(90deg); align-self: center; }
+  .new-business-banner, .new-business-banner > div { align-items: flex-start; flex-direction: column; }
+  .new-business-banner { gap: 22px; padding: 30px 22px; }
+  .new-business-banner > div { gap: 10px; }
+  .new-business-banner a { width: 100%; }
+  .company-back-link { font-size: 10px; gap: 7px; }
+  .company-hero { min-height: 540px; padding: 140px 22px 80px; }
+  .company-hero > p:last-child br { display: none; }
+  .company-business-grid article { min-height: 300px; padding: 28px; }
+  .company-outline dl div { grid-template-columns: 1fr; gap: 10px; }
+  .company-contact { padding: 80px 22px; }
+  .site-footer { padding: 58px 22px 24px; }
+  .footer-curve { right: -430px; bottom: -280px; min-width: 640px; min-height: 430px; opacity: .9; }
+  .footer-main { grid-template-columns: 1fr; gap: 48px; }
+  .footer-nav { grid-template-columns: 1fr; gap: 38px; }
+  .footer-brand > p { margin-top: 22px; }
+  .footer-bottom { max-width: 100%; margin-top: 55px; align-items: flex-start; flex-direction: column-reverse; gap: 24px; }
+  .footer-bottom > div { align-items: flex-start; flex-direction: column; gap: 15px; }
+}
 </style>
 </head>
 <body>
 
-<a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+      <header class="site-header">
+        <a class="logo" href="#top" aria-label="ゆくひ合同会社 トップ">
+          <img src="logo.png" alt="ゆくひ合同会社" class="logo-image">
+          <span>ゆくひ合同会社</span>
+        </a>
+        <nav aria-label="メインナビゲーション">
+          <a href="#products">納期AI</a>
+          <a href="#outcomes">導入効果</a>
+          <a href="#how">導入イメージ</a>
+          <a href="/company">YUKUHI</a>
+        </nav>
+        <a class="header-business-cta" href="https://yukuhi.jp/new-business.html">
+          <span><small>社内ベンチャー立案・分社化・Exit</small>経験者による新規事業支援はこちら</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </header>
 
-<nav role="navigation" aria-label="メインナビゲーション">
-  <a href="index.html" aria-label="ゆくひ合同会社 ホーム">
-    <img src="logo.jpg" alt="ゆくひ" class="nav-logo">
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html">TOP</a></li>
-    <li><a href="ai-agent.html">製造業判断AI</a></li>
-    <li><a href="new-business.html">新規事業支援</a></li>
-    <li><a href="index.html#company">YUKUHIについて</a></li>
-  </ul>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="nav-cta">お問い合わせ</a>
-  
-  <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-</nav>
-
-<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
-  <a href="index.html">TOP</a>
-  <a href="ai-agent.html">製造業判断AI</a>
-  <a href="new-business.html">新規事業支援</a>
-  <a href="index.html#company">YUKUHIについて</a>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="mobile-menu-cta">お問い合わせ</a>
-</div>
-
-<main id="main-content">
-
-<section class="hero" aria-labelledby="hero-heading">
-  <div class="hero-bg"></div>
-  
-  <div class="hero-container">
-    <article class="hero-text-area">
-      <h1 id="hero-heading">製造業の変革を、<br>構造化と実行で<br>現実にする。</h1>
-      <p class="hero-sub">
-        現場に蓄積された判断を、<br>
-        再現可能な仕組みに変える。<br>
-        新しい事業を、<br>
-        構想で終わらせず収益につなげる。
-      </p>
-      
-      <div class="hero-services">
-        <article class="service-card">
-          <h3 class="service-card-title">既存業務の判断を変えたい</h3>
-          <p class="service-card-desc">
-            ベテランに依存する納期回答や生産判断を、<br>
-            AIと構造化によって再現可能にします。
-          </p>
-          <ul class="service-card-features">
-            <li>納期回答AI</li>
-            <li>現場人員配置AI</li>
-            <li>現場作業AI</li>
+      <main id="top">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow"><span></span> DELIVERY RESPONSE AI</p>
+            <h1>
+              その受注判断、
+              <br>
+              <em>ベテランしか</em>
+              <br>
+              できなくなって
+              <br>
+              いませんか？
+            </h1>
+            <p class="hero-lead">
+              受注残・工程・設備負荷と現場の判断基準から、
+              <br>
+              AIが回答納期とその理由を提示します。
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">
+                自社でできるか相談する <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <div class="hero-proof">
+              <span>現場を理解する</span><i></i>
+              <span>判断を構造化する</span><i></i>
+              <span>AIで再現する</span>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="visual-glow"></div>
+            <div class="product-screen" aria-label="納期AIの画面イメージ">
+      <div class="screen-bar">
+        <div class="screen-brand">
+          <span class="brand-mark">Y</span>
+          <span>納期AI</span>
+        </div>
+        <span class="screen-status">回答完了</span>
+      </div>
+      <div class="screen-body">
+        <div class="screen-kicker">案件 #D-2026-0725</div>
+        <div class="screen-title-row">
+          <div>
+            <p>対応可否</p>
+            <h3>条件付きで対応可能</h3>
+          </div>
+          <div class="score-ring">
+            <strong>可</strong>
+            <span>受注判断</span>
+          </div>
+        </div>
+        <div class="screen-metrics">
+          <div>
+            <span>顧客希望納期</span>
+            <strong>8月16日</strong>
+          </div>
+          <div>
+            <span>推奨回答納期</span>
+            <strong class="good">8月18日</strong>
+          </div>
+          <div>
+            <span>納期差</span>
+            <strong>＋2日</strong>
+          </div>
+        </div>
+        <div class="reason-panel">
+          <div class="reason-head">
+            <span>判断根拠</span>
+            <span>3項目</span>
+          </div>
+          <ul>
+            <li><i class="dot warn-dot"></i>ボトルネック設備Bの負荷が82%です</li>
+            <li><i class="dot good-dot"></i>外注工程は標準3営業日で対応できます</li>
+            <li><i class="dot good-dot"></i>8月18日回答なら予備日を1日確保できます</li>
           </ul>
-          <a href="ai-agent.html" class="service-card-link">製造業判断AIを見る</a>
-        </article>
-        
-        <article class="service-card">
-          <h3 class="service-card-title">次の事業をつくりたい</h3>
-          <p class="service-card-desc">
-            顧客課題、競争構造、意思決定を整理し、<br>
-            構想から事業化・Exitまで実行を支援します。
+        </div>
+      </div>
+    </div>
+            <div class="float-card float-top">
+              <span class="float-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"/></svg></span>
+              <div><small>AIの役割</small><strong>納期と根拠を提示</strong></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="products section" id="products">
+          <div class="section-heading">
+            <p class="eyebrow"><span></span> JUDGMENT AI</p>
+            <h2>現場の2つの判断を、<br>AIで支える。</h2>
+            <p>どちらも基本UIをもとに、お客様の業務・データ・判断基準に合わせて導入します。</p>
+          </div>
+          <div class="product-grid">
+            <article class="product-card featured">
+              <div class="card-top"><span>01</span><b>基本UIあり・個別導入</b></div>
+              <div class="card-icon calendar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg></div>
+              <p class="card-question">いつ納品できるか？</p>
+              <h3>納期AI</h3>
+              <p>受注残・工程・設備負荷を確認し、回答納期、ボトルネック、リスクとその理由を提示します。</p>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">まず相談する <span aria-hidden="true">↗</span></a>
+              <a href="nouki-ai-flyer.pdf" class="card-secondary-link" target="_blank" rel="noreferrer">チラシを見る（PDF）<span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="product-card">
+              <div class="card-top"><span>02</span><b>基本UIあり・個別導入</b></div>
+              <div class="card-icon yen-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l6 8 6-8"/><line x1="12" y1="12" x2="12" y2="20"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="8" y1="18" x2="16" y2="18"/></svg></div>
+              <p class="card-question">この金額で受けてよいか？</p>
+              <h3>見積もり判断AI</h3>
+              <p>担当者が作成した見積額を、原価・利益率・過去実績から検証し、妥当性とリスクを提示します。</p>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">まず相談する <span aria-hidden="true">↗</span></a>
+            </article>
+          </div>
+          <div class="next-expansion">
+            <div>
+              <span>NEXT EXPANSION</span>
+              <h3>受注後の人員配置まで。</h3>
+            </div>
+            <p>「誰を、どの設備に配置するか」。納期AIと共通する設備・人・スキル情報を使い、受注後の判断支援へ拡張します。</p>
+            <b>人員配置AI — 次の展開</b>
+          </div>
+        </section>
+
+        <section class="outcomes section" id="outcomes">
+          <div class="outcomes-heading">
+            <p class="eyebrow"><span></span> BUSINESS IMPACT</p>
+            <div>
+              <h2>納期回答を変えると、<br>顧客満足と利益が変わる。</h2>
+              <p>回答の速さ、判断の質、業務の再現性を同時に高めます。納期回答を単なる効率化ではなく、売上と利益につながる経営の仕組みに変えます。</p>
+            </div>
+          </div>
+          <div class="outcome-flow" aria-label="納期AIの導入効果">
+            <article>
+              <span class="outcome-number">01</span>
+              <p class="outcome-before">回答待ちを減らす</p>
+              <h3>顧客満足度向上</h3>
+              <p>問い合わせに素早く、根拠を添えて回答。顧客を待たせず、安心感と信頼を高めます。</p>
+            </article>
+            <article>
+              <span class="outcome-number">02</span>
+              <p class="outcome-before">確認工数と機会損失を減らす</p>
+              <h3>利益率向上</h3>
+              <p>確認作業を減らし、負荷と採算を見ながら最適に判断。取りこぼしや無理な受注を抑えます。</p>
+            </article>
+            <article class="impact-card">
+              <span class="outcome-number">03</span>
+              <p class="outcome-before">ベテランの判断を仕組みにする</p>
+              <h3>属人化の解消</h3>
+              <p>経験の浅い担当者でも、同じ基準と根拠で回答。人手不足でも判断業務を止めません。</p>
+            </article>
+          </div>
+          <p class="outcome-summary">
+            <span>BEFORE</span> 回答が遅い・工数がかかる・人に依存する
+            <i aria-hidden="true">→</i>
+            <span>AFTER</span> 顧客満足・利益率・組織力が高まる
           </p>
-          <ul class="service-card-features">
-            <li>顧客解像度</li>
-            <li>競争構造</li>
-            <li>Exit設計</li>
-          </ul>
-          <a href="new-business.html" class="service-card-link">新規事業支援を見る</a>
-        </article>
-      </div>
-    </article>
-  </div>
-</section>
+        </section>
 
-<section class="services" aria-labelledby="services-heading">
-  <div class="container">
-    <div class="section-eyebrow">SERVICES</div>
-    <h2 id="services-heading" class="section-title">事業内容</h2>
+        <section class="how section" id="how">
+          <div class="how-copy">
+            <p class="eyebrow light"><span></span> HOW IT WORKS</p>
+            <h2>AIが決めるのではない。<br>人が、よりよく決められる。</h2>
+            <p>現場の経験を置き換えるのではなく、判断の前提を見えるようにします。</p>
+          </div>
+          <div class="steps">
+            <article><span>01</span><h3>情報を集める</h3><p>Excel・基幹システム・現場のルールを接続</p></article>
+            <i>→</i>
+            <article><span>02</span><h3>AIが判断する</h3><p>結果だけでなく、根拠・リスク・代替案を提示</p></article>
+            <i>→</i>
+            <article><span>03</span><h3>人が承認する</h3><p>最後は担当者が確認し、判断履歴を蓄積</p></article>
+          </div>
+        </section>
 
-    <div class="dual-services">
-      <article class="service-column">
-        <h3>製造業判断AI</h3>
-        <p class="service-desc">
-          先頭商品は、納期回答AI。<br>
-          現場の判断基準を構造化し、<br>
-          回答と判断理由を説明可能にする。
-        </p>
-        <ul class="service-list">
-          <li>納期回答AI（現在の先頭商品）</li>
-          <li>生産計画AI</li>
-          <li>業務効率化AI</li>
-          <li>産業機器AI</li>
-        </ul>
-        <a href="ai-agent.html" class="service-link">製造業判断AIを見る</a>
-      </article>
+        <section class="trust section" id="company">
+          <div class="section-heading trust-heading">
+            <p class="eyebrow"><span></span> WHY YUKUHI</p>
+            <h2>製造現場と、事業化の<br>両方を知っている。</h2>
+          </div>
+          <div class="numbers">
+            <div><strong>25<small>年以上</small></strong><span>製造業での実務経験</span></div>
+            <div><strong>1<small>件権利化</small></strong><span>製造業AI関連特許・4件出願中</span></div>
+            <div><strong>Exit</strong><span>社内ベンチャー分社化・事業売却</span></div>
+            <div><strong>3現</strong><span>現場・現物・現実から設計</span></div>
+          </div>
+        </section>
 
-      <article class="service-column">
-        <h3>新規事業支援</h3>
-        <p class="service-desc">
-          社内ベンチャーの立ち上げから事業売却まで、<br>
-          実体験に基づいて、<br>
-          構想を事業として前進させる。
-        </p>
-        <ul class="service-list">
-          <li>実体験講演・研修</li>
-          <li>新規事業レビュー・メンタリング</li>
-          <li>事務局伴走</li>
-          <li>事業化支援</li>
-        </ul>
-        <a href="new-business.html" class="service-link">新規事業支援を見る</a>
-      </article>
-    </div>
-  </div>
-</section>
+        <aside class="new-business-banner" aria-label="新規事業支援のご案内">
+          <div>
+            <span>ANOTHER BUSINESS</span>
+            <p>製造業の新規事業開発・事業化支援も行っています。</p>
+          </div>
+          <a href="https://yukuhi.jp/new-business.html">
+            新規事業支援はこちら <span aria-hidden="true">↗</span>
+          </a>
+        </aside>
 
-<section class="credibility-section" aria-labelledby="credibility-heading">
-  <div class="container">
-    <div class="section-eyebrow">TRACK RECORD</div>
-    
-    <div class="credibility-layout">
-      <div class="credibility-intro">
-        <h2 id="credibility-heading">
-          アドバイスだけでは、<br>
-          事業は動かない。
-        </h2>
-        <p>
-          理論だけでは、製造業は変わらない。<br>
-          実際に現場で、新規事業立ち上げ、経営、顧客開拓、組織運営、事業売却（Exit）まで経験した実践知がある。
-        </p>
-        <div class="credibility-image-frame">
-          <img src="lecture.jpg" alt="実践知を語る講演の様子" class="credibility-image" loading="lazy">
+        <section class="final-cta">
+          <p class="eyebrow light"><span></span> START A CONVERSATION</p>
+          <h2>まず、どの判断が<br>属人化しているかを聞かせてください。</h2>
+          <p>現在の業務フローやデータを伺い、AI化できる範囲を一緒に整理します。</p>
+          <a class="button white-button" href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">
+            自社の業務について相談する <span aria-hidden="true">↗</span>
+          </a>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-curve" aria-hidden="true"></div>
+        <div class="footer-main">
+          <div class="footer-brand">
+            <div class="logo footer-logo"><img src="logo.png" alt="ゆくひ合同会社" class="logo-image"><span>ゆくひ合同会社</span></div>
+            <p>製造業の判断を、<br>会社の仕組みに。</p>
+          </div>
+          <nav class="footer-nav" aria-label="フッターナビゲーション">
+            <div>
+              <a class="footer-heading" href="/company">会社概要 <span aria-hidden="true">↗</span></a>
+              <a href="/company#message">私たちについて</a>
+              <a href="/company#profile">代表プロフィール</a>
+              <a href="/company#outline">会社情報</a>
+            </div>
+            <div>
+              <a class="footer-heading" href="https://yukuhi.jp/new-business.html">新規事業支援 <span aria-hidden="true">↗</span></a>
+              <span>構想から事業化まで</span>
+              <span>社内ベンチャー・Exit経験</span>
+              <a href="https://yukuhi.jp/new-business.html">支援内容を見る</a>
+            </div>
+            <div>
+              <a class="footer-heading" href="#products">製造業の属人化解消 <span aria-hidden="true">↗</span></a>
+              <a href="#products">納期AI・見積もり判断AI</a>
+              <a href="#outcomes">導入効果</a>
+              <a href="#how">導入イメージ</a>
+            </div>
+          </nav>
         </div>
-      </div>
-      
-      <div class="credibility-list">
-        <article class="credibility-item">
-          <h4>EXIT</h4>
-          <p>日本特殊陶業 初の社内ベンチャー<br>株式会社シェアリングファクトリー 事業売却完遂</p>
-        </article>
-        
-        <article class="credibility-item">
-          <h4>PATENT</h4>
-          <p>製造業AIエージェント独自アーキテクチャ<br>特許1件権利化 / 4件出願</p>
-        </article>
-        
-        <article class="credibility-item">
-          <h4>LECTURE</h4>
-          <p>産総研コンソーシアム / ノリタケ<br>日本ガイシ / 豊田合成 他</p>
-        </article>
-        
-        <article class="credibility-item">
-          <h4>ADVISORY</h4>
-          <p>新規事業 / AIエージェント / 営業戦略支援</p>
-        </article>
-        
-        <article class="credibility-item">
-          <h4>GENBA PRINCIPLE</h4>
-          <p>現場・現物・現実から判断構造を理解し構造化する</p>
-        </article>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="profile-section" aria-labelledby="profile-heading">
-  <div class="container">
-    <div class="section-eyebrow">FOUNDER</div>
-    
-    <div class="profile-layout">
-      <div class="profile-image-area">
-        <div class="profile-frame">
-          <img src="profile.jpg" alt="長谷川 祐貴" class="profile-image" loading="lazy">
-          <div class="profile-caption">
-            <div class="profile-label">Founder & CEO</div>
-            <div class="profile-name">長谷川 祐貴</div>
+        <div class="footer-bottom">
+          <small>© 2026 YUKUHI LLC</small>
+          <div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">お問い合わせ</a>
+            <a class="html-download" href="/yukuhi-judgment-ai.html" download>HTMLをダウンロード ↓</a>
           </div>
         </div>
-      </div>
-      
-      <article class="profile-content">
-        <h3 id="profile-heading">
-          製造業には、<br>
-          世界に誇れる知見がある。<br>
-          <br>
-          しかし、属人化によって、<br>
-          失われ始めている。<br>
-          <br>
-          私は、その知見を<br>
-          次世代へ繋ぎたい。
-        </h3>
-        
-        <div class="profile-philosophy">
-          日本特殊陶業において、初の社内ベンチャー立案から分社化、事業売却（Exit）までを一貫して経験。<br>
-          大企業の組織の中で「新しいこと」を始める際の特有の摩擦と、それを論理と熱量で突破する方法を実体験として持つ。<br>
-          <br>
-          現在は、その経験を製造業向けAIエージェント技術として開発・特許化しながら、大企業・製造業の新規事業構築を支援。
-        </div>
-        
-        <div class="profile-bio">
-          <div class="profile-bio-item">
-            <h4>EXPERIENCE</h4>
-            <p>日本特殊陶業 初の社内ベンチャー立案・推進・分社化<br>株式会社シェアリングファクトリー 代表取締役<br>事業売却（Exit）完遂</p>
-          </div>
-          
-          <div class="profile-bio-item">
-            <h4>EXPERTISE</h4>
-            <p>製造業AIエージェント / 新規事業構築 / 3現主義<br>中小企業診断士</p>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="final-cta" aria-labelledby="cta-heading">
-  <div class="container">
-    <h2 id="cta-heading">日本のものづくりを、<br>次の時代へ。</h2>
-    <div class="final-cta-actions">
-      <a href="ai-agent.html" class="final-link">製造業判断AIを見る</a>
-      <a href="new-business.html" class="final-link">新規事業支援を見る</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="final-link">お問い合わせ</a>
-    </div>
-  </div>
-</section>
-
-<section class="company-section" id="company" aria-labelledby="company-heading">
-  <div class="container">
-    <div class="section-eyebrow">COMPANY</div>
-    <h2 id="company-heading" class="section-title">YUKUHIについて</h2>
+      </footer>
     
-    <div class="company-grid">
-      <div>
-        <div class="company-label">法人名</div>
-        <div class="company-value">ゆくひ合同会社<br>YUKUHI LLC</div>
-        
-        <div class="company-label">代表</div>
-        <div class="company-value">長谷川 祐貴</div>
-        
-        <div class="company-label">設立</div>
-        <div class="company-value">2026年1月</div>
-        
-        <div class="company-label">所在地</div>
-        <div class="company-value">愛知県名古屋市</div>
-      </div>
-      
-      <div>
-        <div class="company-label">事業内容</div>
-        <div class="company-value">
-          製造業AIエージェント<br>
-          新規事業 / 社内ベンチャー支援<br>
-          講演 / ワークショップ / 研修<br>
-          製造業DX / 情報構造化支援
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<footer role="contentinfo">
-  <span class="footer-logo">ゆくひ合同会社</span>
-  <span class="footer-copy">© 2026 Yukuhi LLC. All Rights Reserved.</span>
-</footer>
-
-<script>
-(function() {
-  const hamburger = document.querySelector('.hamburger');
-  const mobileMenu = document.querySelector('.mobile-menu');
-  const body = document.body;
-  
-  if (!hamburger || !mobileMenu) return;
-  
-  hamburger.addEventListener('click', function() {
-    const isActive = this.classList.toggle('active');
-    mobileMenu.classList.toggle('active');
-    body.classList.toggle('menu-open');
-    this.setAttribute('aria-expanded', isActive);
-    this.setAttribute('aria-label', isActive ? 'メニューを閉じる' : 'メニューを開く');
-  });
-  
-  const menuLinks = mobileMenu.querySelectorAll('a');
-  menuLinks.forEach(link => {
-    link.addEventListener('click', function() {
-      hamburger.classList.remove('active');
-      mobileMenu.classList.remove('active');
-      body.classList.remove('menu-open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.setAttribute('aria-label', 'メニューを開く');
-    });
-  });
-  
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-      hamburger.classList.remove('active');
-      mobileMenu.classList.remove('active');
-      body.classList.remove('menu-open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.setAttribute('aria-label', 'メニューを開く');
-    }
-  });
-})();
-</script>
-
 </body>
 </html>
