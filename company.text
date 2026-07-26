@@ -342,7 +342,7 @@ body small { font-size: 16px; }
 <body>
 
 <header class="y-header">
-  <a class="y-logo" href="/" aria-label="ゆくひ合同会社 トップ">
+  <a class="y-logo" href="index.html" aria-label="ゆくひ合同会社 トップ">
     <img src="logo.png" alt=""><span>ゆくひ合同会社</span>
   </a>
   <nav class="y-nav" aria-label="メインナビゲーション">
@@ -351,7 +351,7 @@ body small { font-size: 16px; }
     <a href="#profile">代表プロフィール</a>
     <a href="#outline">会社概要</a>
   </nav>
-  <a class="y-header-cta" href="/">
+  <a class="y-header-cta" href="index.html">
     <span><small>属人化した納期・見積もり判断を仕組みに</small>納期AIはこちら</span>
     <span aria-hidden="true">↗</span>
   </a>
@@ -395,13 +395,13 @@ body small { font-size: 16px; }
           <div class="y-biz-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg></div>
           <h3>製造業向け判断AI</h3>
           <p>納期回答や見積もりなど、属人化した現場判断を、根拠とともに再現できる仕組みへ変えます。</p>
-          <a class="y-biz-link" href="/">納期AI・見積もり判断AIを見る <span aria-hidden="true">↗</span></a>
+          <a class="y-biz-link" href="index.html">納期AI・見積もり判断AIを見る <span aria-hidden="true">↗</span></a>
         </article>
         <article class="y-biz">
           <div class="y-biz-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/></svg></div>
           <h3>新規事業支援</h3>
           <p>新規事業の実践を通じて、製造業の次世代リーダーを育てます。社内ベンチャー制度の設計者と、事業化・分社化の実践者が伴走します。</p>
-          <a class="y-biz-link" href="/new-business.html">新規事業支援を見る <span aria-hidden="true">↗</span></a>
+          <a class="y-biz-link" href="new-business.html">新規事業支援を見る <span aria-hidden="true">↗</span></a>
         </article>
       </div>
     </div>
@@ -461,23 +461,23 @@ body small { font-size: 16px; }
     </div>
     <nav class="y-footer-nav" aria-label="フッターナビゲーション">
       <div>
-        <a class="y-footer-heading" href="/company">会社案内 <span aria-hidden="true">↗</span></a>
+        <a class="y-footer-heading" href="company.html">会社案内 <span aria-hidden="true">↗</span></a>
         <a href="#message">私たちの考え方</a>
         <a href="#profile">代表プロフィール</a>
         <a href="#outline">会社概要</a>
       </div>
       <div>
-        <a class="y-footer-heading" href="/new-business.html">新規事業支援 <span aria-hidden="true">↗</span></a>
-        <a href="/new-business.html#problem">よくある課題</a>
-        <a href="/new-business.html#partnership">2人について</a>
-        <a href="/new-business.html#programs">支援プログラム</a>
-        <a href="/new-business.html#talks">登壇実績</a>
+        <a class="y-footer-heading" href="new-business.html">新規事業支援 <span aria-hidden="true">↗</span></a>
+        <a href="new-business.html#problem">よくある課題</a>
+        <a href="new-business.html#partnership">2人について</a>
+        <a href="new-business.html#programs">支援プログラム</a>
+        <a href="new-business.html#talks">登壇実績</a>
       </div>
       <div>
-        <a class="y-footer-heading" href="/">製造業の属人化解消 <span aria-hidden="true">↗</span></a>
-        <a href="/#products">納期AI・見積もり判断AI</a>
-        <a href="/#outcomes">導入効果</a>
-        <a href="/#how">AIの仕組み</a>
+        <a class="y-footer-heading" href="index.html">製造業の属人化解消 <span aria-hidden="true">↗</span></a>
+        <a href="index.html#products">納期AI・見積もり判断AI</a>
+        <a href="index.html#outcomes">導入効果</a>
+        <a href="index.html#how">AIの仕組み</a>
       </div>
     </nav>
   </div>
