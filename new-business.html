@@ -1,730 +1,498 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>新規事業支援 | ゆくひ合同会社</title>
-<meta name="description" content="なぜ、大企業の新規事業は成功まで進まないのか。顧客課題、競争構造、意思決定、Exit。その解像度が不足している。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --navy-dark: #06111e;
-    --white: #fafaf8;
-    --ink: #1a1a1a;
-    --accent: #b8551a;
-    --muted: #6b7280;
-    --bg-section: #f9f8f6;
-  }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="実践者と専門コーチが、新規事業の構想から仮説検証、顧客開拓、事業化まで伴走する、ゆくひ合同会社の新規事業支援。">
+  <title>新規事業支援 | ゆくひ合同会社</title>
+  <style>
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+:root {
+  --navy: #071b2e;
+  --navy-2: #0c2942;
+  --blue: #d9662a;
+  --cyan: #f2a65a;
+  --ink: #132338;
+  --muted: #637083;
+  --line: #dce4ec;
+  --paper: #f4f7fa;
+  --white: #ffffff;
+  --font-geist-mono: 'SFMono-Regular', Menlo, Consolas, monospace;
+  --font-geist-sans: -apple-system, 'Segoe UI', 'Noto Sans JP', sans-serif;
+}
 
-  body {
-    font-family: 'Noto Sans JP', sans-serif;
-    background: var(--white);
-    color: var(--ink);
-    line-height: 1.8;
-    font-size: 16px;
-    font-weight: 300;
-  }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--white);
+  font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+  letter-spacing: .02em;
+}
+a { color: inherit; text-decoration: none; }
 
-  /* ─── NAV ─── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    background: rgba(6,17,30,0.92);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    padding: 0 80px;
-    height: 88px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .nav-logo {
-    height: 52px;
-    opacity: 0.92;
-    transition: opacity 0.4s;
-  }
-  .nav-logo:hover { opacity: 1; }
-  .nav-links { display: flex; gap: 64px; list-style: none; }
-  .nav-links a {
-    font-size: 13px;
-    font-weight: 400;
-    color: rgba(250,250,248,0.45);
-    text-decoration: none;
-    transition: color 0.4s;
-    letter-spacing: 0.06em;
-  }
-  .nav-links a:hover { color: rgba(250,250,248,0.85); }
-  .nav-cta {
-    color: rgba(250,250,248,0.65) !important;
-    font-size: 12px !important;
-    letter-spacing: 0.08em !important;
-    border-bottom: 1px solid rgba(184,85,26,0.3) !important;
-    padding-bottom: 2px !important;
-  }
-  .nav-cta:hover { 
-    color: var(--white) !important;
-    border-bottom-color: rgba(184,85,26,0.7) !important;
-  }
+.site-header {
+  height: 78px;
+  padding: 0 clamp(24px, 5vw, 80px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,.13);
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 20;
+  color: white;
+  background: rgba(6,24,39,.93);
+  backdrop-filter: blur(14px);
+}
+.logo { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 700; letter-spacing: .08em; }
+.logo-symbol { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.55); font-family: serif; font-size: 18px; }
+.logo-image { height: 32px; width: auto; display: block; border-radius: 4px; }
+.site-header nav { display: flex; gap: clamp(18px, 2.5vw, 38px); font-size: 12px; color: rgba(255,255,255,.68); }
+.site-header nav a:hover { color: #fff; }
+.header-business-cta { min-width: 284px; padding: 10px 15px; color: var(--navy); background: #f0a961; display: flex; align-items: center; justify-content: space-between; gap: 18px; font-size: 12px; font-weight: 750; white-space: nowrap; box-shadow: 0 7px 24px rgba(0,0,0,.18); transition: .2s ease; }
+.header-business-cta:hover { background: white; transform: translateY(-1px); }
+.header-business-cta span, .header-business-cta small { display: block; }
+.header-business-cta small { margin-bottom: 2px; color: #31566b; font-size: 8px; font-weight: 550; letter-spacing: .08em; }
 
-  /* ─── HERO (新背景) ─── */
-  .hero {
-    padding-top: 88px;
-    min-height: 88vh;
-    background: var(--navy-dark);
-    display: flex;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  /* 背景画像 - 右寄せ、構造的圧力 */
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background-image: url('hero-bg-nb.png');
-    background-size: cover;
-    background-position: center right;
-    background-repeat: no-repeat;
-    opacity: 1;
-  }
-  
-  /* Dark overlay - cinematic mood */
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(
-      90deg, 
-      rgba(6,17,30,0.92) 0%, 
-      rgba(6,17,30,0.75) 50%,
-      rgba(6,17,30,0.6) 100%
-    );
-    pointer-events: none;
-    z-index: 1;
-  }
-  
-  /* オレンジ光 - 静かな熱量 */
-  .hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      ellipse at 70% 50%, 
-      rgba(184,85,26,0.08) 0%, 
-      transparent 60%
-    );
-    pointer-events: none;
-    z-index: 1;
-  }
-  
-  .hero-container {
-    max-width: 1480px;
-    margin: 0 auto;
-    padding: 160px 100px;
-    position: relative;
-    z-index: 2;
-  }
+.hero {
+  min-height: 800px;
+  padding: 148px clamp(24px, 6.5vw, 104px) 80px;
+  background:
+    radial-gradient(circle at 78% 35%, rgba(217,102,42,.28), transparent 27%),
+    linear-gradient(125deg, #061827 0%, #0a253b 65%, #0d3048 100%);
+  color: white;
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  align-items: center;
+  gap: clamp(48px, 7vw, 110px);
+  overflow: hidden;
+}
+.eyebrow { font-family: var(--font-geist-mono), monospace; font-size: 11px; font-weight: 650; letter-spacing: .18em; color: #b8703c; display: flex; align-items: center; gap: 10px; margin: 0 0 26px; }
+.eyebrow span { width: 30px; height: 1px; background: currentColor; }
+.hero .eyebrow, .eyebrow.light { color: #f2a65a; }
+.hero h1 { margin: 0; font-family: "Noto Serif JP", "Yu Mincho", serif; font-weight: 500; letter-spacing: .01em; font-size: clamp(38px, 3.15vw, 50px); line-height: 1.48; }
+.hero h1 em { color: #f2a65a; font-style: normal; }
+.hero-lead { font-size: clamp(15px, 1.35vw, 19px); line-height: 2; color: rgba(255,255,255,.71); margin: 34px 0 36px; }
+.hero-actions { display: flex; align-items: center; gap: 30px; }
+.button { display: inline-flex; align-items: center; justify-content: space-between; gap: 38px; padding: 17px 22px; font-size: 13px; font-weight: 650; min-width: 220px; }
+.primary { background: #fff; color: var(--navy); }
+.text-link { font-size: 13px; color: rgba(255,255,255,.74); border-bottom: 1px solid rgba(255,255,255,.35); padding-bottom: 4px; }
+.hero-proof { display: flex; align-items: center; gap: 15px; margin-top: 52px; font-size: 10px; letter-spacing: .1em; color: rgba(255,255,255,.44); }
+.hero-proof i { width: 24px; height: 1px; background: rgba(255,255,255,.25); }
 
-  .hero-text-area h1 {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(48px, 6vw, 76px);
-    color: var(--white);
-    line-height: 1.45;
-    margin-bottom: 72px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    max-width: 1000px;
-  }
+.hero-visual { position: relative; min-width: 0; }
+.visual-glow { position: absolute; inset: -20%; background: radial-gradient(circle, rgba(242,166,90,.22), transparent 58%); }
+.product-screen { position: relative; width: 100%; max-width: 680px; margin: auto; background: #f4f7fa; color: var(--ink); border: 1px solid rgba(255,255,255,.32); box-shadow: 0 36px 90px rgba(0,0,0,.42); transform: perspective(1300px) rotateY(-3deg) rotateX(1deg); }
+.screen-bar { height: 56px; background: #fff; border-bottom: 1px solid #dce4ea; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font-size: 12px; }
+.screen-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.brand-mark { display: grid; place-items: center; width: 26px; height: 26px; background: var(--navy); color: white; }
+.screen-status { color: #258b67; background: #e7f5ee; padding: 6px 10px; border-radius: 20px; }
+.screen-body { padding: clamp(20px, 3vw, 34px); }
+.screen-kicker { font: 10px var(--font-geist-mono), monospace; color: #8692a1; letter-spacing: .08em; }
+.screen-title-row { display: flex; align-items: center; justify-content: space-between; margin: 20px 0 24px; }
+.screen-title-row p { margin: 0 0 7px; color: #647386; font-size: 11px; }
+.screen-title-row h3 { margin: 0; font-size: clamp(18px, 2vw, 27px); }
+.score-ring { width: 70px; height: 70px; border: 5px solid #4bb59b; border-left-color: #d7e4e2; border-radius: 50%; display: grid; place-content: center; text-align: center; }
+.score-ring strong { font-size: 21px; line-height: 1; }
+.score-ring span { font-size: 8px; color: #7b8795; }
+.screen-metrics { display: grid; grid-template-columns: repeat(3,1fr); background: white; border: 1px solid #dce4ea; }
+.screen-metrics div { padding: 16px; border-right: 1px solid #dce4ea; }
+.screen-metrics div:last-child { border: 0; }
+.screen-metrics span { display: block; color: #7c8997; font-size: 9px; margin-bottom: 7px; }
+.screen-metrics strong { font-size: clamp(12px, 1.3vw, 17px); }
+.good { color: #278a6b; }
+.reason-panel { margin-top: 15px; background: white; border: 1px solid #dce4ea; }
+.reason-head { padding: 12px 15px; display: flex; justify-content: space-between; border-bottom: 1px solid #e5eaef; font-size: 10px; font-weight: 700; }
+.reason-head span:last-child { color: #8994a0; font-weight: 400; }
+.reason-panel ul { list-style: none; padding: 5px 15px 10px; margin: 0; }
+.reason-panel li { font-size: clamp(11px, 1vw, 13px); padding: 9px 0; display: flex; align-items: center; gap: 9px; border-bottom: 1px solid #edf0f3; }
+.reason-panel li:last-child { border: 0; }
+.dot { width: 7px; height: 7px; border-radius: 50%; flex: 0 0 auto; }
+.good-dot { background: #40ad8b; }.warn-dot { background: #e6a139; }
+.float-card { position: absolute; background: rgba(255,255,255,.96); color: var(--ink); box-shadow: 0 15px 40px rgba(0,0,0,.23); padding: 13px 17px; display: flex; align-items: center; gap: 12px; min-width: 190px; }
+.float-card small, .float-card strong { display: block; }.float-card small { font-size: 8px; color: #82909e; margin-bottom: 3px; }.float-card strong { font-size: 10px; }
+.float-icon { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; font-weight: 800; font-size: 11px; color: #208969; background: #ddf2eb; }
+.float-top { right: -35px; top: 17%; }
 
-  .hero-sub {
-    font-size: 22px;
-    color: rgba(250,250,248,0.78);
-    line-height: 2.2;
-    margin-bottom: 88px;
-    font-weight: 300;
-    letter-spacing: 0.03em;
-    max-width: 700px;
-  }
+.section { padding: 120px clamp(24px, 7vw, 112px); }
+.section-heading { display: grid; grid-template-columns: 1fr 1.25fr .75fr; gap: 40px; align-items: end; margin-bottom: 58px; }
+.section-heading .eyebrow { align-self: start; }
+.section-heading h2, .how h2, .final-cta h2 { font-family: "Noto Serif JP", "Yu Mincho", serif; font-size: clamp(32px, 3.4vw, 50px); font-weight: 500; line-height: 1.48; margin: 0; }
+.section-heading > p:last-child { color: var(--muted); line-height: 1.9; font-size: 13px; }
+.product-grid { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); max-width: 1060px; margin-left: auto; }
+.product-card { padding: 34px; min-height: 420px; border-right: 1px solid var(--line); display: flex; flex-direction: column; transition: .25s ease; }
+.product-card:last-child { border: 0; }.product-card:hover { background: #f8fafc; transform: translateY(-4px); box-shadow: 0 15px 35px rgba(19,35,56,.08); }
+.product-card.featured { background: var(--navy); color: white; }
+.card-top { display: flex; justify-content: space-between; font: 10px var(--font-geist-mono), monospace; color: #8896a5; }
+.card-top b { color: #378f70; background: #e5f4ee; padding: 5px 8px; font-weight: 600; }.featured .card-top b { color: #f2c896; background: rgba(74,177,148,.15); }
+.card-icon { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid #cbd6e0; margin: 48px 0 28px; color: #c1631f; font-weight: 700; }
+.featured .card-icon { border-color: rgba(255,255,255,.3); color: #f2a65a; }
+.calendar-icon { font-size: 12px; }.yen-icon { font-size: 19px; }
+.card-question { font-size: 13px; color: #5a6b7a; margin: 0 0 8px; }.featured .card-question { color: #a3b5c4; }
+.product-card h3 { margin: 0 0 18px; font-size: 26px; }.product-card > p:not(.card-question) { color: var(--muted); line-height: 1.9; font-size: 14px; margin: 0 0 26px; }.featured > p:not(.card-question) { color: rgba(255,255,255,.68); }
+.product-card a, .quiet-link { margin-top: auto; font-size: 12px; font-weight: 650; display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 17px; }.featured a { border-color: rgba(255,255,255,.16); }.quiet-link { color: #83909d; }
+.next-expansion { max-width: 1060px; margin: 20px 0 0 auto; border: 1px solid var(--line); padding: 25px 30px; display: grid; grid-template-columns: 1.1fr 1.7fr .8fr; align-items: center; gap: 30px; background: #f8fafc; }
+.next-expansion span { font: 9px var(--font-geist-mono), monospace; color: #6a8499; letter-spacing: .15em; }
+.next-expansion h3 { font: 500 19px "Noto Serif JP", serif; margin: 9px 0 0; }
+.next-expansion p { color: var(--muted); font-size: 11px; line-height: 1.8; }
+.next-expansion b { text-align: right; color: #6a7886; font-size: 10px; letter-spacing: .06em; }
 
-  .hero-actions { 
-    display: flex; 
-    gap: 48px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .hero-link {
-    display: inline-block;
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 0.03em;
-    text-decoration: none;
-    color: rgba(250,250,248,0.92);
-    padding-bottom: 12px;
-    border-bottom: 1px solid rgba(184,85,26,0.35);
-    transition: all 0.7s;
-  }
-  
-  .hero-link::after {
-    content: '→';
-    margin-left: 20px;
-    font-size: 16px;
-    color: rgba(184,85,26,0.7);
-    transition: all 0.7s;
-  }
-  
-  .hero-link:hover {
-    color: var(--white);
-    border-bottom-color: rgba(184,85,26,0.85);
-  }
-  
-  .hero-link:hover::after {
-    margin-left: 34px;
-    color: rgba(184,85,26,1);
-  }
+.outcomes { background: #eef3f7; }
+.outcomes-heading { display: grid; grid-template-columns: .7fr 2fr; gap: 40px; align-items: start; margin-bottom: 60px; }
+.outcomes-heading h2 { font-family: "Noto Serif JP", "Yu Mincho", serif; font-size: clamp(32px, 3.5vw, 52px); font-weight: 500; line-height: 1.5; margin: 0; }
+.outcomes-heading > div > p { max-width: 760px; color: var(--muted); font-size: 14px; line-height: 2; margin: 25px 0 0; }
+.outcome-flow { display: grid; grid-template-columns: repeat(3, 1fr); background: white; border: 1px solid #d5e0e8; }
+.outcome-flow article { min-height: 300px; padding: 34px; border-right: 1px solid #d5e0e8; position: relative; }
+.outcome-flow article:last-child { border-right: 0; }
+.outcome-flow article::after { content: "→"; position: absolute; right: -13px; top: 50%; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: #eef3f7; color: #52748d; font-size: 12px; z-index: 1; }
+.outcome-flow article:last-child::after { display: none; }
+.outcome-number { font: 10px var(--font-geist-mono), monospace; color: #b8703c; letter-spacing: .12em; }
+.outcome-before { display: inline-block; margin: 44px 0 16px; padding: 6px 10px; background: #edf1f4; color: #778592; font-size: 10px; }
+.outcome-flow h3 { margin: 0 0 17px; font: 500 25px "Noto Serif JP", serif; color: #123a57; }
+.outcome-flow article > p:last-child { color: var(--muted); font-size: 13px; line-height: 1.9; margin: 0; }
+.outcome-flow .impact-card { background: var(--navy); color: white; }
+.impact-card .outcome-number { color: #f2a65a; }
+.impact-card .outcome-before { background: rgba(255,255,255,.1); color: rgba(255,255,255,.58); }
+.outcome-flow .impact-card h3 { color: white; }
+.outcome-flow .impact-card > p:last-child { color: rgba(255,255,255,.6); }
+.outcome-summary { margin: 22px 0 0; padding: 26px 28px; display: flex; align-items: center; justify-content: center; gap: 20px; background: white; border: 1px solid #d5e0e8; color: #384c5e; font-size: 15px; }
+.outcome-summary span { color: #c1631f; font: 700 12px var(--font-geist-mono), monospace; letter-spacing: .14em; }
+.outcome-summary i { color: #d9662a; font-style: normal; font-size: 22px; }
 
-  /* ─── SECTIONS ─── */
-  section { padding: 170px 0; }
-  .container { max-width: 1480px; margin: 0 auto; padding: 0 100px; }
+.how { background: var(--navy); color: white; }
+.how-copy { display: grid; grid-template-columns: .7fr 1.3fr .8fr; gap: 40px; align-items: end; }
+.how-copy > p:last-child { color: rgba(255,255,255,.55); font-size: 13px; line-height: 1.9; }
+.steps { margin-top: 72px; display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 32px; }
+.steps article { border-top: 1px solid rgba(255,255,255,.2); padding-top: 25px; min-height: 150px; }
+.steps article span { color: #f2a65a; font: 10px var(--font-geist-mono), monospace; }.steps article h3 { margin: 17px 0 10px; font-size: 19px; }.steps article p { color: rgba(255,255,255,.58); font-size: 13px; line-height: 1.8; }.steps > i { font-style: normal; color: #4b6476; }
 
-  .section-eyebrow {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    color: rgba(184,85,26,0.85);
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    margin-bottom: 56px;
-    font-weight: 400;
-  }
-  
-  .section-title {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(38px, 4.5vw, 60px);
-    font-weight: 700;
-    color: var(--ink);
-    line-height: 1.6;
-    margin-bottom: 120px;
-    letter-spacing: 0.05em;
-  }
+.trust { background: var(--paper); }
+.trust-heading { grid-template-columns: .7fr 1.8fr; }
+.numbers { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #cdd8e1; border-bottom: 1px solid #cdd8e1; }
+.numbers div { padding: 40px 24px; border-right: 1px solid #cdd8e1; }.numbers div:last-child { border: 0; }
+.numbers strong { display: block; font: 500 clamp(36px, 4vw, 56px) var(--font-geist-sans), sans-serif; color: #c1631f; margin-bottom: 15px; }.numbers strong small { font-size: 14px; margin-left: 5px; }.numbers span { font-size: 14px; color: #56666f; }
+.new-business-banner { padding: 34px clamp(24px, 7vw, 112px); background: #eef3f7; border-top: 1px solid #d6e1e9; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+.new-business-banner > div { display: flex; align-items: center; gap: 28px; }
+.new-business-banner span { font: 9px var(--font-geist-mono), monospace; color: #b8703c; letter-spacing: .16em; white-space: nowrap; }
+.new-business-banner p { margin: 0; color: #43596b; font: 500 16px "Noto Serif JP", serif; }
+.new-business-banner a { min-width: 210px; padding: 14px 0; display: flex; justify-content: space-between; border-bottom: 1px solid #7290a4; color: #c1631f; font-size: 12px; font-weight: 650; }
 
-  /* ─── PROBLEM (左右レイアウト) ─── */
-  .problem-section {
-    background: var(--white);
-  }
-  
-  .problem-layout {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 140px;
-    align-items: start;
-  }
-  
-  .problem-intro h2 {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(34px, 4vw, 52px);
-    font-weight: 700;
-    line-height: 1.7;
-    margin-bottom: 48px;
-    letter-spacing: 0.05em;
-  }
-  
-  .problem-intro p {
-    font-size: 18px;
-    line-height: 2.3;
-    color: var(--muted);
-    font-weight: 300;
-  }
-  
-  .problem-list {
-    display: flex;
-    flex-direction: column;
-    gap: 64px;
-  }
-  
-  .problem-item h4 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    letter-spacing: 0.03em;
-  }
-  
-  .problem-item p {
-    font-size: 16px;
-    line-height: 2;
-    color: var(--muted);
-    font-weight: 300;
-  }
+.final-cta { padding: 110px 24px; text-align: center; background: linear-gradient(135deg, #0a263b, #0d3b55); color: white; }.final-cta .eyebrow { justify-content: center; }.final-cta > p:not(.eyebrow) { color: rgba(255,255,255,.58); margin: 28px 0 38px; font-size: 13px; }.white-button { background: white; color: var(--navy); margin: auto; }
+.site-footer { position: relative; overflow: hidden; padding: 76px clamp(24px, 6vw, 90px) 28px; background: #eef2f5; color: var(--navy); }
+.footer-curve { position: absolute; right: -12vw; bottom: -22vw; width: 58vw; height: 34vw; min-width: 620px; min-height: 360px; border-radius: 100% 0 0; background: #d9662a; transform: rotate(-4deg); transform-origin: bottom right; }
+.footer-main, .footer-bottom { position: relative; z-index: 1; }
+.footer-main { display: grid; grid-template-columns: .8fr 2.2fr; gap: clamp(60px, 10vw, 150px); align-items: start; }
+.footer-logo { color: var(--navy); font-size: 16px; }
+.footer-logo .logo-symbol { border-color: rgba(7,27,46,.4); }
+.footer-brand > p { margin: 30px 0 0; color: #6b7885; font: 500 15px/1.9 "Noto Serif JP", serif; }
+.footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(34px, 5vw, 78px); }
+.footer-nav > div { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.footer-nav a, .footer-nav span { color: #778491; font-size: 11px; line-height: 1.55; }
+.footer-nav a { transition: color .2s ease; }
+.footer-nav a:hover { color: #d9662a; }
+.footer-nav .footer-heading { width: 100%; margin-bottom: 5px; color: var(--navy); font-size: 13px; font-weight: 750; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.footer-bottom { margin-top: 76px; padding-top: 22px; border-top: 1px solid #ced7df; display: flex; align-items: center; justify-content: space-between; max-width: 74%; }
+.footer-bottom small { color: #8a949e; font-size: 9px; }
+.footer-bottom > div { display: flex; align-items: center; gap: 25px; }
+.footer-bottom a { color: #566674; font-size: 10px; font-weight: 650; }
+.html-download { padding: 8px 12px; border: 1px solid #aebbc6; letter-spacing: .04em; transition: .2s ease; }
+.html-download:hover { border-color: #d9662a; color: #d9662a; }
 
-  /* ─── EXPERIENCE (講演写真 + 実践知) ─── */
-  .experience-section {
-    background: var(--bg-section);
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .experience-layout {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 120px;
-    align-items: center;
-  }
-  
-  .experience-content h3 {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(32px, 3.5vw, 48px);
-    font-weight: 700;
-    line-height: 1.7;
-    margin-bottom: 56px;
-    letter-spacing: 0.05em;
-  }
-  
-  .experience-lead {
-    font-size: 19px;
-    line-height: 2.1;
-    color: var(--ink);
-    margin-bottom: 72px;
-    font-weight: 300;
-  }
-  
-  .experience-list {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-  
-  .experience-item h4 {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: rgba(184,85,26,0.85);
-    margin-bottom: 12px;
-  }
-  
-  .experience-item p {
-    font-size: 16px;
-    line-height: 2.1;
-    color: var(--ink);
-    font-weight: 300;
-  }
-  
-  .experience-image-area {
-    position: relative;
-  }
-  
-  .experience-frame {
-    width: 100%;
-    aspect-ratio: 16/11;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(26,26,26,0.04);
-  }
-  
-  .experience-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* 実践者トーン - 暖色抑制、ネイビーとグレー強化 */
-    filter: 
-      brightness(0.75) 
-      contrast(0.9) 
-      saturate(0.65) 
-      sepia(0.18) 
-      hue-rotate(-18deg);
-  }
-  
-  .experience-frame::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg, 
-      rgba(6,17,30,0.12) 0%, 
-      rgba(6,17,30,0.35) 100%
-    );
-    z-index: 1;
-    pointer-events: none;
-  }
-  
-  .experience-caption {
-    margin-top: 24px;
-    font-family: 'Space Mono', monospace;
-    font-size: 8px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    opacity: 0.6;
-  }
+.company-header { background: rgba(6,24,39,.97); }
+.company-back-link { color: #f2a65a; font-size: 11px; display: flex; align-items: center; gap: 14px; padding-bottom: 5px; border-bottom: 1px solid rgba(242,166,90,.5); }
+.company-page { background: white; }
+.company-hero { min-height: 620px; padding: 178px clamp(24px, 7vw, 112px) 100px; background: radial-gradient(circle at 80% 28%, rgba(242,166,90,.24), transparent 28%), linear-gradient(125deg, #061827, #0d3048); color: white; display: flex; flex-direction: column; justify-content: center; }
+.company-hero h1 { margin: 0; font: 500 clamp(44px, 5.4vw, 76px)/1.42 "Noto Serif JP", "Yu Mincho", serif; letter-spacing: .02em; }
+.company-hero > p:last-child { margin: 38px 0 0; color: rgba(255,255,255,.62); font-size: 15px; line-height: 2.1; }
+.company-message { display: grid; grid-template-columns: .65fr 1.7fr; gap: clamp(40px, 8vw, 130px); }
+.company-message h2, .company-section-title h2, .company-contact h2 { margin: 0; font: 500 clamp(34px, 3.8vw, 54px)/1.5 "Noto Serif JP", "Yu Mincho", serif; }
+.company-message > div > p { max-width: 780px; color: var(--muted); font-size: 14px; line-height: 2.2; margin: 30px 0 0; }
+.company-businesses { background: var(--paper); }
+.company-section-title { display: grid; grid-template-columns: .65fr 1.7fr; gap: clamp(40px, 8vw, 130px); margin-bottom: 58px; }
+.company-business-grid { margin-left: auto; max-width: 1060px; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); }
+.company-business-grid article { min-height: 330px; padding: 38px; background: white; border-right: 1px solid var(--line); display: flex; flex-direction: column; }
+.company-business-grid article:last-child { border: 0; background: var(--navy); color: white; }
+.company-business-grid article > span { color: #b8703c; font: 10px var(--font-geist-mono), monospace; }
+.company-business-grid h3 { margin: 50px 0 17px; font: 500 26px "Noto Serif JP", serif; }
+.company-business-grid p { color: var(--muted); font-size: 13px; line-height: 2; margin: 0 0 28px; }
+.company-business-grid article:last-child p { color: rgba(255,255,255,.6); }
+.company-business-grid a { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; font-weight: 650; display: flex; justify-content: space-between; }
+.company-business-grid article:last-child a { border-color: rgba(255,255,255,.16); }
+.company-profile { background: var(--navy); color: white; display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(60px, 10vw, 160px); }
+.profile-role { color: #f2a65a; font-size: 12px; letter-spacing: .15em; margin: 0 0 15px; }
+.profile-title h2 { margin: 0; font: 500 clamp(38px, 4.5vw, 62px) "Noto Serif JP", serif; }
+.profile-en { color: rgba(255,255,255,.35); font: 10px var(--font-geist-mono), monospace; letter-spacing: .18em; }
+.profile-copy > p { color: rgba(255,255,255,.65); font-size: 14px; line-height: 2.1; margin: 0 0 22px; }
+.profile-copy ul { list-style: none; padding: 0; margin: 42px 0 0; border-top: 1px solid rgba(255,255,255,.16); }
+.profile-copy li { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.16); color: rgba(255,255,255,.8); font-size: 12px; }
+.company-outline dl { max-width: 920px; margin: 0 0 0 auto; border-top: 1px solid var(--line); }
+.company-outline dl div { display: grid; grid-template-columns: 180px 1fr; padding: 24px 0; border-bottom: 1px solid var(--line); }
+.company-outline dt { color: #708090; font-size: 11px; }
+.company-outline dd { margin: 0; font-size: 13px; }
+.company-outline dd a { color: #c1631f; border-bottom: 1px solid #8bb7ce; }
+.company-contact { padding: 100px 24px; text-align: center; color: white; background: linear-gradient(135deg, #0b263b, #0d3d57); }
+.company-contact .eyebrow { justify-content: center; }
+.company-contact h2 { margin-bottom: 38px; }
 
-  /* ─── SUPPORT ─── */
-  .support-section {
-    background: var(--white);
-  }
-  
-  .support-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 100px;
-  }
-  
-  .support-column h3 {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 1.65;
-    margin-bottom: 48px;
-    letter-spacing: 0.05em;
-  }
-  
-  .support-desc {
-    font-size: 17px;
-    line-height: 2.4;
-    color: var(--ink);
-    margin-bottom: 64px;
-    font-weight: 300;
-  }
-  
-  .support-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .support-list li {
-    font-size: 15px;
-    color: var(--muted);
-    font-weight: 300;
-  }
-  
-  .support-list li::before {
-    content: '—';
-    margin-right: 16px;
-    color: rgba(184,85,26,0.35);
-  }
+@media (max-width: 980px) {
+  .site-header nav { display: none; }
+  .hero { grid-template-columns: 1fr; padding-top: 130px; }
+  .hero-copy { max-width: 680px; }
+  .hero-visual { max-width: 720px; width: 92%; margin: 15px auto 0; }
+  .section-heading, .how-copy { grid-template-columns: 1fr; }
+  .outcomes-heading { grid-template-columns: 1fr; }
+  .section-heading .eyebrow { margin-bottom: 0; }
+  .product-grid { grid-template-columns: 1fr; }
+  .product-card { border-right: 0; border-bottom: 1px solid var(--line); min-height: 370px; }
+  .steps { grid-template-columns: 1fr; }.steps > i { transform: rotate(90deg); text-align: center; }
+  .numbers { grid-template-columns: 1fr 1fr; }.numbers div:nth-child(2) { border-right: 0; }.numbers div:nth-child(-n+2) { border-bottom: 1px solid #cdd8e1; }
+  .next-expansion { grid-template-columns: 1fr; }
+  .outcome-flow { grid-template-columns: 1fr; }
+  .outcome-flow article { border-right: 0; border-bottom: 1px solid #d5e0e8; }
+  .outcome-flow article:last-child { border-bottom: 0; }
+  .outcome-flow article::after { right: auto; left: 50%; top: auto; bottom: -13px; transform: rotate(90deg); }
+  .next-expansion b { text-align: left; }
+  .company-message, .company-section-title, .company-profile { grid-template-columns: 1fr; }
+  .company-business-grid { grid-template-columns: 1fr; }
+  .company-business-grid article { border-right: 0; border-bottom: 1px solid var(--line); }
+}
 
-  /* ─── FINAL CTA ─── */
-  .final-cta {
-    background: var(--navy-dark);
-    text-align: center;
-    padding: 160px 0;
-    position: relative;
-  }
-  
-  .final-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 50%, rgba(184,85,26,0.12) 0%, transparent 65%);
-  }
-  
-  .final-cta h2 {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(38px, 4.5vw, 60px);
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 100px;
-    line-height: 1.65;
-    letter-spacing: 0.05em;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .final-cta-actions {
-    display: flex;
-    gap: 64px;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .final-link {
-    font-size: 18px;
-    font-weight: 400;
-    color: rgba(250,250,248,0.85);
-    text-decoration: none;
-    letter-spacing: 0.03em;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(184,85,26,0.25);
-    transition: all 0.7s;
-  }
-  
-  .final-link::after {
-    content: '→';
-    margin-left: 20px;
-    font-size: 16px;
-    color: rgba(184,85,26,0.5);
-    transition: all 0.7s;
-  }
-  
-  .final-link:hover {
-    color: var(--white);
-    border-bottom-color: rgba(184,85,26,0.75);
-  }
-  
-  .final-link:hover::after {
-    margin-left: 32px;
-    color: rgba(184,85,26,1);
-  }
+@media (max-width: 600px) {
+  .site-header { height: 68px; padding: 0 14px; }.site-header .logo > span:last-child { display: none; }
+  .header-business-cta { min-width: 0; padding: 9px 11px; gap: 8px; font-size: 10px; }
+  .header-business-cta small { font-size: 7px; letter-spacing: .03em; }
+  .hero { min-height: auto; padding: 115px 22px 70px; gap: 70px; }.hero h1 { font-size: 39px; }.hero-lead br { display: none; }.hero-actions { align-items: flex-start; flex-direction: column; }.hero-proof { flex-wrap: wrap; margin-top: 38px; }
+  .hero-visual { width: 100%; }.product-screen { transform: none; }.float-card { display: none; }.screen-metrics { grid-template-columns: 1fr; }.screen-metrics div { border-right: 0; border-bottom: 1px solid #dce4ea; }.score-ring { width: 58px; height: 58px; }
+  .section { padding: 80px 22px; }.section-heading { margin-bottom: 40px; }.section-heading h2, .how h2, .final-cta h2 { font-size: 31px; }.product-card { padding: 28px; }
+  .numbers { grid-template-columns: 1fr; }.numbers div { border-right: 0 !important; border-bottom: 1px solid #cdd8e1 !important; }.numbers div:last-child { border-bottom: 0 !important; }
+  .next-expansion { padding: 24px; }
+  .outcome-flow article { min-height: auto; padding: 28px; }
+  .outcome-before { margin-top: 30px; }
+  .outcome-summary { align-items: flex-start; flex-direction: column; gap: 9px; }
+  .outcome-summary i { transform: rotate(90deg); align-self: center; }
+  .new-business-banner, .new-business-banner > div { align-items: flex-start; flex-direction: column; }
+  .new-business-banner { gap: 22px; padding: 30px 22px; }
+  .new-business-banner > div { gap: 10px; }
+  .new-business-banner a { width: 100%; }
+  .company-back-link { font-size: 10px; gap: 7px; }
+  .company-hero { min-height: 540px; padding: 140px 22px 80px; }
+  .company-hero > p:last-child br { display: none; }
+  .company-business-grid article { min-height: 300px; padding: 28px; }
+  .company-outline dl div { grid-template-columns: 1fr; gap: 10px; }
+  .company-contact { padding: 80px 22px; }
+  .site-footer { padding: 58px 22px 24px; }
+  .footer-curve { right: -430px; bottom: -280px; min-width: 640px; min-height: 430px; opacity: .9; }
+  .footer-main { grid-template-columns: 1fr; gap: 48px; }
+  .footer-nav { grid-template-columns: 1fr; gap: 38px; }
+  .footer-brand > p { margin-top: 22px; }
+  .footer-bottom { max-width: 100%; margin-top: 55px; align-items: flex-start; flex-direction: column-reverse; gap: 24px; }
+  .footer-bottom > div { align-items: flex-start; flex-direction: column; gap: 15px; }
+}
 
-  .final-cta-note {
-    font-size: 14px;
-    line-height: 2;
-    color: rgba(250,250,248,0.5);
-    font-weight: 300;
-    margin-top: 56px;
-    letter-spacing: 0.02em;
-    position: relative;
-    z-index: 1;
-  }
+/* ─── NEW BUSINESS PAGE ADDITIONS ─── */
+.nb-hero { min-height: 560px; }
+.nb-hero .hero-lead-text { margin: 38px 0 0; color: rgba(255,255,255,.62); font-size: 15px; line-height: 2.1; }
+.nb-hero .partner-line { margin-top: 40px; color: rgba(255,255,255,.5); font-size: 12px; letter-spacing: .04em; }
+.nb-hero .partner-line b { color: rgba(255,255,255,.85); font-weight: 650; }
 
-  /* ─── FOOTER ─── */
-  footer {
-    background: transparent;
-    padding: 96px;
-    text-align: center;
-    border-top: 1px solid rgba(26,26,26,0.05);
-  }
-  
-  .footer-logo {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--ink);
-    display: block;
-    margin-bottom: 24px;
-    letter-spacing: 0.08em;
-    opacity: 0.5;
-  }
-  
-  .footer-copy {
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-    opacity: 0.35;
-  }
+.nb-problem-grid { margin-top: 58px; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.nb-problem-grid article { padding: 34px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.nb-problem-grid h4 { margin: 0 0 14px; font: 500 18px "Noto Serif JP", serif; color: var(--navy); }
+.nb-problem-grid p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.9; }
+.nb-problem-icon { width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid #cbd6e0; margin-bottom: 22px; color: #c1631f; }
 
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 1400px) {
-    nav { padding: 0 60px; }
-    .container { padding: 0 60px; }
-    .hero-container { padding: 140px 60px; }
-    .problem-layout { gap: 100px; }
-    .experience-layout { gap: 80px; }
-    .support-grid { gap: 80px; }
-  }
+.nb-support-note { max-width: 900px; margin: -20px 0 40px; color: var(--muted); font-size: 14px; line-height: 2; }
+.nb-support-table { max-width: 1060px; margin: 0 0 0 auto; border-top: 1px solid var(--line); }
+.nb-support-table > div { display: grid; grid-template-columns: 1.4fr .9fr 2fr; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--line); align-items: start; }
+.nb-support-table h3 { margin: 0; font: 500 19px "Noto Serif JP", serif; color: var(--navy); }
+.nb-support-table .duration { color: #b8703c; font: 10px var(--font-geist-mono), monospace; letter-spacing: .1em; }
+.nb-support-table p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.9; }
+.nb-support-format { margin: 30px 0 0; color: #566674; font-size: 13px; }
 
-  @media (max-width: 960px) {
-    nav { padding: 0 32px; height: 76px; }
-    .nav-logo { height: 44px; }
-    .container { padding: 0 32px; }
-    .nav-links { display: none; }
-    
-    .hero-container { padding: 120px 32px; }
-    section { padding: 120px 0; }
-    
-    .problem-layout { grid-template-columns: 1fr; gap: 80px; }
-    .experience-layout { grid-template-columns: 1fr; gap: 64px; }
-    .support-grid { grid-template-columns: 1fr; gap: 80px; }
-  }
+.nb-achievements-grid { margin-top: 58px; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.nb-achievements-grid div { min-height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 14px; font-size: 13px; font-weight: 650; color: var(--navy); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.nb-ach-icon { color: #c1631f; }
+
+@media (max-width: 980px) {
+  .nb-problem-grid { grid-template-columns: 1fr; }
+  .nb-support-table > div { grid-template-columns: 1fr; gap: 8px; }
+  .nb-achievements-grid { grid-template-columns: repeat(2, 1fr); }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="index.html">
-    <img src="logo.jpg" alt="ゆくひ" class="nav-logo">
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html">TOP</a></li>
-    <li><a href="ai-agent.html">製造業判断AI</a></li>
-    <li><a href="new-business.html">新規事業支援</a></li>
-    <li><a href="index.html#company">YUKUHI</a></li>
-  </ul>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="nav-cta">お問い合わせ</a>
-</nav>
+      <header class="site-header">
+        <a class="logo" href="/" aria-label="ゆくひ合同会社 トップ">
+          <img src="logo.png" alt="ゆくひ合同会社" class="logo-image">
+          <span>ゆくひ合同会社</span>
+        </a>
+        <nav aria-label="メインナビゲーション">
+          <a href="#problem">課題</a>
+          <a href="#support">支援内容</a>
+          <a href="#partnership">体制</a>
+          <a href="/company">YUKUHI</a>
+        </nav>
+        <a class="header-business-cta" href="/">
+          <span><small>属人化した納期・見積もり判断を仕組みに</small>納期AIはこちら</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  
-  <div class="hero-container">
-    <div class="hero-text-area">
-      <h1>なぜ、大企業の新規事業は<br>成功まで進まないのか。</h1>
-      <p class="hero-sub">
-        実行はしている。<br>
-        しかし、顧客課題、競争構造、意思決定、Exit。<br>
-        その解像度が不足している。
-      </p>
-      <div class="hero-actions">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="hero-link">新規事業の現在地を相談する</a>
-      </div>
-    </div>
-  </div>
-</section>
+      <main class="company-page">
+        <section class="company-hero nb-hero">
+          <p class="eyebrow light"><span></span> NEW BUSINESS SUPPORT</p>
+          <h1>実践者と学び、<br>事業をつくる。</h1>
+          <p class="hero-lead-text">
+            構想で終わらせない。<br>
+            事業と人を、同時に育てる。
+          </p>
+          <a class="button primary" href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">
+            新規事業について相談する <span aria-hidden="true">↗</span>
+          </a>
+          <p class="partner-line">ゆくひ合同会社 <b>×</b> 株式会社Nuevo Lab</p>
+        </section>
 
-<!-- PROBLEM -->
-<section class="problem-section">
-  <div class="container">
-    <div class="section-eyebrow">STRUCTURE</div>
-    
-    <div class="problem-layout">
-      <div class="problem-intro">
-        <h2>
-          新規事業が止まる理由は、<br>
-          アイデア不足ではない。
-        </h2>
-        <p>
-          新規事業が止まる理由を、<br>
-          構造で説明する。
-        </p>
-      </div>
-      
-      <div class="problem-list">
-        <div class="problem-item">
-          <h4>顧客解像度</h4>
-          <p>顧客課題の表面だけを見ている。現場に入り、本質的な構造まで理解しているか。</p>
-        </div>
-        
-        <div class="problem-item">
-          <h4>競争理解</h4>
-          <p>なぜ競合が勝ち、なぜ自社が勝てるのか。その構造を説明できるか。</p>
-        </div>
-        
-        <div class="problem-item">
-          <h4>意思決定</h4>
-          <p>会議は進むが、誰がどう判断するか、その構造が曖昧になっていないか。</p>
-        </div>
-        
-        <div class="problem-item">
-          <h4>実行構造</h4>
-          <p>担当者は動いているが、事務局化していないか。推進と実行の構造が混在していないか。</p>
-        </div>
-        
-        <div class="problem-item">
-          <h4>Exit視点</h4>
-          <p>「続けること」が目的になっていないか。出口から逆算した構造で事業を設計しているか。</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section class="experience-section">
-  <div class="container">
-    <div class="section-eyebrow">EXPERIENCE</div>
-    
-    <div class="experience-layout">
-      <div class="experience-content">
-        <h3>
-          実際にやってきたから、<br>
-          現実が分かる。
-        </h3>
-        
-        <p class="experience-lead">
-          社内ベンチャー立ち上げ、分社化、経営、営業、組織運営、Exit。<br>
-          <br>
-          その現実を、実際に経験してきた。
-        </p>
-        
-        <div class="experience-list">
-          <div class="experience-item">
-            <h4>VENTURE LAUNCH</h4>
-            <p>日本特殊陶業 初の社内ベンチャー立案・推進・分社化</p>
+        <section class="company-message section" id="problem">
+          <p class="eyebrow"><span></span> STRUCTURE</p>
+          <div>
+            <h2>新規事業が止まる理由は、<br>アイデア不足ではない。</h2>
+            <p>顧客検証や事業化まで進まない、自ら動く人材が育たない、研修が成果につながらない。<br>その構造を、実践知で解きほぐす。</p>
           </div>
-          
-          <div class="experience-item">
-            <h4>MANAGEMENT</h4>
-            <p>株式会社シェアリングファクトリー 代表取締役<br>経営・顧客開拓・組織運営</p>
+        </section>
+
+        <section class="section" style="padding-top:0;background:var(--paper)">
+          <div class="nb-problem-grid">
+            <article>
+              <div class="nb-problem-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/></svg></div>
+              <h4>新規事業が事業化しない</h4>
+              <p>アイデアは出ても、顧客検証や事業化まで進まない。</p>
+            </article>
+            <article>
+              <div class="nb-problem-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c1.2-4 4-6 7-6s5.8 2 7 6"/></svg></div>
+              <h4>自ら動く人材が育たない</h4>
+              <p>社員が指示待ちになり、変革を担う人材が育たない。</p>
+            </article>
+            <article>
+              <div class="nb-problem-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h11a3 3 0 0 1 3 3v11H7a3 3 0 0 1-3-3V5z"/><line x1="8" y1="9" x2="14" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/></svg></div>
+              <h4>研修が成果につながらない</h4>
+              <p>研修を実施しても、実際の行動や事業成果につながらない。</p>
+            </article>
           </div>
-          
-          <div class="experience-item">
-            <h4>EXIT</h4>
-            <p>事業売却完遂<br>出口から逆算した事業構築</p>
+        </section>
+
+        <section class="company-businesses section" id="partnership" style="background:var(--white)">
+          <div class="company-section-title">
+            <p class="eyebrow"><span></span> PARTNERSHIP</p>
+            <h2>社内ベンチャーを、<br>仕組みから生んだ2人。</h2>
           </div>
-          
-          <div class="experience-item">
-            <h4>FIELD PRACTICE</h4>
-            <p>3現主義（現場・現物・現実）から顧客課題構造を理解</p>
+          <p class="nb-support-note" style="margin-left:auto;max-width:1060px">
+            日本特殊陶業初の社内ベンチャー「Sharing FACTORY」。プログラムを設計・伴走した株式会社Nuevo Lab 寺澤のぞみと、
+            事業を立ち上げ、スピンオフ・売却まで導いた長谷川。実体験から体系化した事業創出プロセスを、実行支援として提供する。
+          </p>
+          <div class="company-business-grid">
+            <article>
+              <span>01 / PROGRAM</span>
+              <h3>寺澤のぞみ<br>Nuevo Lab</h3>
+              <p>事業家を育てる社内ベンチャープログラムの実務リーダーとして、設計・伴走を担当。新規事業・人材組織開発コンサルタント。</p>
+            </article>
+            <article>
+              <span>02 / BUSINESS</span>
+              <h3>長谷川 祐貴<br>ゆくひ合同会社</h3>
+              <p>プログラムから「Sharing FACTORY」を立ち上げ、事業化・スピンオフ・売却までを実現。新規事業実践家／中小企業診断士。</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="support" style="background:var(--paper)">
+          <div class="section-heading">
+            <p class="eyebrow"><span></span> SUPPORT</p>
+            <h2>提供する支援</h2>
+            <p>貴社の課題や人材育成方針に合わせて、講演・研修・伴走支援を組み合わせてご提案します。</p>
+          </div>
+          <div class="nb-support-table">
+            <div>
+              <div><span class="duration">期間例：3〜6か月</span><h3>新規事業創出・<br>事業化支援</h3></div>
+              <div class="duration">講演／研修／伴走</div>
+              <p>顧客課題の発見から検証・事業化まで、実践を通じて伴走します。</p>
+            </div>
+            <div>
+              <div><span class="duration">期間例：1日研修〜6か月伴走</span><h3>自律型人材・<br>組織開発支援</h3></div>
+              <div class="duration">講演／研修／伴走</div>
+              <p>実際の組織課題に取り組み、自ら考え、周囲を巻き込み、行動する人材を育成します。</p>
+            </div>
+            <div>
+              <div><span class="duration">期間例：3〜12か月</span><h3>次世代リーダー<br>育成支援</h3></div>
+              <div class="duration">講演／研修／伴走</div>
+              <p>経営視点、意思決定力、組織課題の構造化を学び、変革テーマの実行まで伴走します。</p>
+            </div>
+          </div>
+          <p class="nb-support-format">※ テーマに応じて、起業家・デザイナー・マーケター・VCなどの追加メンターをアサインします。</p>
+        </section>
+
+        <section class="section" id="achievements">
+          <div class="section-heading">
+            <p class="eyebrow"><span></span> ACHIEVEMENTS</p>
+            <h2>実践から得た知見を、<br>次の挑戦へ。</h2>
+            <p>製造業・研究機関・大手企業にて、新規事業創出・事業化支援をテーマに登壇しています。</p>
+          </div>
+          <div class="nb-achievements-grid">
+            <div><svg class="nb-ach-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v9a4 4 0 0 0 8 0V4"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>ノリタケ</div>
+            <div><svg class="nb-ach-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v9a4 4 0 0 0 8 0V4"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>産業技術総合研究所</div>
+            <div><svg class="nb-ach-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v9a4 4 0 0 0 8 0V4"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>日本ガイシ</div>
+            <div><svg class="nb-ach-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v9a4 4 0 0 0 8 0V4"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>Niterra</div>
+            <div><svg class="nb-ach-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v9a4 4 0 0 0 8 0V4"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>豊田合成</div>
+          </div>
+        </section>
+
+        <section class="final-cta" id="contact">
+          <p class="eyebrow light"><span></span> CONTACT</p>
+          <h2>構想を、<br>動く事業へ。</h2>
+          <p>新規事業の立ち上げや、社内での推進に課題を感じている方へ。まずは現在の状況をお聞かせください。</p>
+          <a class="button white-button" href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">
+            新規事業について相談する <span aria-hidden="true">↗</span>
+          </a>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-curve" aria-hidden="true"></div>
+        <div class="footer-main">
+          <div class="footer-brand">
+            <div class="logo footer-logo"><img src="logo.png" alt="ゆくひ合同会社" class="logo-image"><span>ゆくひ合同会社</span></div>
+            <p>事業と人を、<br>同時に育てる。</p>
+          </div>
+          <nav class="footer-nav" aria-label="フッターナビゲーション">
+            <div>
+              <a class="footer-heading" href="/company">会社概要 <span aria-hidden="true">↗</span></a>
+              <a href="/company#message">私たちについて</a>
+              <a href="/company#profile">代表プロフィール</a>
+              <a href="/company#outline">会社情報</a>
+            </div>
+            <div>
+              <a class="footer-heading" href="#support">新規事業支援 <span aria-hidden="true">↗</span></a>
+              <span>講演・研修・伴走支援</span>
+              <span>Nuevo Labとの共同提供</span>
+              <a href="#support">支援内容を見る</a>
+            </div>
+            <div>
+              <a class="footer-heading" href="/">製造業の属人化解消 <span aria-hidden="true">↗</span></a>
+              <a href="/#products">納期AI・見積もり判断AI</a>
+              <a href="/#outcomes">導入効果</a>
+              <a href="/#how">導入イメージ</a>
+            </div>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <small>© 2026 YUKUHI LLC</small>
+          <div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" target="_blank" rel="noreferrer">お問い合わせ</a>
+            <a class="html-download" href="/new-business.html" download>HTMLをダウンロード ↓</a>
           </div>
         </div>
-      </div>
-      
-      <div class="experience-image-area">
-        <div class="experience-frame">
-          <img src="lecture.jpg" alt="実践者として語る" class="experience-image">
-        </div>
-        <div class="experience-caption">
-          Sharing knowledge from real experience
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SUPPORT -->
-<section class="support-section">
-  <div class="container">
-    <div class="section-eyebrow">SUPPORT</div>
-    <h2 class="section-title">提供する支援</h2>
-    
-    <div class="support-grid">
-      <div class="support-column">
-        <h3>講演・ワークショップ</h3>
-        <p class="support-desc">
-          実体験を共有しながら、<br>
-          自社課題を構造的に整理する。
-        </p>
-        <ul class="support-list">
-          <li>新規事業が止まる構造</li>
-          <li>顧客解像度向上</li>
-          <li>勝ち筋設計</li>
-          <li>Exit視点</li>
-          <li>3現主義実践</li>
-        </ul>
-      </div>
-      
-      <div class="support-column">
-        <h3>実行支援・メンタリング</h3>
-        <p class="support-desc">
-          現場に入り、<br>
-          実行まで伴走する。
-        </p>
-        <ul class="support-list">
-          <li>新規事業レビュー</li>
-          <li>顧客課題深掘り</li>
-          <li>競争構造分析</li>
-          <li>事務局伴走</li>
-          <li>経営壁打ち</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="final-cta">
-  <div class="container">
-    <h2>次の事業を、<br>現実にする。</h2>
-    <div class="final-cta-actions">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScLbG5qD7wTBJntIeyR8NH2iJitugVgDQIYSMOuSAIQ6_lTxw/viewform" class="final-link">新規事業の現在地を相談する</a>
-      <a href="index.html" class="final-link">TOPへ戻る</a>
-    </div>
-    <p class="final-cta-note">テーマ、顧客検証、競争構造、社内推進上の課題を伺い、次の打ち手を整理します。</p>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <span class="footer-logo">ゆくひ合同会社</span>
-  <span class="footer-copy">© 2026 Yukuhi LLC. All Rights Reserved.</span>
-</footer>
+      </footer>
 
 </body>
 </html>
