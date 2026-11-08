@@ -1,0 +1,128 @@
+/* 納期AIページ専用（style.css の後に読み込む） */
+
+/* アクセシビリティ */
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:#0b2544;color:#fff;padding:10px 16px;border-radius:8px;font-weight:700}
+.skip:focus{top:12px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #f0a020;outline-offset:3px;border-radius:6px}
+
+/* ファーストビュー */
+.product .hero{background:linear-gradient(120deg,#eaf5fd 0%,#f6fbfe 55%,#e3f0fa 100%);min-height:560px;grid-template-columns:1fr 1fr}
+.product .heroimage{background-image:url('assets/nouki-illust.jpg');background-position:28% 45%;background-color:#e9f4fc}
+.product .herocopy{padding-top:72px;padding-bottom:72px}
+.lockup{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 6px !important;font-size:13px !important;color:#3c5670 !important}
+.lockup b{font-size:20px;color:#0b2544;letter-spacing:-.02em;padding-right:12px;border-right:2px solid #c3d6e6}
+.product .hero h1{font-size:clamp(38px,4.6vw,64px);line-height:1.3;letter-spacing:-.06em;margin:14px 0 22px}
+.product .hero h1 span{color:#0868c8}
+.product .hero p{font-size:17px;color:#2f4a62;line-height:1.85}
+.herobtns{display:flex;gap:12px;flex-wrap:wrap}
+.herobtns .button{align-self:auto;padding:15px 26px;font-size:14px}
+
+/* 見出し（中央寄せ・ラベルなし） */
+.section h2.ctr{text-align:center;margin-bottom:40px}
+.section h2.ctr+.lead-c{margin-top:-28px}
+.lead-c{text-align:center;color:#50657a;margin:0 auto 44px;max-width:640px}
+
+/* これまで／納期AIなら */
+.ba{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:18px}
+.ba article{border-radius:16px;padding:28px 24px;text-align:center;background:#f1f4f8;border:1px solid #e1e7ee}
+.ba .tag{display:inline-block;font-size:12px;font-weight:800;border-radius:20px;padding:3px 14px;background:#6b7a8a;color:#fff}
+.ba h3{font-size:20px;margin:14px 0 6px}
+.ba p{margin:0;color:#5a6c7c;font-size:14px}
+.ba .after{background:linear-gradient(160deg,#0a5fb8,#0b2f63);border:0;color:#fff}
+.ba .after .tag{background:#fff;color:#0a5fb8}
+.ba .after h3{font-size:22px}
+.ba .after p{color:#d6e7f7;font-weight:700}
+
+/* 機能：実画面を大きく */
+.feat{margin:0}
+.feat+.feat{margin-top:72px}
+.fhead{display:grid;grid-template-columns:auto auto 1fr;align-items:center;gap:6px 16px;margin-bottom:20px}
+.fnum{font-size:15px;font-weight:900;color:#fff;background:#086aca;border-radius:8px;padding:4px 11px}
+.fhead h3{font-size:26px;margin:0;letter-spacing:-.03em;white-space:nowrap}
+.fhead p{margin:0;color:#3d5468;font-size:15px;padding-left:16px;border-left:2px solid #cfe0ee}
+.feat figure{margin:0}
+.pair{display:grid;grid-template-columns:minmax(0,1fr);gap:22px}
+.feat figure,.feat a.zoom{min-width:0;max-width:100%}
+figcaption{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;font-size:14px;color:#3d5468}
+figcaption b{font-size:13px;color:#fff;background:#0b2544;border-radius:6px;padding:2px 9px}
+a.zoom{position:relative;display:block;border-radius:14px;overflow:hidden;border:1px solid #d3e0eb;box-shadow:0 16px 44px #0d3a6016;background:#fff;cursor:zoom-in;transition:box-shadow .2s,transform .2s}
+a.zoom:hover{box-shadow:0 20px 56px #0d3a6026;transform:translateY(-2px)}
+a.zoom img{width:100%;height:auto}
+.zhint{position:absolute;right:12px;bottom:12px;display:flex;align-items:center;gap:6px;background:#0b2544e6;color:#fff;font-size:12px;font-weight:700;border-radius:20px;padding:6px 12px}
+.zhint:before{content:'';width:11px;height:11px;border:2px solid #fff;border-radius:50%;box-shadow:4px 4px 0 -2.5px #fff}
+.note{margin:28px 0 0;font-size:12px;color:#7b8c9c;text-align:right}
+
+/* 拡大表示 */
+dialog#lightbox{width:min(96vw,1500px);max-width:none;max-height:94vh;padding:0;border:0;border-radius:14px;background:#fff;box-shadow:0 30px 80px #0008;overflow:hidden}
+dialog#lightbox::backdrop{background:#071a30d9}
+.lbbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px 10px 18px;border-bottom:1px solid #e3ebf2}
+.lbbar p{margin:0;font-size:13px;font-weight:700;color:#0b2544}
+.lbclose{flex:none;width:40px;height:40px;border-radius:50%;border:0;background:#eef3f8;color:#0b2544;font-size:22px;line-height:1;cursor:pointer}
+.lbbody{overflow:auto;max-height:calc(94vh - 62px);background:#f5f7fa}
+.lbbody img{display:block;width:100%;height:auto}
+.lbhint{display:none}
+
+/* 仕組み */
+.flow4{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);counter-reset:f;text-align:center}
+.flow4 li{position:relative;padding:0 10px}
+.flow4 li:before{counter-increment:f;content:counter(f);display:grid;place-items:center;width:46px;height:46px;margin:0 auto 12px;border-radius:50%;background:#fff;border:2px solid #086aca;color:#086aca;font-weight:900;position:relative;z-index:1}
+.flow4 li:after{content:'';position:absolute;top:23px;left:calc(50% + 23px);right:calc(-50% + 23px);height:2px;background:#cfe2f0}
+.flow4 li:last-child:after{display:none}
+.flow4 strong{display:block;font-size:16px}
+.flow4 span{font-size:13px;color:#5a6c7c}
+.flow4 .em:before{background:#086aca;color:#fff}
+
+/* 導入の流れ */
+.steps{list-style:none;margin:0;padding:0;display:flex;justify-content:center;gap:12px 40px;flex-wrap:wrap}
+.steps li{position:relative;background:#fff;border:1px solid var(--rule);border-radius:40px;padding:14px 26px;font-weight:800;font-size:15px}
+.steps li:not(:last-child):after{content:'→';position:absolute;right:-29px;top:50%;transform:translateY(-50%);color:#9aaab8;font-weight:900}
+
+/* FAQ */
+.faq{display:grid;gap:10px;max-width:820px;margin:0 auto}
+.faq details{border:1px solid var(--rule);border-radius:12px;background:#fff;padding:0 22px}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:800;font-size:15px;display:flex;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:before{content:'Q';color:#086aca;font-weight:900}
+.faq summary:after{content:'+';margin-left:auto;color:#7fa3bf;font-size:18px;line-height:1}
+.faq details[open] summary:after{content:'−'}
+.faq details p{margin:0 0 18px 24px;font-size:14px;color:#4f6377}
+
+.cta .ctabtns{display:flex;gap:12px;flex-wrap:wrap}
+.cta .button.ghost{background:transparent;border-color:#6f8fb0;color:#fff}
+
+@media(max-width:900px){
+  .product .hero{grid-template-columns:1fr;min-height:0}
+  .product .heroimage{min-height:300px;background-position:35% 40%}
+  .ba{grid-template-columns:1fr}
+  .fhead{grid-template-columns:auto 1fr}
+  .fhead p{grid-column:1/-1;border-left:0;padding-left:0}
+  .flow4{grid-template-columns:1fr 1fr;row-gap:28px}
+  .flow4 li:after{display:none}
+}
+@media(max-width:820px){
+  /* スマホ・タブレットでは拡大時に実寸に近い幅で表示し、横スクロールで確認 */
+  dialog#lightbox{width:100vw;height:100dvh;max-height:100dvh;border-radius:0}
+  .lbbody{max-height:calc(100dvh - 96px);height:calc(100dvh - 96px)}
+  .lbbody img{width:1000px;max-width:none}
+  .lbhint{display:block;margin:0;padding:8px;text-align:center;font-size:12px;color:#6a7c8d;border-top:1px solid #e3ebf2}
+  .product .hero p{font-size:15px}
+}
+@media(max-width:540px){
+  .product .herocopy{padding:44px 20px 40px}
+  .product .hero h1{font-size:36px}
+  .product .heroimage{min-height:240px}
+  .lockup b{font-size:18px}
+  .fhead h3{font-size:22px}
+  .feat+.feat{margin-top:52px}
+  /* スマホ：画面を小さくしすぎず、横スクロールで見せる */
+  a.zoom{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  a.zoom img{width:640px;max-width:none}
+  a.zoom:hover{transform:none}
+  .zhint{display:none}
+  .feat figure:after{content:'← 横にスクロール ／ タップで拡大';display:block;margin-top:6px;font-size:11px;color:#6a7c8d;text-align:right}
+  .steps li{width:100%;text-align:center}
+  .steps li:not(:last-child):after{content:'↓';right:50%;top:auto;bottom:-24px;transform:translateX(50%)}
+  .steps{row-gap:30px}
+  .note{text-align:left}
+}
